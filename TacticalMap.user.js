@@ -13548,17 +13548,17 @@ cursor:pointer;
         }
       });
 
-      td.addEventListener("mouseleave", () => {
-        if (currentViewSuburb === playerSuburb) {
-          suburbMap.label.textContent = playerSuburb + " (You)";
-        } else {
-          suburbMap.label.textContent = currentViewSuburb;
-        }
-      });
-
       suburbCells[y][x] = td;
     }
   }
+
+  suburbMap.wrap.addEventListener("mouseleave", () => {
+    if (currentViewSuburb === playerSuburb) {
+      suburbMap.label.textContent = playerSuburb + " (You)";
+    } else {
+      suburbMap.label.textContent = currentViewSuburb;
+    }
+  });
 
   // ------------------------------------------------
   // DRAW SUBURB MAP
@@ -13570,11 +13570,13 @@ cursor:pointer;
 
     suburbMap.coords.textContent = "";
 
-    if (suburbName === playerSuburb) {
-      suburbMap.label.textContent = suburbName + " (You)";
-    } else {
-      suburbMap.label.textContent = suburbName;
-    }
+    // WARN: Calling this will reset any mouseenter suburb location text.
+    // We should ensure/assume its set somewhere else (or make a more robust fix here).
+    // if (suburbName === playerSuburb) {
+    //   suburbMap.label.textContent = suburbName + " (You)";
+    // } else {
+    //   suburbMap.label.textContent = suburbName;
+    // }
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
