@@ -13403,7 +13403,7 @@
   const container = document.createElement("div");
 
   container.style.cssText =
-    "position:fixed;bottom:10px;right:10px;background:#556655;border-top:3px solid #778877;border-left:3px solid #778877;border-right:3px solid #334433;border-bottom:3px solid #334433;padding:6px;display:none;flex-direction:column;gap:6px;z-index:9999;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;box-shadow:0 8px 20px rgba(0,0,0,0.7),0 0 12px rgba(120,180,120,0.25)";
+    "position:fixed;bottom:10px;right:10px;background:#556655;border-top:3px solid #778877;border-left:3px solid #778877;border-right:3px solid #334433;border-bottom:3px solid #334433;padding:6px;display:none;flex-direction:column;gap:6px;z-index:9999;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;box-shadow:0 8px 20px rgba(0,0,0,0.7),0 0 12px rgba(120,180,120,0.25);box-sizing:border-box;";
 
   document.body.appendChild(container);
 
@@ -13441,6 +13441,7 @@
 
   function makeMap(title) {
     const wrap = document.createElement("div");
+    wrap.style.width = "220px";
 
     const label = document.createElement("div");
     label.textContent = title;
@@ -13454,6 +13455,8 @@
 
     const table = document.createElement("table");
     table.style.borderCollapse = "collapse";
+    table.style.tableLayout = "fixed";
+    table.style.width = "220px";
 
     wrap.appendChild(label);
     wrap.appendChild(coords);
@@ -13496,9 +13499,10 @@
       const td = tr.insertCell();
 
       td.style.cssText = `
-width:16px;
-height:18px;
+width:22px;
+height:22px;
 border:1px solid #000;
+box-sizing:border-box;
 background:${getQuadrantColor(y, x)};
 transition:box-shadow .3s ease,border .2s ease;
 cursor:pointer;
@@ -13535,7 +13539,7 @@ cursor:pointer;
       const td = tr.insertCell();
 
       td.style =
-        "width:16px;height:18px;border:1px solid #223322;background:#071A07";
+        "width:22px;height:22px;border:1px solid #223322;box-sizing:border-box;background:#071A07";
 
       td.addEventListener("mouseenter", () => {
         if (td.dataset.name) {
@@ -13584,6 +13588,7 @@ cursor:pointer;
         td.style.background = "#071A07";
         td.style.boxShadow = "";
         td.style.border = "1px solid #000000";
+        td.style.boxSizing = "border-box";
         td.dataset.name = "";
         td.dataset.gps = `(${gx}, ${gy})`;
 
@@ -13635,7 +13640,6 @@ cursor:pointer;
       for (let x = 0; x < 10; x++) {
         if (y === sy && x === sx) {
           cityCells[y][x].style.border = "2px solid #000";
-
           cityCells[y][x].style.boxShadow =
             "0 0 10px 3px rgba(0,0,0,.7), inset 0 0 6px rgba(0,0,0,.5)";
         } else {
