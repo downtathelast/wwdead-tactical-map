@@ -13,7 +13,8 @@
 // @exclude		 https://wwdead.com/classic/profile*
 // @exclude		 https://wwdead.com/classic/login*
 // @exclude		 https://wwdead.com/classic/characters
-// @grant        none
+// @grant       GM.setValue
+// @grant       GM.getValue
 // @license      GNU General Public License v2 or later; http://www.gnu.org/licenses/gpl.txt
 
 // @downloadURL https://update.greasyfork.org/scripts/567867/WWDead%20Tactical%20Map%20v20.user.js
@@ -35,7 +36,7 @@
  *
  */
 
-(function () {
+(async function () {
   "use strict";
 
   // ------------------------------------------------
@@ -13432,13 +13433,14 @@
 
   let collapsed = false;
 
-  toggleBtn.onclick = () => {
-    collapsed = !collapsed;
-
+  async function setCollapsed(value) {
+    collapsed = value;
     mapHolder.style.display = collapsed ? "none" : "flex";
-
     toggleBtn.textContent = collapsed ? "[+]" : "[-]";
-  };
+    await GM.setValue("collapsed", collapsed);
+  }
+
+  toggleBtn.onclick = async () => await setCollapsed(!collapsed);
 
   // ------------------------------------------------
   // MAP BUILDER
@@ -13691,9 +13693,9 @@ cursor:pointer;
   // START SCRIPT
   // ------------------------------------------------
 
-  window.addEventListener("load", () => {
+  window.addEventListener("load", async () => {
+    await setCollapsed(await GM.getValue("collapsed") ?? false);
     updateMaps();
-
     setInterval(updateMaps, 2000);
   });
 
