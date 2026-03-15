@@ -2,6 +2,8 @@
 
 Personal fork of **DTTL**'s [Tactical Map Greasemonkey Plugin](https://greasyfork.org/en/scripts/567867-wwdead-tactical-map-v2-0) for [WWDead.com](https://www.wwdead.com) with minor fixes added.
 
+[Click here](https://github.com/xunoaib/wwdead_tacticalmap/raw/refs/heads/main/TacticalMap.user.js) to install.
+
 Only tested with Greasemonkey 4.13 on Firefox.
 
 ## Changelog
