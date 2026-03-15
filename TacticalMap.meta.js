@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WWDead Tactical Map v2.0-xun.1
+// @name         WWDead Tactical Map v2.0.0-xun.1
 // @namespace    wwd-mini-map-malton
 // @version      2.0.0-xun.1
 // @description  Displays city and suburb map in WWDead
