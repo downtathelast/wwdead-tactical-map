@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         WWDead Tactical Map v2.0
+// @name         WWDead Tactical Map v2.0-xun.1
 // @namespace    wwd-mini-map-malton
-// @version      2.0
+// @version      2.0-xun.1
 // @description  Displays city and suburb map in WWDead
 // @match        https://wwdead.com/classic
 // @grant       GM.setValue
