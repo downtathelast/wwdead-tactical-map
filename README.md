@@ -6,6 +6,8 @@ A personal fork of **DTTL**'s [Tactical Map Greasemonkey Plugin](https://greasyf
 
 You can [compare the full code diff here](https://github.com/xunoaib/wwdead_tacticalmap/compare/upstream-2.0...main) to see exactly what has been modified from the original source.
 
+You may have to click the `Files changed` tab to see the actual content.
+
 > Tested with Greasemonkey 4.13 on Firefox.
 
 ## Key Improvements (v2.0.0-xun.1)
