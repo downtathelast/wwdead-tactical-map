@@ -13395,6 +13395,8 @@
   B[33][45] = [34, "City Zoo", "City_Zoo"];
 
   let playerGPS = "undefined";
+  let playerSX = -1;
+  let playerSY = -1;
 
   // ------------------------------------------------
   // CREATE MAP WINDOW (Collapsible)
@@ -13509,7 +13511,11 @@ cursor:pointer;
 `;
 
       td.addEventListener("mouseenter", () => {
-        cityMap.label.textContent = suburbNames[y][x];
+        const isPlayerSuburb = (y === playerSY && x === playerSX);
+
+        cityMap.label.textContent = isPlayerSuburb
+          ? suburbNames[y][x] + " (You)"
+          : suburbNames[y][x];
       });
 
       td.addEventListener("mouseleave", () => {
@@ -13640,6 +13646,8 @@ cursor:pointer;
         if (suburbNames[y][x] === suburb) {
           sx = x;
           sy = y;
+          playerSX = x;
+          playerSY = y;
         }
       }
     }
