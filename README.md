@@ -14,10 +14,13 @@ You may have to click the `Files changed` tab to see the actual content.
 
 ### [v2.0.0-xun.1]
 
-- Show GPS coordinates for other map locations on hover.
-- Added local storage support to remember the collapsed/expanded state of the map.
-- Use fixed cell size to prevent grid from shifting
+**Additions:**
+- Show GPS coordinates for other suburb tiles on mouseover.
+- Use local storage to remember the collapsed/expanded state of the map.
+- Add white dot to indicate the player's current location.
+
+**Fixes:**
+- Use a fixed cell size to prevent grid from shifting.
 - Fix issue where hovered suburb location text would reset itself.
-- Implemented "hidden" state until initialization is complete to prevent layout popping/flicker.
-- Simplify `@match` rules to specifically target the main "map" URL.
+- Simplify URL matching rules to only target the main "map" URL.
 - Ran `npx prettier` to improve readability of source code.
