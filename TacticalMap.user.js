@@ -13670,22 +13670,18 @@ cursor:pointer;
 
           const entry = B[gy]?.[gx];
 
-          if (entry) {
-            const name = entry[1];
+          if (entry && pageText.includes(entry[1])) {
+            const td = suburbCells[y][x];
 
-            if (pageText.includes(name)) {
-              const td = suburbCells[y][x];
+            td.style.border = "2px solid #000";
+            td.style.boxShadow =
+              "0 0 10px 3px rgba(0,0,0,.7), inset 0 0 6px rgba(0,0,0,.5)";
 
-              td.style.border = "2px solid #000";
-              td.style.boxShadow =
-                "0 0 10px 3px rgba(0,0,0,.7), inset 0 0 6px rgba(0,0,0,.5)";
+            playerGPS = `(${gx}, ${gy})`;
+            suburbMap.label.dataset.playerGPS = playerGPS;
+            suburbMap.coords.textContent = "GPS: " + playerGPS;
 
-              playerGPS = `(${gx}, ${gy})`;
-              suburbMap.label.dataset.playerGPS = playerGPS;
-              suburbMap.coords.textContent = "GPS: " + playerGPS;
-
-              break outer;
-            }
+            break outer;
           }
         }
       }
