@@ -13411,7 +13411,7 @@
   const container = document.createElement("div");
 
   container.style.cssText =
-    "position:fixed;bottom:10px;right:10px;background:#556655;border-top:3px solid #778877;border-left:3px solid #778877;border-right:3px solid #334433;border-bottom:3px solid #334433;padding:6px;display:flex;flex-direction:column;gap:6px;z-index:9999;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;box-shadow:0 8px 20px rgba(0,0,0,0.7),0 0 12px rgba(120,180,120,0.25)";
+    "position:fixed;bottom:10px;right:10px;background:#556655;border-top:3px solid #778877;border-left:3px solid #778877;border-right:3px solid #334433;border-bottom:3px solid #334433;padding:6px;display:none;flex-direction:column;gap:6px;z-index:9999;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;box-shadow:0 8px 20px rgba(0,0,0,0.7),0 0 12px rgba(120,180,120,0.25)";
 
   document.body.appendChild(container);
 
@@ -13435,6 +13435,7 @@
 
   async function setCollapsed(value) {
     collapsed = value;
+    container.style.display = "flex";
     mapHolder.style.display = collapsed ? "none" : "flex";
     toggleBtn.textContent = collapsed ? "[+]" : "[-]";
     await GM.setValue("collapsed", collapsed);
