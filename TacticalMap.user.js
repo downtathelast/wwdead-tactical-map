@@ -13536,6 +13536,7 @@ cursor:pointer;
       td.addEventListener("mouseenter", () => {
         if (td.dataset.name) {
           suburbMap.label.textContent = td.dataset.name;
+          suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
         }
       });
 
@@ -13549,6 +13550,7 @@ cursor:pointer;
     } else {
       suburbMap.label.textContent = currentViewSuburb;
     }
+    suburbMap.coords.textContent = "";
   });
 
   // ------------------------------------------------
@@ -13578,6 +13580,7 @@ cursor:pointer;
         td.style.boxShadow = "";
         td.style.border = "1px solid #000000";
         td.dataset.name = "";
+        td.dataset.gps = `(${gx}, ${gy})`;
 
         const entry = B[gy]?.[gx];
 
@@ -13668,7 +13671,9 @@ cursor:pointer;
               td.style.boxShadow =
                 "0 0 10px 3px rgba(0,0,0,.7), inset 0 0 6px rgba(0,0,0,.5)";
 
-              suburbMap.coords.textContent = "GPS: (" + gx + "," + gy + ")";
+              const playerGPS = `(${gx}, ${gy})`;
+              suburbMap.label.dataset.playerGPS = playerGPS;
+              suburbMap.coords.textContent = "GPS: " + playerGPS;
 
               break outer;
             }
