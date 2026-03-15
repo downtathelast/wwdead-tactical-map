@@ -1,16 +1,17 @@
-# WWDead Plugin - Tactical Map
+# Tactical Map - WWDead Plugin
 
-Personal fork of **DTTL**'s [Tactical Map Greasemonkey Plugin](https://greasyfork.org/en/scripts/567867-wwdead-tactical-map-v2-0) for [WWDead.com](https://www.wwdead.com) with minor fixes added.
+A personal fork of **DTTL**'s [Tactical Map Greasemonkey Plugin](https://greasyfork.org/en/scripts/567867-wwdead-tactical-map-v2-0) for [WWDead.com](https://www.wwdead.com) with some minor fixes.
 
-[Click here](https://github.com/xunoaib/wwdead_tacticalmap/raw/refs/heads/main/TacticalMap.user.js) to install.
+## [⚡ Install Tactical Map (v2.0-xun.1)](https://github.com/xunoaib/wwdead_tacticalmap/raw/refs/heads/main/TacticalMap.user.js)
 
-Tested with Greasemonkey 4.13 on Firefox.
+You can [compare the full code diff here](https://github.com/xunoaib/wwdead_tacticalmap/compare/upstream-2.0...main) to see exactly what has been modified from the original source.
 
-## Changelog
+> Tested with Greasemonkey 4.13 on Firefox.
 
-- **v2.0-xun.1**
-    - Fix hovered suburb location text resetting itself.
-    - Remember the collapsed state of the map.
-    - Hide map until its ready, to avoid a brief popup.
-    - Simplified URL rules to only match the main "map" URL.
-    - Prettify code.
+## Key Improvements (v2.0-xun.1)
+
+- Fix issue where hovered suburb location text would reset itself.
+- Added local storage support to remember the collapsed/expanded state of the map.
+- Implemented "hidden" state until initialization is complete to prevent layout popping/flicker.
+- Simplify `@match` rules to target the main "map" URL specifically.
+- Ran `npx prettitier` to improve readiability of source code.
