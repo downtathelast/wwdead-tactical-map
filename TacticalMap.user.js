@@ -13603,6 +13603,7 @@ cursor:pointer;
         td.style.border = "1px solid #000000";
         td.dataset.name = "";
         td.dataset.gps = `(${gx}, ${gy})`;
+        td.title = "";
 
         const entry = B[gy]?.[gx];
         if (entry) {
@@ -13726,6 +13727,7 @@ cursor:pointer;
           td.style.lineHeight = "22px";
           td.style.fontSize = "14px";
           td.style.cursor = "default";
+          td.title = "You are here";
 
           playerGPS = `(${gx}, ${gy})`;
           suburbMap.coords.textContent = "GPS: " + playerGPS;
