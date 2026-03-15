@@ -10,10 +10,13 @@ You may have to click the `Files changed` tab to see the actual content.
 
 > Tested with Greasemonkey 4.13 on Firefox.
 
-## Key Improvements (v2.0.0-xun.1)
+## Changelog
+
+### [v2.0.0-xun.1]
 
 - Show GPS coordinates for other map locations on hover.
 - Added local storage support to remember the collapsed/expanded state of the map.
+- Use fixed cell size to prevent grid from shifting
 - Fix issue where hovered suburb location text would reset itself.
 - Implemented "hidden" state until initialization is complete to prevent layout popping/flicker.
 - Simplify `@match` rules to specifically target the main "map" URL.
