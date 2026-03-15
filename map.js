@@ -3,16 +3,7 @@
 // @namespace    wwd-mini-map-malton
 // @version      2.0
 // @description  Displays city and suburb map in WWDead
-// @match        https://wwdead.com/classic*
-// @exclude		 https://wwdead.com/classic/skills*
-// @exclude		 https://wwdead.com/classic/contacts*
-// @exclude		 https://wwdead.com/classic/settings*
-// @exclude		 https://wwdead.com/classic/logout*
-// @exclude		 https://wwdead.com/classic/FAQ*
-// @exclude		 https://wwdead.com/classic/stats*
-// @exclude		 https://wwdead.com/classic/profile*
-// @exclude		 https://wwdead.com/classic/login*
-// @exclude		 https://wwdead.com/classic/characters
+// @match        https://wwdead.com/classic
 // @grant       GM.setValue
 // @grant       GM.getValue
 // @license      GNU General Public License v2 or later; http://www.gnu.org/licenses/gpl.txt
