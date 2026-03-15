@@ -9,6 +9,7 @@ Tested with Greasemonkey 4.13 on Firefox.
 ## Changelog
 
 - **v2.0-xun.1**
+    - Fix hovered suburb location text resetting itself.
     - Remember the collapsed state of the map.
     - Hide map until its ready, to avoid a brief popup.
     - Simplified URL rules to only match the main "map" URL.
