@@ -13572,11 +13572,12 @@ cursor:pointer;
 
     // WARN: Calling this will reset any mouseenter suburb location text.
     // We should ensure/assume its set somewhere else (or make a more robust fix here).
-    // if (suburbName === playerSuburb) {
-    //   suburbMap.label.textContent = suburbName + " (You)";
-    // } else {
-    //   suburbMap.label.textContent = suburbName;
-    // }
+
+    if (suburbName === playerSuburb) {
+      suburbMap.label.textContent = suburbName + " (You)";
+    } else {
+      suburbMap.label.textContent = suburbName;
+    }
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
@@ -13696,7 +13697,7 @@ cursor:pointer;
   window.addEventListener("load", async () => {
     await setCollapsed(await GM.getValue("collapsed") ?? false);
     updateMaps();
-    setInterval(updateMaps, 2000);
+    // setInterval(updateMaps, 2000);
   });
 
   // ------------------------------------------------
