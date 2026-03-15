@@ -7,4 +7,6 @@
 // @grant        GM.setValue
 // @grant        GM.getValue
 // @license      GNU General Public License v2 or later; http://www.gnu.org/licenses/gpl.txt
+// @downloadURL  https://github.com/xunoaib/wwdead_tacticalmap/raw/refs/heads/main/TacticalMap.user.js
+// @updateURL    https://github.com/xunoaib/wwdead_tacticalmap/raw/refs/heads/main/TacticalMap.meta.js
 // ==/UserScript==
