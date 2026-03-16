@@ -13394,7 +13394,6 @@
   B[33][44] = [34, "City Zoo", "City_Zoo"];
   B[33][45] = [34, "City Zoo", "City_Zoo"];
 
-  let playerGPS = "undefined";
   let playerSX = -1;
   let playerSY = -1;
   let playerGX = -1;
@@ -13538,7 +13537,7 @@
         }
       }
     }
-    miniMap.coords.textContent = `Center: ${playerGX}, ${playerGY}`;
+    miniMap.coords.textContent = `Center: (${playerGX}, ${playerGY})`;
   }
 
   // ------------------------------------------------
@@ -13634,7 +13633,7 @@
 
       td.addEventListener("mouseenter", () => {
         if (td.dataset.name) {
-          const isPlayer = td.dataset.gps === playerGPS;
+          const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
           suburbMap.label.textContent = isPlayer ? td.dataset.name + " (You)" : td.dataset.name;
           suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
         }
@@ -13645,7 +13644,7 @@
   suburbMap.wrap.addEventListener("mouseleave", () => {
     if (currentViewSuburb === playerSuburb) {
       suburbMap.label.textContent = playerSuburb + " (You)";
-      suburbMap.coords.textContent = "GPS: " + playerGPS;
+      suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
     } else {
       suburbMap.label.textContent = currentViewSuburb;
       suburbMap.coords.textContent = "\u00A0";
@@ -13793,7 +13792,8 @@
     const suburb = suburbElem.textContent.trim();
 
     playerSuburb = suburb;
-    [playerSX, playerSY] = suburbCoordsByName(suburb)
+    [playerSX, playerSY] = suburbCoordsByName(suburb);
+    [playerGX, playerGY] = globalPlayerCoords();
 
     // highlight city suburb
 
@@ -13811,41 +13811,13 @@
       }
     }
 
-    // find player gps
-    const pageText = document.body.textContent;
-    outer: for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        const gx = playerSX * 10 + x;
-        const gy = playerSY * 10 + y;
-        const entry = B[gy]?.[gx];
-
     if (!selectedSuburb) {
       drawSuburbMap(playerSX, playerSY);
     }
 
-    // ------------------------------------------------
-    // PLAYER HIGHLIGHT + GPS (ONLY IN YOUR SUBURB)
-    // ------------------------------------------------
-
+    // set initial GPS coordinates in suburb map heading
     if (currentViewSuburb === playerSuburb) {
-      const pageText = document.body.textContent;
-
-      outer: for (let y = 0; y < 10; y++) {
-        for (let x = 0; x < 10; x++) {
-          const gx = playerSX * 10 + x;
-          const gy = playerSY * 10 + y;
-
-          const entry = B[gy]?.[gx];
-
-          if (entry && pageText.includes(entry[1])) {
-            playerGPS = `(${gx}, ${gy})`;
-            suburbMap.label.dataset.playerGPS = playerGPS;
-            suburbMap.coords.textContent = "GPS: " + playerGPS;
-
-            break outer;
-          }
-        }
-      }
+      suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
     }
 
     if (!selectedSuburb) drawSuburbMap(playerSX, playerSY);
@@ -13873,8 +13845,7 @@
     td.style.cursor = "default";
     td.title = "You are here";
 
-    playerGPS = `(${gx}, ${gy})`;
-    suburbMap.coords.textContent = "GPS: " + playerGPS;
+    suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
   }
 
   // ------------------------------------------------
