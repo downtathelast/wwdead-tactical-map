@@ -13396,10 +13396,10 @@
   B[33][44] = [34, "City Zoo", "City_Zoo"];
   B[33][45] = [34, "City Zoo", "City_Zoo"];
 
-  let playerSX = -1;
-  let playerSY = -1;
-  let playerGX = -1;
-  let playerGY = -1;
+  let playerSX = -1; // suburb X
+  let playerSY = -1; // suburb Y
+  let playerGX = -1; // global X
+  let playerGY = -1; // global Y
 
   // ------------------------------------------------
   // CREATE MAP WINDOW (Collapsible)
