@@ -13401,6 +13401,12 @@
   let playerGX = -1; // global X
   let playerGY = -1; // global Y
 
+  let cityMap, suburbMap, miniMap;
+
+  let selectedSuburb = null;
+  let playerSuburb = "";
+  let currentViewSuburb = "";
+
   // ------------------------------------------------
   // CREATE MAP WINDOW (Collapsible)
   // ------------------------------------------------
@@ -13472,16 +13478,6 @@
     const table = document.createElement("table");
     table.style.cssText = "border-collapse:collapse; table-layout:fixed; width:" + (size * 22) + "px;";
 
-    // individual map toggle logic
-    let isMinimised = false;
-    header.onclick = () => {
-      isMinimised = !isMinimised;
-      table.style.display = isMinimised ? "none" : "table";
-      coords.style.display = isMinimised ? "none" : "block";
-      indicator.textContent = isMinimised ? "▸" : "▾";
-      wrap.style.width = isMinimised ? "auto" : (size * 22) + "px";
-    };
-
     // persistence logic for individual maps
     let isMinimised = await GM.getValue(`map_collapsed_${key}`, false);
 
@@ -13517,16 +13513,6 @@
 
     return { wrap, label, coords, table, title, cells };
   }
-
-  const cityMap = await makeMap("City Map", 10, "city");
-  const suburbMap = await makeMap("Suburb Map", 10, "suburb");
-  const miniMap = await makeMap("Local", LOCAL_MAP_SIZE, "local");
-
-  cityMap.coords.style.visibility = "hidden";
-
-  mapHolder.appendChild(cityMap.wrap);
-  mapHolder.appendChild(suburbMap.wrap);
-  mapHolder.appendChild(miniMap.wrap);
 
   // ------------------------------------------------
   // DRAW MINIMAP AROUND PLAYER
@@ -13584,40 +13570,38 @@
   // ------------------------------------------------
   // LOCAL MAP INTERACTION
   // ------------------------------------------------
-  const localCells = miniMap.cells;
 
-  for (let y = 0; y < localCells.length; y++) {
-    for (let x = 0; x < localCells[y].length; x++) {
-      const td = localCells[y][x];
+  function setupLocalInteractions() {
+    const localCells = miniMap.cells;
 
-      td.addEventListener("mouseenter", () => {
-        if (td.dataset.name) {
-          const isPlayer = (td.textContent === "●");
-          miniMap.label.textContent = isPlayer ? td.dataset.name : td.dataset.name;
-          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
-        } else {
-          // hovering an empty street/tile
-          miniMap.label.textContent = "Street";
-          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
-        }
-      });
+    for (let y = 0; y < localCells.length; y++) {
+      for (let x = 0; x < localCells[y].length; x++) {
+        const td = localCells[y][x];
+
+        td.addEventListener("mouseenter", () => {
+          if (td.dataset.name) {
+            const isPlayer = (td.textContent === "●");
+            miniMap.label.textContent = isPlayer ? td.dataset.name : td.dataset.name;
+            miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+          } else {
+            // hovering an empty street/tile
+            miniMap.label.textContent = "Street";
+            miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+          }
+        });
+      }
     }
-  }
 
-  // reset to "local" and player gps when mouse leaves the minimap
-  miniMap.wrap.addEventListener("mouseleave", () => {
-    miniMap.label.textContent = "Local";
-    miniMap.coords.textContent = `Center: (${playerGX}, ${playerGY})`;
-  });
+    // reset to "local" and player gps when mouse leaves the minimap
+    miniMap.wrap.addEventListener("mouseleave", () => {
+      miniMap.label.textContent = "Local";
+      miniMap.coords.textContent = `Center: (${playerGX}, ${playerGY})`;
+    });
+  }
 
   // ------------------------------------------------
   // CITY GRID
   // ------------------------------------------------
-
-  const cityCells = cityMap.cells;
-  let selectedSuburb = null;
-  let playerSuburb = "";
-  let currentViewSuburb = "";
 
   function getQuadrantColor(row, col) {
     if (row >= 3 && row <= 6 && col >= 3 && col <= 6) return "#A1C4F4";
@@ -13629,36 +13613,38 @@
     return "#A9D3B0";
   }
 
-  for (let y = 0; y < 10; y++) {
-    for (let x = 0; x < 10; x++) {
-      const td = cityCells[y][x];
+  function setupCityInteractions() {
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const td = cityMap.cells[y][x];
 
-      td.style.cssText = `
-        width:22px;
-        height:22px;
-        border:1px solid #000;
-        box-sizing:border-box;
-        background:${getQuadrantColor(y, x)};
-        transition:box-shadow .3s ease,border .2s ease;
-        cursor:pointer;
-      `;
+        td.style.cssText = `
+          width:22px;
+          height:22px;
+          border:1px solid #000;
+          box-sizing:border-box;
+          background:${getQuadrantColor(y, x)};
+          transition:box-shadow .3s ease,border .2s ease;
+          cursor:pointer;
+        `;
 
-      td.addEventListener("mouseenter", () => {
-        const isPlayerSuburb = (y === playerSY && x === playerSX);
+        td.addEventListener("mouseenter", () => {
+          const isPlayerSuburb = (y === playerSY && x === playerSX);
 
-        cityMap.label.textContent = isPlayerSuburb
-          ? suburbNames[y][x] + " (You)"
-          : suburbNames[y][x];
-      });
+          cityMap.label.textContent = isPlayerSuburb
+            ? suburbNames[y][x] + " (You)"
+            : suburbNames[y][x];
+        });
 
-      td.addEventListener("mouseleave", () => {
-        cityMap.label.textContent = cityMap.title;
-      });
+        td.addEventListener("mouseleave", () => {
+          cityMap.label.textContent = cityMap.title;
+        });
 
-      td.addEventListener("click", () => {
-        selectedSuburb = suburbNames[y][x];
-        drawSuburbMap(x, y);
-      });
+        td.addEventListener("click", () => {
+          selectedSuburb = suburbNames[y][x];
+          drawSuburbMap(x, y);
+        });
+      }
     }
   }
 
@@ -13666,31 +13652,31 @@
   // SUBURB GRID
   // ------------------------------------------------
 
-  const suburbCells = suburbMap.cells;
+  function setupSuburbInteractions() {
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const td = suburbMap.cells[y][x];
 
-  for (let y = 0; y < 10; y++) {
-    for (let x = 0; x < 10; x++) {
-      const td = suburbCells[y][x];
-
-      td.addEventListener("mouseenter", () => {
-        if (td.dataset.name) {
-          const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
-          suburbMap.label.textContent = isPlayer ? td.dataset.name + " (You)" : td.dataset.name;
-          suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
-        }
-      });
+        td.addEventListener("mouseenter", () => {
+          if (td.dataset.name) {
+            const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
+            suburbMap.label.textContent = isPlayer ? td.dataset.name + " (You)" : td.dataset.name;
+            suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
+          }
+        });
+      }
     }
+
+    suburbMap.wrap.addEventListener("mouseleave", () => {
+      if (currentViewSuburb === playerSuburb) {
+        suburbMap.label.textContent = playerSuburb + " (You)";
+        suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
+      } else {
+        suburbMap.label.textContent = currentViewSuburb;
+        suburbMap.coords.textContent = "\u00A0";
+      }
+    });
   }
-
-  suburbMap.wrap.addEventListener("mouseleave", () => {
-    if (currentViewSuburb === playerSuburb) {
-      suburbMap.label.textContent = playerSuburb + " (You)";
-      suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
-    } else {
-      suburbMap.label.textContent = currentViewSuburb;
-      suburbMap.coords.textContent = "\u00A0";
-    }
-  });
 
   // ------------------------------------------------
   // DRAW SUBURB MAP
@@ -13704,7 +13690,7 @@
     // highlight the selected cell
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
-        const cell = cityCells[y][x];
+        const cell = cityMap.cells[y][x];
         if (y === sy && x === sx) {
           cell.style.outline = "2px dashed #FFFFFF";
           cell.style.outlineOffset = "-1px";
@@ -13726,7 +13712,7 @@
       for (let x = 0; x < 10; x++) {
         const gx = sx * 10 + x;
         const gy = sy * 10 + y;
-        const td = suburbCells[y][x];
+        const td = suburbMap.cells[y][x];
 
         td.textContent = "";
         td.style.background = "#071A07";
@@ -13841,13 +13827,13 @@
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
         if (y === playerSY && x === playerSX) {
-          cityCells[y][x].style.border = "2px solid #000";
-          cityCells[y][x].style.boxShadow =
+          cityMap.cells[y][x].style.border = "2px solid #000";
+          cityMap.cells[y][x].style.boxShadow =
             "0 0 10px 3px rgba(0,0,0,.7), inset 0 0 6px rgba(0,0,0,.5)";
         } else {
-          cityCells[y][x].style.border = "1px solid #000";
-          cityCells[y][x].style.boxShadow = "none";
-          cityCells[y][x].style.background = getQuadrantColor(y, x);
+          cityMap.cells[y][x].style.border = "1px solid #000";
+          cityMap.cells[y][x].style.boxShadow = "none";
+          cityMap.cells[y][x].style.background = getQuadrantColor(y, x);
         }
       }
     }
@@ -13877,7 +13863,7 @@
     let x = gx - playerSX * 10;
     let y = gy - playerSY * 10;
 
-    const td = suburbCells[y][x];
+    const td = suburbMap.cells[y][x];
     td.textContent = "●";
     td.style.color = "#FFFFFF";
     td.style.textAlign = "center";
@@ -13894,34 +13880,55 @@
   // ------------------------------------------------
 
   window.addEventListener("load", async () => {
+
+    cityMap = await makeMap("City Map", 10, "city");
+    suburbMap = await makeMap("Suburb Map", 10, "suburb");
+    miniMap = await makeMap("Local", LOCAL_MAP_SIZE, "local");
+
+    mapHolder.appendChild(cityMap.wrap);
+    mapHolder.appendChild(suburbMap.wrap);
+    mapHolder.appendChild(miniMap.wrap);
+
+    cityMap.coords.style.visibility = "hidden";
+
+    setupCityInteractions(); 
+    setupSuburbInteractions();
+    setupLocalInteractions();
+
+    // load main window collapsed state
     await setCollapsed(await GM.getValue("collapsed") ?? false);
+
     updateMaps();
+    setupPulse();
   });
 
   // ------------------------------------------------
   // CENTER QUADRANT PULSE
   // ------------------------------------------------
 
-  let pulseDir = 1;
-  let pulse = 0;
+  function setupPulse() {
+    let pulseDir = 1;
+    let pulse = 0;
 
-  setInterval(() => {
-    pulse += 0.02 * pulseDir;
+    setInterval(() => {
+      pulse += 0.02 * pulseDir;
 
-    if (pulse > 0.4) pulseDir = -1;
-    if (pulse < 0) pulseDir = 1;
+      if (pulse > 0.4) pulseDir = -1;
+      if (pulse < 0) pulseDir = 1;
 
-    for (let y = 3; y <= 6; y++) {
-      for (let x = 3; x <= 6; x++) {
-        const cell = cityCells[y][x];
+      for (let y = 3; y <= 6; y++) {
+        for (let x = 3; x <= 6; x++) {
+          const cell = cityMap.cells[y][x];
 
-        if (cell.style.border === "2px solid rgb(0, 0, 0)") continue;
+          if (cell.style.border === "2px solid rgb(0, 0, 0)") continue;
 
-        if (cell.dataset.selected === "true") continue;
+          if (cell.dataset.selected === "true") continue;
 
-        cell.style.boxShadow =
-          `0 0 ${6 + pulse * 10}px ${2 + pulse * 5}px rgba(161,196,244,${0.5 + pulse * 0.5})`;
+          cell.style.boxShadow =
+            `0 0 ${6 + pulse * 10}px ${2 + pulse * 5}px rgba(161,196,244,${0.5 + pulse * 0.5})`;
+        }
       }
-    }
-  }, 50);
+    }, 50);
+  }
+
 })();
