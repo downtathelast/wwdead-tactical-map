@@ -10,12 +10,16 @@ You may have to click the `Files changed` tab to see the actual content.
 
 > Tested with Greasemonkey 4.13 on Firefox, and reportedly also works on Chrome.
 
+## Screenshot
+
+![Demo](demo.png)
+
 ## Changelog
 
 ### [v2.0.0-xun.2]
 
 **Additions**
-- Add a local 9x9 map centered on the current player's tile.
+- Add a local 11x11 map centered on the current player's tile.
 - Allow toggling the visibility of each submap, and persist these settings.
 
 **Fixes**:
