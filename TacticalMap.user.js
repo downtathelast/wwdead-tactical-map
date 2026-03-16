@@ -13397,6 +13397,8 @@
   let playerGPS = "undefined";
   let playerSX = -1;
   let playerSY = -1;
+  let playerGX = -1;
+  let playerGY = -1;
 
   // ------------------------------------------------
   // CREATE MAP WINDOW (Collapsible)
@@ -13441,44 +13443,138 @@
   // MAP BUILDER
   // ------------------------------------------------
 
-  function makeMap(title) {
+  function makeMap(title, size = 10) {
     const wrap = document.createElement("div");
-    wrap.style.width = "220px";
+    wrap.style.width = (size * 22) + "px";
 
     const label = document.createElement("div");
     label.textContent = title;
-    label.style =
-      "color:#BBCCBB;margin-bottom:2px;text-align:center;font-weight:bold";
+    label.style = "color:#BBCCBB;margin-bottom:2px;text-align:center;font-weight:bold";
 
     const coords = document.createElement("div");
-    coords.textContent = "";
-    coords.style =
-      "color:#CCDDAA;font-size:10px;text-align:center;margin-bottom:4px";
+    coords.textContent = "\u00A0";
+    coords.style = "color:#CCDDAA;font-size:10px;text-align:center;margin-bottom:4px";
 
     const table = document.createElement("table");
     table.style.borderCollapse = "collapse";
     table.style.tableLayout = "fixed";
-    table.style.width = "220px";
+    table.style.width = (size * 22) + "px";
+
+    const cells = [];
+    for (let y = 0; y < size; y++) {
+      const tr = table.insertRow();
+      cells[y] = [];
+      for (let x = 0; x < size; x++) {
+        const td = tr.insertCell();
+        td.style.cssText = "width:22px;height:22px;border:1px solid #000;box-sizing:border-box;background:#071A07;";
+        cells[y][x] = td;
+      }
+    }
 
     wrap.appendChild(label);
     wrap.appendChild(coords);
     wrap.appendChild(table);
 
-    return { wrap, label, coords, table, title };
+    return { wrap, label, coords, table, title, cells };
   }
 
   const cityMap = makeMap("City Map");
-  cityMap.coords.style.visibility = "hidden";
   const suburbMap = makeMap("Suburb Map");
+  const miniMap = makeMap("Local", 9); // size should be odd
+
+  cityMap.coords.style.visibility = "hidden";
 
   mapHolder.appendChild(cityMap.wrap);
   mapHolder.appendChild(suburbMap.wrap);
+  mapHolder.appendChild(miniMap.wrap);
+
+  // ------------------------------------------------
+  // DRAW MINIMAP AROUND PLAYER
+  // ------------------------------------------------
+  function drawMiniMap() {
+    if (playerGX === -1 || playerGY === -1) return;
+
+    const size = miniMap.cells.length
+    const offset = Math.floor(size / 2);
+
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const targetX = playerGX - offset + x;
+        const targetY = playerGY - offset + y;
+        const td = miniMap.cells[y][x];
+
+        // wipe cell
+        td.textContent = "";
+        td.style.background = "#111";
+        td.style.border = "1px solid #222";
+        td.dataset.name = "";
+        td.dataset.gps = `(${targetX}, ${targetY})`;
+        td.title = "";
+
+        // draw player in center
+        if (x === offset && y === offset) {
+          td.textContent = "●";
+          td.style.color = "#FFF";
+          td.style.textAlign = "center";
+          td.dataset.name = "You";
+        }
+
+        // check if coordinate exists in global data
+        const entry = B[targetY]?.[targetX];
+        if (entry) {
+          const type = BUILDING_TYPES[entry[0]];
+          if (type && type.visible) {
+            td.style.background = type.color;
+            if (type.border) td.style.border = type.border;
+          }
+
+          td.dataset.name = entry[1]; // location name
+          td.title = type?.name ?? ""; // building type name
+        }
+
+        // bounds check
+        if (targetX < 0 || targetX > 99 || targetY < 0 || targetY > 99) {
+            td.style.background = "#000";
+        }
+      }
+    }
+    miniMap.coords.textContent = `Center: ${playerGX}, ${playerGY}`;
+  }
+
+  // ------------------------------------------------
+  // LOCAL MAP INTERACTION
+  // ------------------------------------------------
+  const localCells = miniMap.cells;
+
+  for (let y = 0; y < localCells.length; y++) {
+    for (let x = 0; x < localCells[y].length; x++) {
+      const td = localCells[y][x];
+
+      td.addEventListener("mouseenter", () => {
+        if (td.dataset.name) {
+          const isPlayer = (td.textContent === "●");
+          miniMap.label.textContent = isPlayer ? td.dataset.name : td.dataset.name;
+          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+        } else {
+          // hovering an empty street/tile
+          miniMap.label.textContent = "Street";
+          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+        }
+      });
+    }
+  }
+
+  // reset to "local" and player gps when mouse leaves the minimap
+  miniMap.wrap.addEventListener("mouseleave", () => {
+    miniMap.label.textContent = "Local";
+    miniMap.coords.textContent = `Center: (${playerGX}, ${playerGY})`;
+  });
 
   // ------------------------------------------------
   // CITY GRID
   // ------------------------------------------------
 
-  const cityCells = [];
+  const cityCells = cityMap.cells;
   let selectedSuburb = null;
   let playerSuburb = "";
   let currentViewSuburb = "";
@@ -13494,21 +13590,18 @@
   }
 
   for (let y = 0; y < 10; y++) {
-    const tr = cityMap.table.insertRow();
-    cityCells[y] = [];
-
     for (let x = 0; x < 10; x++) {
-      const td = tr.insertCell();
+      const td = cityCells[y][x];
 
       td.style.cssText = `
-width:22px;
-height:22px;
-border:1px solid #000;
-box-sizing:border-box;
-background:${getQuadrantColor(y, x)};
-transition:box-shadow .3s ease,border .2s ease;
-cursor:pointer;
-`;
+        width:22px;
+        height:22px;
+        border:1px solid #000;
+        box-sizing:border-box;
+        background:${getQuadrantColor(y, x)};
+        transition:box-shadow .3s ease,border .2s ease;
+        cursor:pointer;
+      `;
 
       td.addEventListener("mouseenter", () => {
         const isPlayerSuburb = (y === playerSY && x === playerSX);
@@ -13526,8 +13619,6 @@ cursor:pointer;
         selectedSuburb = suburbNames[y][x];
         drawSuburbMap(x, y);
       });
-
-      cityCells[y][x] = td;
     }
   }
 
@@ -13535,17 +13626,11 @@ cursor:pointer;
   // SUBURB GRID
   // ------------------------------------------------
 
-  const suburbCells = [];
+  const suburbCells = suburbMap.cells;
 
   for (let y = 0; y < 10; y++) {
-    const tr = suburbMap.table.insertRow();
-    suburbCells[y] = [];
-
     for (let x = 0; x < 10; x++) {
-      const td = tr.insertCell();
-
-      td.style =
-        "width:22px;height:22px;border:1px solid #223322;box-sizing:border-box;background:#071A07";
+      const td = suburbCells[y][x];
 
       td.addEventListener("mouseenter", () => {
         if (td.dataset.name) {
@@ -13554,8 +13639,6 @@ cursor:pointer;
           suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
         }
       });
-
-      suburbCells[y][x] = td;
     }
   }
 
@@ -13728,7 +13811,13 @@ cursor:pointer;
       }
     }
 
-    // auto-load player suburb if none selected
+    // find player gps
+    const pageText = document.body.textContent;
+    outer: for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const gx = playerSX * 10 + x;
+        const gy = playerSY * 10 + y;
+        const entry = B[gy]?.[gx];
 
     if (!selectedSuburb) {
       drawSuburbMap(playerSX, playerSY);
@@ -13758,6 +13847,10 @@ cursor:pointer;
         }
       }
     }
+
+    if (!selectedSuburb) drawSuburbMap(playerSX, playerSY);
+    drawPlayerDot();
+    drawMiniMap();
   }
 
   // ------------------------------------------------
