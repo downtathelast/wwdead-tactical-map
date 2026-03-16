@@ -29,6 +29,8 @@
 (async function () {
   "use strict";
 
+  const LOCAL_MAP_SIZE = 11; // should be odd
+
   // ------------------------------------------------
   // SUBURB NAMES
   // ------------------------------------------------
@@ -13479,7 +13481,7 @@
 
   const cityMap = makeMap("City Map");
   const suburbMap = makeMap("Suburb Map");
-  const miniMap = makeMap("Local", 9); // size should be odd
+  const miniMap = makeMap("Local", LOCAL_MAP_SIZE); // size should be odd
 
   cityMap.coords.style.visibility = "hidden";
 
