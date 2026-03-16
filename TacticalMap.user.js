@@ -13424,7 +13424,7 @@
   // map holder
 
   const mapHolder = document.createElement("div");
-  mapHolder.style.cssText = "display:flex;gap:10px;align-items:flex-end";
+  mapHolder.style.cssText = "display:flex;gap:10px;align-items:flex-start";
 
   container.appendChild(mapHolder);
 
@@ -13447,19 +13447,40 @@
   function makeMap(title, size = 10) {
     const wrap = document.createElement("div");
     wrap.style.width = (size * 22) + "px";
+    wrap.style.display = "flex";
+    wrap.style.flexDirection = "column";
+
+    // create a header container for the label and a small indicator
+    const header = document.createElement("div");
+    header.style.cssText = "cursor:pointer; user-select:none; display:flex; justify-content:center; align-items:center; gap:4px;";
 
     const label = document.createElement("div");
     label.textContent = title;
-    label.style = "color:#BBCCBB;margin-bottom:2px;text-align:center;font-weight:bold";
+    label.style.cssText = "color:#BBCCBB; margin-bottom:2px; text-align:center; font-weight:bold;";
+
+    const indicator = document.createElement("span");
+    indicator.textContent = "▾"; // default: expanded
+    indicator.style.fontSize = "9px";
+
+    header.appendChild(label);
+    header.appendChild(indicator);
 
     const coords = document.createElement("div");
     coords.textContent = "\u00A0";
-    coords.style = "color:#CCDDAA;font-size:10px;text-align:center;margin-bottom:4px";
+    coords.style.cssText = "color:#CCDDAA; font-size:10px; text-align:center; margin-bottom:4px";
 
     const table = document.createElement("table");
-    table.style.borderCollapse = "collapse";
-    table.style.tableLayout = "fixed";
-    table.style.width = (size * 22) + "px";
+    table.style.cssText = "border-collapse:collapse; table-layout:fixed; width:" + (size * 22) + "px;";
+
+    // individual map toggle logic
+    let isMinimised = false;
+    header.onclick = () => {
+      isMinimised = !isMinimised;
+      table.style.display = isMinimised ? "none" : "table";
+      coords.style.display = isMinimised ? "none" : "block";
+      indicator.textContent = isMinimised ? "▸" : "▾";
+      wrap.style.width = isMinimised ? "auto" : (size * 22) + "px";
+    };
 
     const cells = [];
     for (let y = 0; y < size; y++) {
@@ -13472,7 +13493,7 @@
       }
     }
 
-    wrap.appendChild(label);
+    wrap.appendChild(header);
     wrap.appendChild(coords);
     wrap.appendChild(table);
 
