@@ -164,25 +164,65 @@
 
   const BUILDING_TYPES = {
     0: null,
-    1: { visible: true, color: "#9DB", border: "3px solid #163", name: "Armory" },
+    1: {
+      visible: true,
+      color: "#9DB",
+      border: "3px solid #163",
+      name: "Armory",
+    },
     2: { visible: true, color: "#676", name: "Arms" },
     3: { visible: true, color: "#FD9", name: "Autoshop" },
-    4: { visible: true, color: "#676", border: "3px dotted #000000", name: "Bank" },
+    4: {
+      visible: true,
+      color: "#676",
+      border: "3px dotted #000000",
+      name: "Bank",
+    },
     5: { visible: true, color: "#676", name: "Building" },
     6: { visible: true, color: "#232", name: "Carpark" },
     7: { visible: true, color: "#BBCCBB", name: "Cathedral" },
-    8: { visible: true, color: "#232", border: "3px dotted #FF0000", name: "Cemetary" },
+    8: {
+      visible: true,
+      color: "#232",
+      border: "3px dotted #FF0000",
+      name: "Cemetary",
+    },
     9: { visible: true, color: "#676", name: "Church" },
-    10: { visible: true, color: "#676", border: "3px dotted #000000", name: "Cinema" },
-    11: { visible: true, color: "#676", border: "3px dotted #000000", name: "Club" },
+    10: {
+      visible: true,
+      color: "#676",
+      border: "3px dotted #000000",
+      name: "Cinema",
+    },
+    11: {
+      visible: true,
+      color: "#676",
+      border: "3px dotted #000000",
+      name: "Club",
+    },
     12: { visible: true, color: "#653", name: "Factory" },
     13: { visible: true, color: "#BBCCBB", name: "Firehouse" },
-    14: { visible: true, color: "#9DB", border: "3px solid #163", name: "Fort" },
+    14: {
+      visible: true,
+      color: "#9DB",
+      border: "3px solid #163",
+      name: "Fort",
+    },
     15: { visible: true, color: "#FF9999", name: "Hospital" },
     16: { visible: true, color: "#676", name: "Hotel" },
-    17: { visible: true, color: "#676", border: "2px dotted #DDD", name: "Junkyard" },
+    17: {
+      visible: true,
+      color: "#676",
+      border: "2px dotted #DDD",
+      name: "Junkyard",
+    },
     18: { visible: true, color: "#676", name: "Library" },
-    19: { visible: true, color: "#9DB", border: "3px solid #163", name: "Mall" },
+    19: {
+      visible: true,
+      color: "#9DB",
+      border: "3px solid #163",
+      name: "Mall",
+    },
     20: { visible: true, color: "#BBCCBB", name: "Mansion" },
     21: { visible: true, color: "#232", name: "Monument" },
     22: { visible: true, color: "#676", name: "Museum" },
@@ -198,7 +238,12 @@
     32: { visible: true, color: "#676", name: "Warehouse" },
     33: { visible: true, color: "#232", name: "Wasteland" },
     34: { visible: true, color: "#BBCCBB", name: "Zoo" },
-    35: { visible: true, color: "#BBCCBB", border: "2px dotted #DDD", name: "Zoo Enclosure" },
+    35: {
+      visible: true,
+      color: "#BBCCBB",
+      border: "2px dotted #DDD",
+      name: "Zoo Enclosure",
+    },
   };
 
   // ------------------------------------------------
@@ -206,7 +251,6 @@
   // ------------------------------------------------
 
   function generateMaltonGrid() {
-
     const B = [];
     for (let y = 0; y < 100; y++) B[y] = [];
     B[48][79] = [1, "Fort Creedy Armoury", "Fort_Creedy"];
@@ -561,7 +605,11 @@
     B[44][25] = [3, "Lasbury Auto Repair", "Lasbury_Auto_Repair"];
     B[45][20] = [3, "Gower Auto Repair", "Gower_Auto_Repair"];
     B[46][24] = [3, "Wasson Auto Repair", "Wasson_Auto_Repair"];
-    B[42][30] = [3, "Hemore Auto Repair", "Hemore_Auto_Repair_%28Havercroft%29"];
+    B[42][30] = [
+      3,
+      "Hemore Auto Repair",
+      "Hemore_Auto_Repair_%28Havercroft%29",
+    ];
     B[43][34] = [3, "Auston Auto Repair", "Auston_Auto_Repair"];
     B[40][48] = [3, "Wyndham Auto Repair", "Wyndham_Auto_Repair"];
     B[41][42] = [3, "Masey Auto Repair", "Masey_Auto_Repair"];
@@ -732,7 +780,11 @@
     B[95][58] = [3, "Shepherd Auto Repair", "Shepherd_Auto_Repair"];
     B[91][65] = [3, "Mudford Auto Repair", "Mudford_Auto_Repair"];
     B[99][67] = [3, "Whitemore Auto Repair", "Whitemore_Auto_Repair"];
-    B[91][93] = [3, "Finnerty Auto Repair", "Finnerty_Auto_Repair_%28Miltown%29"];
+    B[91][93] = [
+      3,
+      "Finnerty Auto Repair",
+      "Finnerty_Auto_Repair_%28Miltown%29",
+    ];
     B[93][98] = [3, "Stockwell Auto Repair", "Stockwell_Auto_Repair"];
     B[3][6] = [4, "Tomkins Bank", "Tomkins_Bank"];
     B[4][6] = [4, "Bissley Bank", "Bissley_Bank"];
@@ -1029,7 +1081,11 @@
     B[1][40] = [5, "Spankling Building", "The_Spankling_Building"];
     B[2][44] = [5, "Eastwood Building", "The_Eastwood_Building"];
     B[2][46] = [5, "Scarman Building", "The_Scarman_Building"];
-    B[3][41] = [5, "Brazey Building", "The_Brazey_Building_%28East_Boundwood%29"];
+    B[3][41] = [
+      5,
+      "Brazey Building",
+      "The_Brazey_Building_%28East_Boundwood%29",
+    ];
     B[4][47] = [5, "Channing Building", "The_Channing_Building"];
     B[6][44] = [5, "Digby Building", "The_Digby_Building"];
     B[7][40] = [5, "Porcher Building", "The_Porcher_Building"];
@@ -1038,7 +1094,11 @@
     B[3][51] = [5, "Lethbridge Building", "The_Lethbridge_Building"];
     B[4][55] = [5, "Braddick Building", "The_Braddick_Building"];
     B[7][50] = [5, "Leary Building", "The_Leary_Building"];
-    B[0][61] = [5, "Mallows Building", "The_Mallows_Building_%28Chancelwood%29"];
+    B[0][61] = [
+      5,
+      "Mallows Building",
+      "The_Mallows_Building_%28Chancelwood%29",
+    ];
     B[1][60] = [5, "Thompson Building", "The_Thompson_Building"];
     B[1][63] = [5, "Gaffney Building", "The_Gaffney_Building"];
     B[1][65] = [5, "Dobin Building", "The_Dobin_Building"];
@@ -1082,7 +1142,11 @@
     B[15][18] = [5, "Critchell Building", "The_Critchell_Building"];
     B[16][18] = [5, "Gibbens Building", "The_Gibbens_Building"];
     B[18][11] = [5, "Billows Building", "The_Billows_Building"];
-    B[18][12] = [5, "Halliday Building", "The_Halliday_Building_%28Judgewood%29"];
+    B[18][12] = [
+      5,
+      "Halliday Building",
+      "The_Halliday_Building_%28Judgewood%29",
+    ];
     B[19][11] = [5, "Osbaldeston Building", "The_Osbaldeston_Building"];
     B[15][22] = [5, "Pounsett Building", "The_Pounsett_Building"];
     B[18][24] = [5, "Simons Building", "The_Simons_Building"];
@@ -1143,7 +1207,11 @@
     B[17][93] = [5, "Love Building", "The_Love_Building"];
     B[17][98] = [5, "Rowson Building", "The_Rowson_Building"];
     B[20][0] = [5, "Orr Building", "The_Orr_Building"];
-    B[20][2] = [5, "Coss Building", "The_Coss_Building_%28Peddlesden_Village%29"];
+    B[20][2] = [
+      5,
+      "Coss Building",
+      "The_Coss_Building_%28Peddlesden_Village%29",
+    ];
     B[22][4] = [5, "Elderfield Building", "The_Elderfield_Building"];
     B[23][8] = [5, "Huxtable Building", "The_Huxtable_Building"];
     B[26][9] = [5, "Hookins Building", "The_Hookins_Building"];
@@ -1315,7 +1383,11 @@
       "The_Williames_Building_%28Randallbank%29",
     ];
     B[37][69] = [5, "Hindley Building", "The_Hindley_Building"];
-    B[38][60] = [5, "Pridham Building", "The_Pridham_Building_%28Randallbank%29"];
+    B[38][60] = [
+      5,
+      "Pridham Building",
+      "The_Pridham_Building_%28Randallbank%29",
+    ];
     B[38][63] = [5, "Finnerty Building", "The_Finnerty_Building"];
     B[38][67] = [5, "Parslow Building", "The_Parslow_Building"];
     B[39][64] = [5, "Feadon Building", "The_Feadon_Building"];
@@ -1462,7 +1534,11 @@
     B[57][59] = [5, "Betty Building", "The_Betty_Building"];
     B[59][50] = [5, "Tomalin Building", "The_Tomalin_Building"];
     B[59][56] = [5, "Hervey Building", "The_Hervey_Building"];
-    B[50][68] = [5, "Copeland Building", "The_Copeland_Building_%28Roftwood%29"];
+    B[50][68] = [
+      5,
+      "Copeland Building",
+      "The_Copeland_Building_%28Roftwood%29",
+    ];
     B[52][65] = [5, "Kirkby Building", "The_Kirkby_Building_%28Roftwood%29"];
     B[53][60] = [5, "Whale Building", "The_Whale_Building"];
     B[54][69] = [5, "Wotton Building", "The_Wotton_Building"];
@@ -1474,7 +1550,11 @@
     B[59][67] = [5, "Drewe Building", "The_Drewe_Building"];
     B[59][68] = [5, "Ker Building", "The_Ker_Building"];
     B[51][74] = [5, "Fruin Building", "The_Fruin_Building"];
-    B[52][74] = [5, "Prankerd Building", "The_Prankerd_Building_%28Edgecombe%29"];
+    B[52][74] = [
+      5,
+      "Prankerd Building",
+      "The_Prankerd_Building_%28Edgecombe%29",
+    ];
     B[53][77] = [5, "Baxter Building", "The_Baxter_Building"];
     B[55][70] = [5, "Somerton Building", "The_Somerton_Building"];
     B[55][79] = [5, "Collinns Building", "The_Collinns_Building"];
@@ -1555,7 +1635,11 @@
       "Rayfield Building",
       "The_Rayfield_Building_%28Shackleville%29",
     ];
-    B[64][50] = [5, "Elcomb Building", "The_Elcomb_Building_%28Shackleville%29"];
+    B[64][50] = [
+      5,
+      "Elcomb Building",
+      "The_Elcomb_Building_%28Shackleville%29",
+    ];
     B[64][55] = [
       5,
       "Williames Building",
@@ -1589,7 +1673,11 @@
     B[64][97] = [5, "Hawarden Building", "The_Hawarden_Building"];
     B[65][93] = [5, "Pitney Building", "The_Pitney_Building"];
     B[67][95] = [5, "Ridyard Building", "The_Ridyard_Building"];
-    B[67][96] = [5, "Wrigley Building", "The_Wrigley_Building_%28Houldenbank%29"];
+    B[67][96] = [
+      5,
+      "Wrigley Building",
+      "The_Wrigley_Building_%28Houldenbank%29",
+    ];
     B[69][96] = [5, "Chicke Building", "The_Chicke_Building"];
     B[77][4] = [5, "Buskin Building", "The_Buskin_Building"];
     B[78][9] = [5, "Lettey Building", "The_Lettey_Building"];
@@ -1840,7 +1928,11 @@
     B[94][64] = [5, "Roddoway Building", "The_Roddoway_Building"];
     B[94][69] = [5, "Chard Building", "The_Chard_Building"];
     B[97][61] = [5, "MacDonald Building", "The_MacDonald_Building"];
-    B[98][60] = [5, "Rycroft Building", "The_Rycroft_Building_%28Hollomstown%29"];
+    B[98][60] = [
+      5,
+      "Rycroft Building",
+      "The_Rycroft_Building_%28Hollomstown%29",
+    ];
     B[98][63] = [5, "Meadley Building", "The_Meadley_Building"];
     B[99][61] = [5, "Starkie Building", "The_Starkie_Building"];
     B[99][62] = [5, "Bickell Building", "The_Bickell_Building"];
@@ -1853,7 +1945,11 @@
     B[96][70] = [5, "Appelby Building", "The_Appelby_Building"];
     B[96][71] = [5, "Cowie Building", "The_Cowie_Building"];
     B[96][77] = [5, "Panter Building", "The_Panter_Building"];
-    B[99][71] = [5, "Curtice Building", "The_Curtice_Building_%28Danversbank%29"];
+    B[99][71] = [
+      5,
+      "Curtice Building",
+      "The_Curtice_Building_%28Danversbank%29",
+    ];
     B[99][73] = [5, "Pettey Building", "The_Pettey_Building"];
     B[99][75] = [5, "Kirkaldie Building", "The_Kirkaldie_Building"];
     B[99][76] = [5, "Buckley Building", "The_Buckley_Building"];
@@ -1863,7 +1959,11 @@
     B[93][80] = [5, "Wyche Building", "The_Wyche_Building"];
     B[94][84] = [5, "Sherwel Building", "The_Sherwel_Building"];
     B[94][87] = [5, "Gullick Building", "The_Gullick_Building"];
-    B[96][89] = [5, "Bellamy Building", "The_Bellamy_Building_%28Whittenside%29"];
+    B[96][89] = [
+      5,
+      "Bellamy Building",
+      "The_Bellamy_Building_%28Whittenside%29",
+    ];
     B[97][84] = [5, "Rayment Building", "The_Rayment_Building"];
     B[91][92] = [5, "Eccleston Building", "The_Eccleston_Building"];
     B[92][94] = [5, "Gough Building", "The_Gough_Building"];
@@ -2278,7 +2378,11 @@
     B[97][73] = [8, "Cemetery", "Cemetery_73%2C97"];
     B[90][87] = [8, "Cemetery", "Cemetery_87%2C90"];
     B[98][82] = [8, "Cemetery", "Cemetery_82%2C98"];
-    B[0][2] = [9, "St Danilo's Church", "St._Danilo%27s_Church_%28Dakerstown%29"];
+    B[0][2] = [
+      9,
+      "St Danilo's Church",
+      "St._Danilo%27s_Church_%28Dakerstown%29",
+    ];
     B[8][0] = [
       9,
       "St Matthias's Church",
@@ -2346,7 +2450,11 @@
     B[0][87] = [9, "St Dunstan's Church", "St._Dunstan%27s_Church"];
     B[3][85] = [9, "St Matheos's Church", "St._Matheos%27s_Church"];
     B[2][98] = [9, "St Barbara's Church", "St._Barbara%27s_Church"];
-    B[17][0] = [9, "St Cyprian's Church", "St._Cyprian%27s_Church_%28Roywood%29"];
+    B[17][0] = [
+      9,
+      "St Cyprian's Church",
+      "St._Cyprian%27s_Church_%28Roywood%29",
+    ];
     B[17][1] = [9, "St Mary's Church", "St._Mary%27s_Church_%28Roywood%29"];
     B[10][16] = [
       9,
@@ -2374,7 +2482,11 @@
       "St Maximillian's Church",
       "St._Maximillian%27s_Church_%28Gatcombeton%29",
     ];
-    B[19][28] = [9, "St John's Church", "St._John%27s_Church_%28Gatcombeton%29"];
+    B[19][28] = [
+      9,
+      "St John's Church",
+      "St._John%27s_Church_%28Gatcombeton%29",
+    ];
     B[12][36] = [
       9,
       "St Piran's Church",
@@ -2415,7 +2527,11 @@
       "St Athanasius's Church",
       "St._Athanasius%27s_Church_%28Raines Hills%29",
     ];
-    B[12][65] = [9, "St Paul's Church", "St._Paul%27s_Church_%28Raines Hills%29"];
+    B[12][65] = [
+      9,
+      "St Paul's Church",
+      "St._Paul%27s_Church_%28Raines Hills%29",
+    ];
     B[13][60] = [
       9,
       "St Irenaeus's Church",
@@ -2426,8 +2542,16 @@
       "St Irenaeus's Church",
       "St._Irenaeus%27s_Church_%28Raines Hills%29",
     ];
-    B[13][62] = [9, "St Juan's Church", "St._Juan%27s_Church_%28Raines Hills%29"];
-    B[13][67] = [9, "St Mary's Church", "St._Mary%27s_Church_%28Raines Hills%29"];
+    B[13][62] = [
+      9,
+      "St Juan's Church",
+      "St._Juan%27s_Church_%28Raines Hills%29",
+    ];
+    B[13][67] = [
+      9,
+      "St Mary's Church",
+      "St._Mary%27s_Church_%28Raines Hills%29",
+    ];
     B[15][65] = [
       9,
       "St Romuald's Church",
@@ -2448,7 +2572,11 @@
       "St Arnold's Church",
       "St._Arnold%27s_Church_%28Rolt_Heights%29",
     ];
-    B[10][94] = [9, "St Odile's Church", "St._Odile%27s_Church_%28Pescodside%29"];
+    B[10][94] = [
+      9,
+      "St Odile's Church",
+      "St._Odile%27s_Church_%28Pescodside%29",
+    ];
     B[12][96] = [
       9,
       "St Matthias's Church",
@@ -2480,7 +2608,11 @@
       "St._Arnold%27s_Church_%28Brooke_Hills%29",
     ];
     B[28][46] = [9, "St Methodius's Church", "St._Methodius%27s_Church"];
-    B[29][41] = [9, "St Pius's Church", "St._Pius%27s_Church_%28Brooke_Hills%29"];
+    B[29][41] = [
+      9,
+      "St Pius's Church",
+      "St._Pius%27s_Church_%28Brooke_Hills%29",
+    ];
     B[22][54] = [
       9,
       "St Christopher's Church",
@@ -2525,7 +2657,11 @@
       "St Innocent's Church",
       "St._Innocent%27s_Church_%28Dunningwood%29",
     ];
-    B[32][0] = [9, "St Luke's Church", "St._Luke%27s_Church_%28Dunell_Hills%29"];
+    B[32][0] = [
+      9,
+      "St Luke's Church",
+      "St._Luke%27s_Church_%28Dunell_Hills%29",
+    ];
     B[33][6] = [
       9,
       "St Marcus's Church",
@@ -2536,7 +2672,11 @@
       "St Lorenzo's Church",
       "St._Lorenzo%27s_Church_%28Dunell_Hills%29",
     ];
-    B[37][8] = [9, "St Mary's Church", "St._Mary%27s_Church_%28Dunell_Hills%29"];
+    B[37][8] = [
+      9,
+      "St Mary's Church",
+      "St._Mary%27s_Church_%28Dunell_Hills%29",
+    ];
     B[35][12] = [
       9,
       "St Tsarevna's Church",
@@ -2718,7 +2858,11 @@
     B[54][53] = [9, "St Eusebius's Church", "St._Eusebius%27s_Church"];
     B[56][52] = [9, "St Augustine's Church", "St._Augustine%27s_Church"];
     B[57][53] = [9, "St Maria's Church", "St._Maria%27s_Church"];
-    B[58][67] = [9, "St Arnold's Church", "St._Arnold%27s_Church_%28Roftwood%29"];
+    B[58][67] = [
+      9,
+      "St Arnold's Church",
+      "St._Arnold%27s_Church_%28Roftwood%29",
+    ];
     B[57][76] = [
       9,
       "St Ethelbert's Church",
@@ -2743,7 +2887,11 @@
       "St Tsarevna's Church",
       "St._Tsarevna%27s_Church_%28Mornington%29",
     ];
-    B[66][16] = [9, "St Osyth's Church", "St._Osyth%27s_Church_%28Mornington%29"];
+    B[66][16] = [
+      9,
+      "St Osyth's Church",
+      "St._Osyth%27s_Church_%28Mornington%29",
+    ];
     B[62][27] = [
       9,
       "St Barnabas's Church",
@@ -2798,8 +2946,16 @@
       "St Lorenzo's Church",
       "St._Lorenzo%27s_Church_%28Crowbank%29",
     ];
-    B[63][70] = [9, "St Emelia's Church", "St._Emelia%27s_Church_%28Crowbank%29"];
-    B[66][70] = [9, "St Eugene's Church", "St._Eugene%27s_Church_%28Crowbank%29"];
+    B[63][70] = [
+      9,
+      "St Emelia's Church",
+      "St._Emelia%27s_Church_%28Crowbank%29",
+    ];
+    B[66][70] = [
+      9,
+      "St Eugene's Church",
+      "St._Eugene%27s_Church_%28Crowbank%29",
+    ];
     B[66][72] = [9, "St Piran's Church", "St._Piran%27s_Church_%28Crowbank%29"];
     B[68][74] = [
       9,
@@ -2807,7 +2963,11 @@
       "St._Birinus%27s_Church_%28Crowbank%29",
     ];
     B[64][92] = [9, "St Willibrord's Church", "St._Willibrord%27s_Church"];
-    B[68][90] = [9, "St John's Church", "St._John%27s_Church_%28Houldenbank%29"];
+    B[68][90] = [
+      9,
+      "St John's Church",
+      "St._John%27s_Church_%28Houldenbank%29",
+    ];
     B[69][92] = [
       9,
       "St Lorenzo's Church",
@@ -2817,7 +2977,11 @@
     B[77][7] = [9, "St Eugene's Church", "St._Eugene%27s_Church_%28Nixbank%29"];
     B[79][4] = [9, "St Ninian's Church", "St._Ninian%27s_Church_%28Nixbank%29"];
     B[72][16] = [9, "St Fabian's Church", "St._Fabian%27s_Church"];
-    B[75][16] = [9, "St Egbert's Church", "St._Egbert%27s_Church_%28Wykewood%29"];
+    B[75][16] = [
+      9,
+      "St Egbert's Church",
+      "St._Egbert%27s_Church_%28Wykewood%29",
+    ];
     B[77][18] = [9, "St Julie's Church", "St._Julie%27s_Church_%28Wykewood%29"];
     B[73][20] = [9, "St Caius's Church", "St._Caius%27s_Church"];
     B[74][26] = [
@@ -2846,8 +3010,16 @@
     B[70][48] = [9, "St Paul's Church", "St._Paul%27s_Church_%28Tapton%29"];
     B[77][44] = [9, "St Piran's Church", "St._Piran%27s_Church_%28Tapton%29"];
     B[77][46] = [9, "St Emelia's Church", "St._Emelia%27s_Church_%28Tapton%29"];
-    B[78][49] = [9, "St Cyprian's Church", "St._Cyprian%27s_Church_%28Tapton%29"];
-    B[78][59] = [9, "St Luke's Church", "St._Luke%27s_Church_%28Kempsterbank%29"];
+    B[78][49] = [
+      9,
+      "St Cyprian's Church",
+      "St._Cyprian%27s_Church_%28Tapton%29",
+    ];
+    B[78][59] = [
+      9,
+      "St Luke's Church",
+      "St._Luke%27s_Church_%28Kempsterbank%29",
+    ];
     B[70][60] = [
       9,
       "St Danilo's Church",
@@ -2858,7 +3030,11 @@
       "St Margaret's Church",
       "St._Margaret%27s_Church_%28Wray_Heights%29",
     ];
-    B[77][69] = [9, "St John's Church", "St._John%27s_Church_%28Wray_Heights%29"];
+    B[77][69] = [
+      9,
+      "St John's Church",
+      "St._John%27s_Church_%28Wray_Heights%29",
+    ];
     B[78][64] = [9, "St Polycarp's Church", "St._Polycarp%27s_Church"];
     B[72][71] = [
       9,
@@ -2901,7 +3077,11 @@
       "St Maximillian's Church",
       "St._Maximillian%27s_Church_%28Ruddlebank%29",
     ];
-    B[85][14] = [9, "St Piran's Church", "St._Piran%27s_Church_%28Ruddlebank%29"];
+    B[85][14] = [
+      9,
+      "St Piran's Church",
+      "St._Piran%27s_Church_%28Ruddlebank%29",
+    ];
     B[82][22] = [
       9,
       "St Irenaeus's Church",
@@ -3011,7 +3191,11 @@
       "St Maximillian's Church",
       "St._Maximillian%27s_Church_%28Wyke_Hills%29",
     ];
-    B[92][65] = [9, "St Juan's Church", "St._Juan%27s_Church_%28Hollomstown%29"];
+    B[92][65] = [
+      9,
+      "St Juan's Church",
+      "St._Juan%27s_Church_%28Hollomstown%29",
+    ];
     B[95][68] = [
       9,
       "St Daniel's Church",
@@ -3038,7 +3222,11 @@
       "St Symmachus's Church",
       "St._Symmachus%27s_Church_%28Whittenside%29",
     ];
-    B[99][88] = [9, "St Juan's Church", "St._Juan%27s_Church_%28Whittenside%29"];
+    B[99][88] = [
+      9,
+      "St Juan's Church",
+      "St._Juan%27s_Church_%28Whittenside%29",
+    ];
     B[3][7] = [10, "McDougall Cinema", "McDougall_Cinema"];
     B[0][16] = [10, "Alaway Cinema", "Alaway_Cinema"];
     B[9][15] = [10, "Elmund Cinema", "Elmund_Cinema"];
@@ -3735,7 +3923,11 @@
       "Kembry Boulevard Fire Station",
       "Kembry_Boulevard_Fire_Station",
     ];
-    B[9][22] = [13, "Maddocks Drive Fire Station", "Maddocks_Drive_Fire_Station"];
+    B[9][22] = [
+      13,
+      "Maddocks Drive Fire Station",
+      "Maddocks_Drive_Fire_Station",
+    ];
     B[1][30] = [
       13,
       "Yeatman Boulevard Fire Station",
@@ -3748,7 +3940,11 @@
       "Wolsey Crescent Fire Station",
       "Wolsey_Crescent_Fire_Station",
     ];
-    B[3][44] = [13, "Cookesley Walk Fire Station", "Cookesley_Walk_Fire_Station"];
+    B[3][44] = [
+      13,
+      "Cookesley Walk Fire Station",
+      "Cookesley_Walk_Fire_Station",
+    ];
     B[0][69] = [
       13,
       "Prickett Street Fire Station",
@@ -3771,7 +3967,11 @@
       "Swansborough Road Fire Station",
       "Swansborough_Road_Fire_Station",
     ];
-    B[2][82] = [13, "Meetcham Drive Fire Station", "Meetcham_Drive_Fire_Station"];
+    B[2][82] = [
+      13,
+      "Meetcham Drive Fire Station",
+      "Meetcham_Drive_Fire_Station",
+    ];
     B[5][89] = [13, "Gable Walk Fire Station", "Gable_Walk_Fire_Station"];
     B[2][95] = [
       13,
@@ -3789,10 +3989,18 @@
       "Melbourne Square Fire Station",
       "Melbourne_Square_Fire_Station",
     ];
-    B[14][12] = [13, "Higgin Square Fire Station", "Higgin_Square_Fire_Station"];
+    B[14][12] = [
+      13,
+      "Higgin Square Fire Station",
+      "Higgin_Square_Fire_Station",
+    ];
     B[12][20] = [13, "Eatwell Walk Fire Station", "Eatwell_Walk_Fire_Station"];
     B[10][38] = [13, "Berrow Road Fire Station", "Berrow_Road_Fire_Station"];
-    B[12][37] = [13, "Perrie Square Fire Station", "Perrie_Square_Fire_Station"];
+    B[12][37] = [
+      13,
+      "Perrie Square Fire Station",
+      "Perrie_Square_Fire_Station",
+    ];
     B[18][36] = [13, "Bubcar Road Fire Station", "Bubcar_Road_Fire_Station"];
     B[18][41] = [13, "Faber Lane Fire Station", "Faber_Lane_Fire_Station"];
     B[10][65] = [
@@ -3801,8 +4009,16 @@
       "Barling_Boulevard_Fire_Station",
     ];
     B[11][63] = [13, "Skarin Way Fire Station", "Skarin_Way_Fire_Station"];
-    B[12][69] = [13, "Birt Crescent Fire Station", "Birt_Crescent_Fire_Station"];
-    B[18][66] = [13, "Chibbett Lane Fire Station", "Chibbett_Lane_Fire_Station"];
+    B[12][69] = [
+      13,
+      "Birt Crescent Fire Station",
+      "Birt_Crescent_Fire_Station",
+    ];
+    B[18][66] = [
+      13,
+      "Chibbett Lane Fire Station",
+      "Chibbett_Lane_Fire_Station",
+    ];
     B[13][78] = [
       13,
       "Cocker Boulevard Fire Station",
@@ -3846,7 +4062,11 @@
     B[22][36] = [13, "Rutt Square Fire Station", "Rutt_Square_Fire_Station"];
     B[23][39] = [13, "Luellin Lane Fire Station", "Luellin_Lane_Fire_Station"];
     B[24][33] = [13, "Evans Row Fire Station", "Evans_Row_Fire_Station"];
-    B[27][32] = [13, "Courtney Lane Fire Station", "Courtney_Lane_Fire_Station"];
+    B[27][32] = [
+      13,
+      "Courtney Lane Fire Station",
+      "Courtney_Lane_Fire_Station",
+    ];
     B[27][33] = [
       13,
       "Thickett Plaza Fire Station",
@@ -3861,7 +4081,11 @@
     B[26][71] = [13, "Burrough Row Fire Station", "Burrough_Row_Fire_Station"];
     B[28][71] = [13, "Dennis Row Fire Station", "Dennis_Row_Fire_Station"];
     B[20][80] = [13, "Ramsden Way Fire Station", "Ramsden_Way_Fire_Station"];
-    B[22][99] = [13, "Haggas Square Fire Station", "Haggas_Square_Fire_Station"];
+    B[22][99] = [
+      13,
+      "Haggas Square Fire Station",
+      "Haggas_Square_Fire_Station",
+    ];
     B[25][92] = [
       13,
       "Grimmer Square Fire Station",
@@ -3879,23 +4103,43 @@
       "Stranger Grove Fire Station",
       "Stranger_Grove_Fire_Station",
     ];
-    B[31][16] = [13, "Whippey Place Fire Station", "Whippey_Place_Fire_Station"];
-    B[38][13] = [13, "Dunstone Walk Fire Station", "Dunstone_Walk_Fire_Station"];
+    B[31][16] = [
+      13,
+      "Whippey Place Fire Station",
+      "Whippey_Place_Fire_Station",
+    ];
+    B[38][13] = [
+      13,
+      "Dunstone Walk Fire Station",
+      "Dunstone_Walk_Fire_Station",
+    ];
     B[39][10] = [13, "Urben Alley Fire Station", "Urben_Alley_Fire_Station"];
     B[31][27] = [
       13,
       "Mitchell Drive Fire Station",
       "Mitchell_Drive_Fire_Station",
     ];
-    B[39][28] = [13, "Kirkwood Lane Fire Station", "Kirkwood_Lane_Fire_Station"];
+    B[39][28] = [
+      13,
+      "Kirkwood Lane Fire Station",
+      "Kirkwood_Lane_Fire_Station",
+    ];
     B[34][33] = [13, "Wood Grove Fire Station", "Wood_Grove_Fire_Station"];
     B[34][41] = [13, "Getsom Drive Fire Station", "Getsom_Drive_Fire_Station"];
     B[35][46] = [13, "Riddell Way Fire Station", "Riddell_Way_Fire_Station"];
     B[38][49] = [13, "Arscott Road Fire Station", "Arscott_Road_Fire_Station"];
-    B[37][55] = [13, "Pegrum Square Fire Station", "Pegrum_Square_Fire_Station"];
+    B[37][55] = [
+      13,
+      "Pegrum Square Fire Station",
+      "Pegrum_Square_Fire_Station",
+    ];
     B[38][74] = [13, "Dyment Row Fire Station", "Dyment_Row_Fire_Station"];
     B[32][84] = [13, "Millett Walk Fire Station", "Millett_Walk_Fire_Station"];
-    B[36][85] = [13, "Cudworth Lane Fire Station", "Cudworth_Lane_Fire_Station"];
+    B[36][85] = [
+      13,
+      "Cudworth Lane Fire Station",
+      "Cudworth_Lane_Fire_Station",
+    ];
     B[30][94] = [13, "Thorp Way Fire Station", "Thorp_Way_Fire_Station"];
     B[33][96] = [13, "Morton Lane Fire Station", "Morton_Lane_Fire_Station"];
     B[35][97] = [
@@ -3924,7 +4168,11 @@
     B[45][14] = [13, "Falvey Walk Fire Station", "Falvey_Walk_Fire_Station"];
     B[45][15] = [13, "Ewins Row Fire Station", "Ewins_Row_Fire_Station"];
     B[45][17] = [13, "Sorton Way Fire Station", "Sorton_Way_Fire_Station"];
-    B[45][19] = [13, "Sherman Alley Fire Station", "Sherman_Alley_Fire_Station"];
+    B[45][19] = [
+      13,
+      "Sherman Alley Fire Station",
+      "Sherman_Alley_Fire_Station",
+    ];
     B[42][25] = [
       13,
       "Dales Boulevard Fire Station",
@@ -3940,18 +4188,34 @@
     ];
     B[45][34] = [13, "Michaud Walk Fire Station", "Michaud_Walk_Fire_Station"];
     B[47][35] = [13, "Adey Plaza Fire Station", "Adey_Plaza_Fire_Station"];
-    B[47][36] = [13, "Saltrow Alley Fire Station", "Saltrow_Alley_Fire_Station"];
+    B[47][36] = [
+      13,
+      "Saltrow Alley Fire Station",
+      "Saltrow_Alley_Fire_Station",
+    ];
     B[47][45] = [
       13,
       "Reginaldus Plaza Fire Station",
       "Reginaldus_Plaza_Fire_Station",
     ];
-    B[48][49] = [13, "Withyman Road Fire Station", "Withyman_Road_Fire_Station"];
+    B[48][49] = [
+      13,
+      "Withyman Road Fire Station",
+      "Withyman_Road_Fire_Station",
+    ];
     B[43][59] = [13, "Acreman Road Fire Station", "Acreman_Road_Fire_Station"];
     B[40][66] = [13, "Voules Plaza Fire Station", "Voules_Plaza_Fire_Station"];
     B[48][65] = [13, "Frayne Walk Fire Station", "Frayne_Walk_Fire_Station"];
-    B[48][69] = [13, "Whitten Place Fire Station", "Whitten_Place_Fire_Station"];
-    B[47][76] = [13, "Nositer Drive Fire Station", "Nositer_Drive_Fire_Station"];
+    B[48][69] = [
+      13,
+      "Whitten Place Fire Station",
+      "Whitten_Place_Fire_Station",
+    ];
+    B[47][76] = [
+      13,
+      "Nositer Drive Fire Station",
+      "Nositer_Drive_Fire_Station",
+    ];
     B[41][81] = [13, "Boxall Road Fire Station", "Boxall_Road_Fire_Station"];
     B[44][86] = [13, "Billet Road Fire Station", "Billet_Road_Fire_Station"];
     B[45][94] = [13, "Flower Walk Fire Station", "Flower_Walk_Fire_Station"];
@@ -3975,7 +4239,11 @@
       "Kingslake Walk Fire Station",
       "Kingslake_Walk_Fire_Station",
     ];
-    B[57][43] = [13, "Pigitt Square Fire Station", "Pigitt_Square_Fire_Station"];
+    B[57][43] = [
+      13,
+      "Pigitt Square Fire Station",
+      "Pigitt_Square_Fire_Station",
+    ];
     B[51][69] = [13, "Membry Lane Fire Station", "Membry_Lane_Fire_Station"];
     B[53][66] = [
       13,
@@ -3992,14 +4260,22 @@
       "Southcott Plaza Fire Station",
       "Southcott_Plaza_Fire_Station",
     ];
-    B[59][70] = [13, "Pardoe Square Fire Station", "Pardoe_Square_Fire_Station"];
+    B[59][70] = [
+      13,
+      "Pardoe Square Fire Station",
+      "Pardoe_Square_Fire_Station",
+    ];
     B[51][85] = [13, "Sellek Way Fire Station", "Sellek_Way_Fire_Station"];
     B[51][87] = [
       13,
       "McDonald Drive Fire Station",
       "McDonald_Drive_Fire_Station",
     ];
-    B[54][92] = [13, "Horsey Square Fire Station", "Horsey_Square_Fire_Station"];
+    B[54][92] = [
+      13,
+      "Horsey Square Fire Station",
+      "Horsey_Square_Fire_Station",
+    ];
     B[65][5] = [
       13,
       "Furneaux Square Fire Station",
@@ -4027,9 +4303,17 @@
     B[65][49] = [13, "Brockway Row Fire Station", "Brockway_Row_Fire_Station"];
     B[65][54] = [13, "Dempsey Lane Fire Station", "Dempsey_Lane_Fire_Station"];
     B[66][51] = [13, "Doig Road Fire Station", "Doig_Road_Fire_Station"];
-    B[66][54] = [13, "Clarkson Lane Fire Station", "Clarkson_Lane_Fire_Station"];
+    B[66][54] = [
+      13,
+      "Clarkson Lane Fire Station",
+      "Clarkson_Lane_Fire_Station",
+    ];
     B[60][68] = [13, "Garrow Drive Fire Station", "Garrow_Drive_Fire_Station"];
-    B[60][69] = [13, "Paskin Square Fire Station", "Paskin_Square_Fire_Station"];
+    B[60][69] = [
+      13,
+      "Paskin Square Fire Station",
+      "Paskin_Square_Fire_Station",
+    ];
     B[61][63] = [
       13,
       "Wimbridge Boulevard Fire Station",
@@ -4042,7 +4326,11 @@
       "Gerrish Square Fire Station",
       "Gerrish_Square_Fire_Station",
     ];
-    B[69][79] = [13, "Spinney Alley Fire Station", "Spinney_Alley_Fire_Station"];
+    B[69][79] = [
+      13,
+      "Spinney Alley Fire Station",
+      "Spinney_Alley_Fire_Station",
+    ];
     B[60][93] = [13, "Vallis Plaza Fire Station", "Vallis_Plaza_Fire_Station"];
     B[77][1] = [13, "Lindsey Lane Fire Station", "Lindsey_Lane_Fire_Station"];
     B[72][14] = [
@@ -4051,8 +4339,16 @@
       "Castleman_Walk_Fire_Station",
     ];
     B[79][17] = [13, "Catcott Row Fire Station", "Catcott_Row_Fire_Station"];
-    B[71][22] = [13, "Deverell Walk Fire Station", "Deverell_Walk_Fire_Station"];
-    B[74][35] = [13, "Polwhiele Way Fire Station", "Polwhiele_Way_Fire_Station"];
+    B[71][22] = [
+      13,
+      "Deverell Walk Fire Station",
+      "Deverell_Walk_Fire_Station",
+    ];
+    B[74][35] = [
+      13,
+      "Polwhiele Way Fire Station",
+      "Polwhiele_Way_Fire_Station",
+    ];
     B[75][37] = [
       13,
       "Weightman Boulevard Fire Station",
@@ -4098,7 +4394,11 @@
     B[76][85] = [13, "Burden Road Fire Station", "Burden_Road_Fire_Station"];
     B[72][92] = [13, "Tuxill Alley Fire Station", "Tuxill_Alley_Fire_Station"];
     B[72][98] = [13, "Fowke Lane Fire Station", "Fowke_Lane_Fire_Station"];
-    B[76][91] = [13, "Hagger Square Fire Station", "Hagger_Square_Fire_Station"];
+    B[76][91] = [
+      13,
+      "Hagger Square Fire Station",
+      "Hagger_Square_Fire_Station",
+    ];
     B[77][92] = [
       13,
       "Adler Crescent Fire Station",
@@ -4111,7 +4411,11 @@
     ];
     B[85][0] = [13, "Whittard Road Fire Station", "Whittard_Road_Fire_Station"];
     B[81][12] = [13, "Wyke Grove Fire Station", "Wyke_Grove_Fire_Station"];
-    B[88][10] = [13, "Strange Alley Fire Station", "Strange_Alley_Fire_Station"];
+    B[88][10] = [
+      13,
+      "Strange Alley Fire Station",
+      "Strange_Alley_Fire_Station",
+    ];
     B[88][14] = [13, "Hulin Drive Fire Station", "Hulin_Drive_Fire_Station"];
     B[81][26] = [13, "Pimm Walk Fire Station", "Pimm_Walk_Fire_Station"];
     B[82][24] = [13, "Dinham Row Fire Station", "Dinham_Row_Fire_Station"];
@@ -4128,7 +4432,11 @@
       "Dunford_Lane_Fire_Station_%28Dartside%29",
     ];
     B[89][32] = [13, "Kebby Street Fire Station", "Kebby_Street_Fire_Station"];
-    B[80][45] = [13, "Lambourn Walk Fire Station", "Lambourn_Walk_Fire_Station"];
+    B[80][45] = [
+      13,
+      "Lambourn Walk Fire Station",
+      "Lambourn_Walk_Fire_Station",
+    ];
     B[82][49] = [
       13,
       "Gleeson Square Fire Station",
@@ -4147,7 +4455,11 @@
       "Merryweather Way Fire Station",
       "Merryweather_Way_Fire_Station",
     ];
-    B[82][50] = [13, "Councell Lane Fire Station", "Councell_Lane_Fire_Station"];
+    B[82][50] = [
+      13,
+      "Councell Lane Fire Station",
+      "Councell_Lane_Fire_Station",
+    ];
     B[83][55] = [13, "Barter Road Fire Station", "Barter_Road_Fire_Station"];
     B[85][56] = [
       13,
@@ -4159,7 +4471,11 @@
     B[88][72] = [13, "Karnaus Row Fire Station", "Karnaus_Row_Fire_Station"];
     B[80][82] = [13, "Boole Place Fire Station", "Boole_Place_Fire_Station"];
     B[81][87] = [13, "Rich Square Fire Station", "Rich_Square_Fire_Station"];
-    B[83][84] = [13, "Hooper Square Fire Station", "Hooper_Square_Fire_Station"];
+    B[83][84] = [
+      13,
+      "Hooper Square Fire Station",
+      "Hooper_Square_Fire_Station",
+    ];
     B[80][94] = [13, "Tudge Way Fire Station", "Tudge_Way_Fire_Station"];
     B[92][2] = [13, "Horton Square Fire Station", "Horton_Square_Fire_Station"];
     B[92][3] = [13, "Woof Grove Fire Station", "Woof_Grove_Fire_Station"];
@@ -4183,7 +4499,11 @@
       "Edgcumbe_Drive_Fire_Station",
     ];
     B[94][21] = [13, "Barens Road Fire Station", "Barens_Road_Fire_Station"];
-    B[96][29] = [13, "Learmond Walk Fire Station", "Learmond_Walk_Fire_Station"];
+    B[96][29] = [
+      13,
+      "Learmond Walk Fire Station",
+      "Learmond_Walk_Fire_Station",
+    ];
     B[97][24] = [13, "Dudman Row Fire Station", "Dudman_Row_Fire_Station"];
     B[90][34] = [13, "Gell Lane Fire Station", "Gell_Lane_Fire_Station"];
     B[92][32] = [
@@ -4197,14 +4517,22 @@
       "Condon Boulevard Fire Station",
       "Condon_Boulevard_Fire_Station",
     ];
-    B[97][41] = [13, "Whittem Place Fire Station", "Whittem_Place_Fire_Station"];
+    B[97][41] = [
+      13,
+      "Whittem Place Fire Station",
+      "Whittem_Place_Fire_Station",
+    ];
     B[98][48] = [
       13,
       "Garlick Square Fire Station",
       "Garlick_Square_Fire_Station",
     ];
     B[97][55] = [13, "Haim Walk Fire Station", "Haim_Walk_Fire_Station"];
-    B[90][67] = [13, "Sleeman Alley Fire Station", "Sleeman_Alley_Fire_Station"];
+    B[90][67] = [
+      13,
+      "Sleeman Alley Fire Station",
+      "Sleeman_Alley_Fire_Station",
+    ];
     B[95][63] = [
       13,
       "Avent Crescent Fire Station",
@@ -4233,7 +4561,11 @@
       "Hitchens Street Fire Station",
       "Hitchens_Street_Fire_Station",
     ];
-    B[99][90] = [13, "Donoghan Walk Fire Station", "Donoghan_Walk_Fire_Station"];
+    B[99][90] = [
+      13,
+      "Donoghan Walk Fire Station",
+      "Donoghan_Walk_Fire_Station",
+    ];
     B[47][78] = [14, "Fort Creedy Infirmary", "Fort_Creedy"];
     B[47][79] = [14, "Fort Creedy Storehouse", "Fort_Creedy"];
     B[48][78] = [14, "Fort Creedy Barracks", "Fort_Creedy"];
@@ -4288,7 +4620,11 @@
       "Alphege General Hospital",
       "Alphege_General_Hospital_%28East_Boundwood%29",
     ];
-    B[6][40] = [15, "Anastasius General Hospital", "Anastasius_General_Hospital"];
+    B[6][40] = [
+      15,
+      "Anastasius General Hospital",
+      "Anastasius_General_Hospital",
+    ];
     B[9][45] = [
       15,
       "St Matthew's Hospital",
@@ -4382,7 +4718,11 @@
       "St._Seraphim%27s_Hospital_%28Pashenton%29",
     ];
     B[14][89] = [15, "St Herman's Hospital", "St._Herman%27s_Hospital"];
-    B[19][83] = [15, "Silverius General Hospital", "Silverius_General_Hospital"];
+    B[19][83] = [
+      15,
+      "Silverius General Hospital",
+      "Silverius_General_Hospital",
+    ];
     B[14][98] = [
       15,
       "St Bartholomew's Hospital",
@@ -4506,7 +4846,11 @@
       "St Ethelbert's Hospital",
       "St._Ethelbert%27s_Hospital_%28East_Becktown%29",
     ];
-    B[34][24] = [15, "St Eleutherius's Hospital", "St._Eleutherius%27s_Hospital"];
+    B[34][24] = [
+      15,
+      "St Eleutherius's Hospital",
+      "St._Eleutherius%27s_Hospital",
+    ];
     B[36][27] = [
       15,
       "St Elisabeth's Hospital",
@@ -4685,7 +5029,11 @@
       "St Wolfgang's Hospital",
       "St._Wolfgang%27s_Hospital_%28Grigg_Heights%29",
     ];
-    B[59][13] = [15, "St Maximillian's Hospital", "St._Maximillian%27s_Hospital"];
+    B[59][13] = [
+      15,
+      "St Maximillian's Hospital",
+      "St._Maximillian%27s_Hospital",
+    ];
     B[52][23] = [
       15,
       "St Columbanus's Hospital",
@@ -4863,7 +5211,11 @@
       "St Matheos's Hospital",
       "St._Matheos%27s_Hospital_%28Tapton%29",
     ];
-    B[73][46] = [15, "St Luke's Hospital", "St._Luke%27s_Hospital_%28Tapton%29"];
+    B[73][46] = [
+      15,
+      "St Luke's Hospital",
+      "St._Luke%27s_Hospital_%28Tapton%29",
+    ];
     B[70][56] = [
       15,
       "St Matheos's Hospital",
@@ -4902,7 +5254,11 @@
     ];
     B[79][62] = [15, "St Hilarion's Hospital", "St._Hilarion%27s_Hospital"];
     B[71][74] = [15, "St Polycarp's Hospital", "St._Polycarp%27s_Hospital"];
-    B[79][72] = [15, "Zacharias General Hospital", "Zacharias_General_Hospital"];
+    B[79][72] = [
+      15,
+      "Zacharias General Hospital",
+      "Zacharias_General_Hospital",
+    ];
     B[77][97] = [
       15,
       "Josephine General Hospital",
@@ -4991,7 +5347,11 @@
       "St Spyridon's Hospital",
       "St._Spyridon%27s_Hospital_%28Scarletwood%29",
     ];
-    B[88][73] = [15, "St Telesphorus's Hospital", "St._Telesphorus%27s_Hospital"];
+    B[88][73] = [
+      15,
+      "St Telesphorus's Hospital",
+      "St._Telesphorus%27s_Hospital",
+    ];
     B[81][81] = [15, "Remigius General Hospital", "Remigius_General_Hospital"];
     B[88][82] = [
       15,
@@ -5048,7 +5408,11 @@
     ];
     B[94][63] = [15, "Theophan General Hospital", "Theophan_General_Hospital"];
     B[95][69] = [15, "Gall General Hospital", "Gall_General_Hospital"];
-    B[92][72] = [15, "Servatius General Hospital", "Servatius_General_Hospital"];
+    B[92][72] = [
+      15,
+      "Servatius General Hospital",
+      "Servatius_General_Hospital",
+    ];
     B[96][72] = [
       15,
       "Martha General Hospital",
@@ -5071,7 +5435,11 @@
       "Josephine General Hospital",
       "Josephine_General_Hospital_%28Miltown%29",
     ];
-    B[97][93] = [15, "Callistus General Hospital", "Callistus_General_Hospital"];
+    B[97][93] = [
+      15,
+      "Callistus General Hospital",
+      "Callistus_General_Hospital",
+    ];
     B[4][4] = [16, "Doyne Hotel", "The_Doyne_Hotel"];
     B[6][1] = [16, "Gristwood Hotel", "The_Gristwood_Hotel"];
     B[8][5] = [16, "Chitty Hotel", "The_Chitty_Hotel"];
@@ -5905,7 +6273,11 @@
     B[8][54] = [21, "Classey Monument", "The_Classey_Monument"];
     B[6][62] = [21, "Henshaw Monument", "The_Henshaw_Monument"];
     B[8][64] = [21, "Bythesea Monument", "The_Bythesea_Monument"];
-    B[9][60] = [21, "Norgate Monument", "The_Norgate_Monument_%28Chancelwood%29"];
+    B[9][60] = [
+      21,
+      "Norgate Monument",
+      "The_Norgate_Monument_%28Chancelwood%29",
+    ];
     B[0][70] = [21, "Blount Monument", "The_Blount_Monument"];
     B[6][74] = [21, "Chandler Monument", "The_Chandler_Monument"];
     B[9][70] = [21, "Carslake Monument", "The_Carslake_Monument"];
@@ -6393,14 +6765,22 @@
     B[0][14] = [23, "Selley Building", "The_Selley_Building_%28Jensentown%29"];
     B[0][97] = [23, "Beale Building", "The_Beale_Building"];
     B[1][27] = [23, "Evett Building", "The_Evett_Building"];
-    B[1][29] = [23, "Haslock Building", "The_Haslock_Building_%28Quarlesbank%29"];
+    B[1][29] = [
+      23,
+      "Haslock Building",
+      "The_Haslock_Building_%28Quarlesbank%29",
+    ];
     B[1][99] = [23, "Trood Building", "The_Trood_Building"];
     B[2][91] = [23, "Bridgman Building", "The_Bridgman_Building"];
     B[3][20] = [23, "Balchin Building", "The_Balchin_Building"];
     B[3][23] = [23, "Milnerr Building", "The_Milnerr_Building"];
     B[3][89] = [23, "Wallbutton Building", "The_Wallbutton_Building"];
     B[4][89] = [23, "Carlyle Building", "The_Carlyle_Building"];
-    B[5][69] = [23, "Haslock Building", "The_Haslock_Building_%28Chancelwood%29"];
+    B[5][69] = [
+      23,
+      "Haslock Building",
+      "The_Haslock_Building_%28Chancelwood%29",
+    ];
     B[5][79] = [23, "Wortley Building", "The_Wortley_Building"];
     B[5][83] = [
       23,
@@ -6434,7 +6814,11 @@
     B[16][17] = [23, "Ludlow Building", "The_Ludlow_Building"];
     B[16][45] = [23, "Whatmore Building", "The_Whatmore_Building"];
     B[16][66] = [23, "Jack Building", "The_Jack_Building"];
-    B[16][72] = [23, "Woolven Building", "The_Woolven_Building_%28Pashenton%29"];
+    B[16][72] = [
+      23,
+      "Woolven Building",
+      "The_Woolven_Building_%28Pashenton%29",
+    ];
     B[17][55] = [23, "Muller Building", "The_Muller_Building"];
     B[17][65] = [23, "Halay Building", "The_Halay_Building"];
     B[18][49] = [23, "Serrell Building", "The_Serrell_Building"];
@@ -6477,7 +6861,11 @@
     B[30][23] = [23, "Kening Building", "The_Kening_Building"];
     B[30][30] = [23, "Laimbeer Building", "The_Laimbeer_Building"];
     B[30][63] = [23, "Littlehales Building", "The_Littlehales_Building"];
-    B[31][15] = [23, "Oxley Building", "The_Oxley_Building_%28West_Becktown%29"];
+    B[31][15] = [
+      23,
+      "Oxley Building",
+      "The_Oxley_Building_%28West_Becktown%29",
+    ];
     B[31][40] = [23, "Staples Building", "The_Staples_Building"];
     B[31][95] = [23, "Robbins Building", "The_Robbins_Building"];
     B[32][24] = [23, "Sugg Building", "The_Sugg_Building"];
@@ -6541,14 +6929,22 @@
     B[57][33] = [23, "Pittman Building", "The_Pittman_Building"];
     B[57][51] = [23, "Moseley Building", "The_Moseley_Building"];
     B[58][79] = [23, "Maver Building", "The_Maver_Building"];
-    B[59][4] = [23, "Merson Building", "The_Merson_Building_%28Grigg_Heights%29"];
+    B[59][4] = [
+      23,
+      "Merson Building",
+      "The_Merson_Building_%28Grigg_Heights%29",
+    ];
     B[60][72] = [23, "Blocksidge Building", "The_Blocksidge_Building"];
     B[60][95] = [23, "Tribe Building", "The_Tribe_Building"];
     B[63][76] = [23, "Mydleham Building", "The_Mydleham_Building"];
     B[64][31] = [23, "Flooks Building", "The_Flooks_Building"];
     B[64][37] = [23, "Culling Building", "The_Culling_Building"];
     B[64][94] = [23, "Owsley Building", "The_Owsley_Building"];
-    B[64][99] = [23, "Hosken Building", "The_Hosken_Building_%28Houldenbank%29"];
+    B[64][99] = [
+      23,
+      "Hosken Building",
+      "The_Hosken_Building_%28Houldenbank%29",
+    ];
     B[65][24] = [
       23,
       "Hebditch Building",
@@ -6561,7 +6957,11 @@
       "The_Greatorex_Building_%28Houldenbank%29",
     ];
     B[66][55] = [23, "Raymond Building", "The_Raymond_Building"];
-    B[67][66] = [23, "Rayfield Building", "The_Rayfield_Building_%28Tollyton%29"];
+    B[67][66] = [
+      23,
+      "Rayfield Building",
+      "The_Rayfield_Building_%28Tollyton%29",
+    ];
     B[68][76] = [23, "Doubting Building", "The_Doubting_Building"];
     B[69][39] = [23, "Foreman Building", "The_Foreman_Building"];
     B[70][26] = [23, "Hazeldine Building", "The_Hazeldine_Building"];
@@ -6626,7 +7026,11 @@
     ];
     B[90][47] = [23, "Fort Building", "The_Fort_Building"];
     B[90][88] = [23, "Malcolm Building", "The_Malcolm_Building"];
-    B[91][48] = [23, "Brazey Building", "The_Brazey_Building_%28Buttonville%29"];
+    B[91][48] = [
+      23,
+      "Brazey Building",
+      "The_Brazey_Building_%28Buttonville%29",
+    ];
     B[91][75] = [23, "Kynaston Building", "The_Kynaston_Building"];
     B[91][91] = [23, "Cartwright Building", "The_Cartwright_Building"];
     B[91][97] = [23, "McCullock Building", "The_McCullock_Building"];
@@ -6895,9 +7299,17 @@
     B[92][90] = [24, "Hitchcott Park", "Hitchcott_Park"];
     B[96][91] = [24, "Villar Park", "Villar_Park"];
     B[98][90] = [24, "Red Park", "Red_Park"];
-    B[0][1] = [25, "Palprey Road Police Dept", "Palprey_Road_Police_Department"];
+    B[0][1] = [
+      25,
+      "Palprey Road Police Dept",
+      "Palprey_Road_Police_Department",
+    ];
     B[5][0] = [25, "Wale Walk Police Dept", "Wale_Walk_Police_Department"];
-    B[6][2] = [25, "Swearse Lane Police Dept", "Swearse_Lane_Police_Department"];
+    B[6][2] = [
+      25,
+      "Swearse Lane Police Dept",
+      "Swearse_Lane_Police_Department",
+    ];
     B[9][0] = [
       25,
       "Stobbart Walk Police Dept",
@@ -6924,7 +7336,11 @@
       "Dorothey Plaza Police Dept",
       "Dorothey_Plaza_Police_Department",
     ];
-    B[8][30] = [25, "Ivyleafe Row Police Dept", "Ivyleafe_Row_Police_Department"];
+    B[8][30] = [
+      25,
+      "Ivyleafe Row Police Dept",
+      "Ivyleafe_Row_Police_Department",
+    ];
     B[0][41] = [25, "Carner Way Police Dept", "Carner_Way_Police_Department"];
     B[1][41] = [
       25,
@@ -6936,7 +7352,11 @@
       "Challenger Crescent Police Dept",
       "Challenger_Crescent_Police_Department",
     ];
-    B[1][57] = [25, "Fenwyk Plaza Police Dept", "Fenwyk_Plaza_Police_Department"];
+    B[1][57] = [
+      25,
+      "Fenwyk Plaza Police Dept",
+      "Fenwyk_Plaza_Police_Department",
+    ];
     B[5][58] = [
       25,
       "Gainard Place Police Dept",
@@ -6971,7 +7391,11 @@
       "Midelton Crescent Police Dept",
       "Midelton_Crescent_Police_Department",
     ];
-    B[9][93] = [25, "Pegrum Place Police Dept", "Pegrum_Place_Police_Department"];
+    B[9][93] = [
+      25,
+      "Pegrum Place Police Dept",
+      "Pegrum_Place_Police_Department",
+    ];
     B[17][6] = [
       25,
       "Gerrard Place Police Dept",
@@ -6987,7 +7411,11 @@
       "Lamport Walk Police Dept",
       "Lamport_Walk_Police_Department",
     ];
-    B[14][29] = [25, "Boorman Way Police Dept", "Boorman_Way_Police_Department"];
+    B[14][29] = [
+      25,
+      "Boorman Way Police Dept",
+      "Boorman_Way_Police_Department",
+    ];
     B[10][36] = [
       25,
       "Lock Boulevard Police Dept",
@@ -7061,9 +7489,21 @@
       "Dungey Alley Police Dept",
       "Dungey_Alley_Police_Department",
     ];
-    B[17][70] = [25, "Breeden Way Police Dept", "Breeden_Way_Police_Department"];
-    B[17][79] = [25, "Rawkins Row Police Dept", "Rawkins_Row_Police_Department"];
-    B[18][73] = [25, "Bagehot Way Police Dept", "Bagehot_Way_Police_Department"];
+    B[17][70] = [
+      25,
+      "Breeden Way Police Dept",
+      "Breeden_Way_Police_Department",
+    ];
+    B[17][79] = [
+      25,
+      "Rawkins Row Police Dept",
+      "Rawkins_Row_Police_Department",
+    ];
+    B[18][73] = [
+      25,
+      "Bagehot Way Police Dept",
+      "Bagehot_Way_Police_Department",
+    ];
     B[12][89] = [
       25,
       "Younghusband Square Police Dept",
@@ -7104,7 +7544,11 @@
       "Kenefie Lane Police Dept",
       "Kenefie_Lane_Police_Department",
     ];
-    B[27][12] = [25, "Rodwell Row Police Dept", "Rodwell_Row_Police_Department"];
+    B[27][12] = [
+      25,
+      "Rodwell Row Police Dept",
+      "Rodwell_Row_Police_Department",
+    ];
     B[20][20] = [
       25,
       "Halse Crescent Police Dept",
@@ -7115,7 +7559,11 @@
       "Crossman Grove Police Dept",
       "Crossman_Grove_Police_Department",
     ];
-    B[23][29] = [25, "Tayler Lane Police Dept", "Tayler_Lane_Police_Department"];
+    B[23][29] = [
+      25,
+      "Tayler Lane Police Dept",
+      "Tayler_Lane_Police_Department",
+    ];
     B[25][35] = [
       25,
       "Pooll Crescent Police Dept",
@@ -7149,7 +7597,11 @@
       "Farrant Crescent Police Dept",
       "Farrant_Crescent_Police_Department",
     ];
-    B[23][55] = [25, "Lessey Lane Police Dept", "Lessey_Lane_Police_Department"];
+    B[23][55] = [
+      25,
+      "Lessey Lane Police Dept",
+      "Lessey_Lane_Police_Department",
+    ];
     B[25][53] = [
       25,
       "Owsley Crescent Police Dept",
@@ -7175,17 +7627,29 @@
       "Cotterrell Crescent Police Dept",
       "Cotterrell_Crescent_Police_Department",
     ];
-    B[20][89] = [25, "Mylrea Walk Police Dept", "Mylrea_Walk_Police_Department"];
+    B[20][89] = [
+      25,
+      "Mylrea Walk Police Dept",
+      "Mylrea_Walk_Police_Department",
+    ];
     B[23][82] = [25, "Oram Walk Police Dept", "Oram_Walk_Police_Department"];
     B[22][90] = [25, "Skarin Row Police Dept", "Skarin_Row_Police_Department"];
-    B[22][92] = [25, "Morley Walk Police Dept", "Morley_Walk_Police_Department"];
+    B[22][92] = [
+      25,
+      "Morley Walk Police Dept",
+      "Morley_Walk_Police_Department",
+    ];
     B[23][99] = [
       25,
       "Lord Boulevard Police Dept",
       "Lord_Boulevard_Police_Department",
     ];
     B[32][8] = [25, "Yea Drive Police Dept", "Yea_Drive_Police_Department"];
-    B[33][1] = [25, "Cotty Street Police Dept", "Cotty_Street_Police_Department"];
+    B[33][1] = [
+      25,
+      "Cotty Street Police Dept",
+      "Cotty_Street_Police_Department",
+    ];
     B[35][7] = [
       25,
       "Broadbelt Grove Police Dept",
@@ -7213,7 +7677,11 @@
       "Matraves Crescent Police Dept",
       "Matraves_Crescent_Police_Department",
     ];
-    B[33][50] = [25, "Traves Lane Police Dept", "Traves_Lane_Police_Department"];
+    B[33][50] = [
+      25,
+      "Traves Lane Police Dept",
+      "Traves_Lane_Police_Department",
+    ];
     B[33][51] = [
       25,
       "Sires Boulevard Police Dept",
@@ -7230,7 +7698,11 @@
       "Gillett Place Police Dept",
       "Gillett_Place_Police_Department",
     ];
-    B[36][68] = [25, "Towner Lane Police Dept", "Towner_Lane_Police_Department"];
+    B[36][68] = [
+      25,
+      "Towner Lane Police Dept",
+      "Towner_Lane_Police_Department",
+    ];
     B[32][74] = [
       25,
       "Chaffey Alley Police Dept",
@@ -7256,7 +7728,11 @@
       "Ruggevale Walk Police Dept",
       "Ruggevale_Walk_Police_Department",
     ];
-    B[44][13] = [25, "Burrell Way Police Dept", "Burrell_Way_Police_Department"];
+    B[44][13] = [
+      25,
+      "Burrell Way Police Dept",
+      "Burrell_Way_Police_Department",
+    ];
     B[48][10] = [
       25,
       "Stockley Walk Police Dept",
@@ -7282,7 +7758,11 @@
       "Spurdell Walk Police Dept",
       "Spurdell_Walk_Police_Department",
     ];
-    B[48][36] = [25, "Yapp Square Police Dept", "Yapp_Square_Police_Department"];
+    B[48][36] = [
+      25,
+      "Yapp Square Police Dept",
+      "Yapp_Square_Police_Department",
+    ];
     B[45][41] = [
       25,
       "Keane Boulevard Police Dept",
@@ -7353,7 +7833,11 @@
       "Halberry Boulevard Police Dept",
       "Halberry_Boulevard_Police_Department",
     ];
-    B[51][0] = [25, "Haddock Road Police Dept", "Haddock_Road_Police_Department"];
+    B[51][0] = [
+      25,
+      "Haddock Road Police Dept",
+      "Haddock_Road_Police_Department",
+    ];
     B[57][0] = [25, "Spry Road Police Dept", "Spry_Road_Police_Department"];
     B[57][3] = [
       25,
@@ -7413,14 +7897,22 @@
       "Joyner_Boulevard_Police_Department",
     ];
     B[56][62] = [25, "Mayo Row Police Dept", "Mayo_Row_Police_Department"];
-    B[56][68] = [25, "Rawlins Row Police Dept", "Rawlins_Row_Police_Department"];
+    B[56][68] = [
+      25,
+      "Rawlins Row Police Dept",
+      "Rawlins_Row_Police_Department",
+    ];
     B[53][75] = [25, "Pavy Plaza Police Dept", "Pavy_Plaza_Police_Department"];
     B[55][75] = [
       25,
       "Chanter Alley Police Dept",
       "Chanter_Alley_Police_Department",
     ];
-    B[56][78] = [25, "Cape Avenue Police Dept", "Cape_Avenue_Police_Department"];
+    B[56][78] = [
+      25,
+      "Cape Avenue Police Dept",
+      "Cape_Avenue_Police_Department",
+    ];
     B[57][79] = [
       25,
       "Stadling Walk Police Dept",
@@ -7461,14 +7953,26 @@
       "Herbert Road Police Dept",
       "Herbert_Road_Police_Department",
     ];
-    B[64][26] = [25, "Dear Street Police Dept", "Dear_Street_Police_Department"];
+    B[64][26] = [
+      25,
+      "Dear Street Police Dept",
+      "Dear_Street_Police_Department",
+    ];
     B[61][34] = [
       25,
       "Robertson Walk Police Dept",
       "Robertson_Walk_Police_Department",
     ];
-    B[63][31] = [25, "Bidgood Way Police Dept", "Bidgood_Way_Police_Department"];
-    B[66][31] = [25, "Dore Street Police Dept", "Dore_Street_Police_Department"];
+    B[63][31] = [
+      25,
+      "Bidgood Way Police Dept",
+      "Bidgood_Way_Police_Department",
+    ];
+    B[66][31] = [
+      25,
+      "Dore Street Police Dept",
+      "Dore_Street_Police_Department",
+    ];
     B[60][45] = [
       25,
       "Wheaton Avenue Police Dept",
@@ -7500,8 +8004,16 @@
       "Friend Plaza Police Dept",
       "Friend_Plaza_Police_Department",
     ];
-    B[61][75] = [25, "Dane Street Police Dept", "Dane_Street_Police_Department"];
-    B[62][76] = [25, "Burt Square Police Dept", "Burt_Square_Police_Department"];
+    B[61][75] = [
+      25,
+      "Dane Street Police Dept",
+      "Dane_Street_Police_Department",
+    ];
+    B[62][76] = [
+      25,
+      "Burt Square Police Dept",
+      "Burt_Square_Police_Department",
+    ];
     B[66][77] = [25, "Clinch Way Police Dept", "Clinch_Way_Police_Department"];
     B[61][85] = [
       25,
@@ -7528,7 +8040,11 @@
       "Solomon Lane Police Dept",
       "Solomon_Lane_Police_Department_%28Houldenbank%29",
     ];
-    B[72][7] = [25, "Deakin Alley Police Dept", "Deakin_Alley_Police_Department"];
+    B[72][7] = [
+      25,
+      "Deakin Alley Police Dept",
+      "Deakin_Alley_Police_Department",
+    ];
     B[77][3] = [25, "Page Plaza Police Dept", "Page_Plaza_Police_Department"];
     B[78][1] = [25, "Brandon Way Police Dept", "Brandon_Way_Police_Department"];
     B[79][10] = [
@@ -7551,7 +8067,11 @@
       "Lovelock Plaza Police Dept",
       "Lovelock_Plaza_Police_Department",
     ];
-    B[76][27] = [25, "Gotch Plaza Police Dept", "Gotch_Plaza_Police_Department"];
+    B[76][27] = [
+      25,
+      "Gotch Plaza Police Dept",
+      "Gotch_Plaza_Police_Department",
+    ];
     B[70][38] = [
       25,
       "Rounds Boulevard Police Dept",
@@ -7560,8 +8080,16 @@
     B[71][34] = [25, "Dixon Way Police Dept", "Dixon_Way_Police_Department"];
     B[79][33] = [25, "Eley Way Police Dept", "Eley_Way_Police_Department"];
     B[74][48] = [25, "Haag Plaza Police Dept", "Haag_Plaza_Police_Department"];
-    B[75][58] = [25, "Burdett Way Police Dept", "Burdett_Way_Police_Department"];
-    B[76][54] = [25, "Barnerd Way Police Dept", "Barnerd_Way_Police_Department"];
+    B[75][58] = [
+      25,
+      "Burdett Way Police Dept",
+      "Burdett_Way_Police_Department",
+    ];
+    B[76][54] = [
+      25,
+      "Barnerd Way Police Dept",
+      "Barnerd_Way_Police_Department",
+    ];
     B[73][61] = [
       25,
       "Hudson Place Police Dept",
@@ -7667,7 +8195,11 @@
       "Witchell Street Police Dept",
       "Witchell_Street_Police_Department",
     ];
-    B[85][65] = [25, "Binning Way Police Dept", "Binning_Way_Police_Department"];
+    B[85][65] = [
+      25,
+      "Binning Way Police Dept",
+      "Binning_Way_Police_Department",
+    ];
     B[86][63] = [
       25,
       "Rodman Boulevard Police Dept",
@@ -7698,7 +8230,11 @@
       "Corless Alley Police Dept",
       "Corless_Alley_Police_Department",
     ];
-    B[84][81] = [25, "Milton Walk Police Dept", "Milton_Walk_Police_Department"];
+    B[84][81] = [
+      25,
+      "Milton Walk Police Dept",
+      "Milton_Walk_Police_Department",
+    ];
     B[85][88] = [25, "Cosins Way Police Dept", "Cosins_Way_Police_Department"];
     B[88][89] = [
       25,
@@ -7743,7 +8279,11 @@
       "Stockman Walk Police Dept",
       "Stockman_Walk_Police_Department",
     ];
-    B[98][20] = [25, "Bowring Way Police Dept", "Bowring_Way_Police_Department"];
+    B[98][20] = [
+      25,
+      "Bowring Way Police Dept",
+      "Bowring_Way_Police_Department",
+    ];
     B[91][34] = [
       25,
       "Dibbings Plaza Police Dept",
@@ -7803,7 +8343,11 @@
       "Hardwick_Row_Railway_Station",
     ];
     B[5][9] = [27, "Imber Road Railway Station", "Imber_Road_Railway_Station"];
-    B[9][8] = [27, "Snook Alley Railway Station", "Snook_Alley_Railway_Station"];
+    B[9][8] = [
+      27,
+      "Snook Alley Railway Station",
+      "Snook_Alley_Railway_Station",
+    ];
     B[1][16] = [
       27,
       "Pople Avenue Railway Station",
@@ -7815,7 +8359,11 @@
       "Dawney_Grove_Railway_Station",
     ];
     B[7][11] = [27, "Batton Row Railway Station", "Batton_Row_Railway_Station"];
-    B[0][26] = [27, "Halse Place Railway Station", "Halse_Place_Railway_Station"];
+    B[0][26] = [
+      27,
+      "Halse Place Railway Station",
+      "Halse_Place_Railway_Station",
+    ];
     B[4][21] = [
       27,
       "Holloms Boulevard Railway Station",
@@ -7837,7 +8385,11 @@
       "Stranks Walk Railway Station",
       "Stranks_Walk_Railway_Station",
     ];
-    B[2][57] = [27, "Latter Walk Railway Station", "Latter_Walk_Railway_Station"];
+    B[2][57] = [
+      27,
+      "Latter Walk Railway Station",
+      "Latter_Walk_Railway_Station",
+    ];
     B[6][66] = [
       27,
       "Gapper Place Railway Station",
@@ -7896,7 +8448,11 @@
       "Hewlett Boulevard Railway Station",
       "Hewlett_Boulevard_Railway_Station",
     ];
-    B[14][10] = [27, "Mules Walk Railway Station", "Mules_Walk_Railway_Station"];
+    B[14][10] = [
+      27,
+      "Mules Walk Railway Station",
+      "Mules_Walk_Railway_Station",
+    ];
     B[14][16] = [
       27,
       "Cridge Alley Railway Station",
@@ -7977,7 +8533,11 @@
       "Peaty Avenue Railway Station",
       "Peaty_Avenue_Railway_Station",
     ];
-    B[19][66] = [27, "Meads Walk Railway Station", "Meads_Walk_Railway_Station"];
+    B[19][66] = [
+      27,
+      "Meads Walk Railway Station",
+      "Meads_Walk_Railway_Station",
+    ];
     B[12][74] = [
       27,
       "Sambone Walk Railway Station",
@@ -8039,7 +8599,11 @@
       "Fowler Crescent Railway Station",
       "Fowler_Crescent_Railway_Station",
     ];
-    B[22][13] = [27, "Barter Row Railway Station", "Barter_Row_Railway_Station"];
+    B[22][13] = [
+      27,
+      "Barter Row Railway Station",
+      "Barter_Row_Railway_Station",
+    ];
     B[23][22] = [27, "Butt Road Railway Station", "Butt_Road_Railway_Station"];
     B[27][27] = [
       27,
@@ -8101,7 +8665,11 @@
       "Dimon Alley Railway Station",
       "Dimon_Alley_Railway_Station",
     ];
-    B[23][85] = [27, "Edge Alley Railway Station", "Edge_Alley_Railway_Station"];
+    B[23][85] = [
+      27,
+      "Edge Alley Railway Station",
+      "Edge_Alley_Railway_Station",
+    ];
     B[22][91] = [
       27,
       "Hellear Boulevard Railway Station",
@@ -8127,7 +8695,11 @@
       "Capper Alley Railway Station",
       "Capper_Alley_Railway_Station",
     ];
-    B[37][13] = [27, "Ayre Place Railway Station", "Ayre_Place_Railway_Station"];
+    B[37][13] = [
+      27,
+      "Ayre Place Railway Station",
+      "Ayre_Place_Railway_Station",
+    ];
     B[31][26] = [
       27,
       "Heathman Row Railway Station",
@@ -8143,7 +8715,11 @@
       "Lea Boulevard Railway Station",
       "Lea_Boulevard_Railway_Station",
     ];
-    B[38][37] = [27, "Bayley Row Railway Station", "Bayley_Row_Railway_Station"];
+    B[38][37] = [
+      27,
+      "Bayley Row Railway Station",
+      "Bayley_Row_Railway_Station",
+    ];
     B[38][39] = [
       27,
       "Cardwell Plaza Railway Station",
@@ -8270,7 +8846,11 @@
       "Rumbell Grove Railway Station",
       "Rumbell_Grove_Railway_Station",
     ];
-    B[45][29] = [27, "Bennet Row Railway Station", "Bennet_Row_Railway_Station"];
+    B[45][29] = [
+      27,
+      "Bennet Row Railway Station",
+      "Bennet_Row_Railway_Station",
+    ];
     B[46][20] = [
       27,
       "Silwood Walk Railway Station",
@@ -8301,7 +8881,11 @@
       "Scarpendale Street Railway Station",
       "Scarpendale_Street_Railway_Station",
     ];
-    B[41][57] = [27, "Alkin Road Railway Station", "Alkin_Road_Railway_Station"];
+    B[41][57] = [
+      27,
+      "Alkin Road Railway Station",
+      "Alkin_Road_Railway_Station",
+    ];
     B[42][53] = [27, "Cribb Row Railway Station", "Cribb_Row_Railway_Station"];
     B[42][58] = [
       27,
@@ -8379,7 +8963,11 @@
       "Sidey Alley Railway Station",
       "Sidey_Alley_Railway_Station",
     ];
-    B[51][39] = [27, "Rio Avenue Railway Station", "Rio_Avenue_Railway_Station"];
+    B[51][39] = [
+      27,
+      "Rio Avenue Railway Station",
+      "Rio_Avenue_Railway_Station",
+    ];
     B[50][46] = [
       27,
       "Mattravers Way Railway Station",
@@ -8445,7 +9033,11 @@
       "Mesney Drive Railway Station",
       "Mesney_Drive_Railway_Station_%28Crooketon%29",
     ];
-    B[69][9] = [27, "Penning Way Railway Station", "Penning_Way_Railway_Station"];
+    B[69][9] = [
+      27,
+      "Penning Way Railway Station",
+      "Penning_Way_Railway_Station",
+    ];
     B[60][11] = [
       27,
       "Dye Boulevard Railway Station",
@@ -8519,13 +9111,21 @@
       "Whittle Street Railway Station",
       "Whittle_Street_Railway_Station",
     ];
-    B[65][60] = [27, "Basher Row Railway Station", "Basher_Row_Railway_Station"];
+    B[65][60] = [
+      27,
+      "Basher Row Railway Station",
+      "Basher_Row_Railway_Station",
+    ];
     B[64][70] = [
       27,
       "Gajewski Boulevard Railway Station",
       "Gajewski_Boulevard_Railway_Station",
     ];
-    B[64][76] = [27, "Exon Alley Railway Station", "Exon_Alley_Railway_Station"];
+    B[64][76] = [
+      27,
+      "Exon Alley Railway Station",
+      "Exon_Alley_Railway_Station",
+    ];
     B[63][89] = [
       27,
       "Colwill Grove Railway Station",
@@ -8546,7 +9146,11 @@
       "Sellwood Drive Railway Station",
       "Sellwood_Drive_Railway_Station",
     ];
-    B[66][97] = [27, "Barens Row Railway Station", "Barens_Row_Railway_Station"];
+    B[66][97] = [
+      27,
+      "Barens Row Railway Station",
+      "Barens_Row_Railway_Station",
+    ];
     B[73][9] = [
       27,
       "Foulkes Place Railway Station",
@@ -8672,7 +9276,11 @@
       "Shickell Drive Railway Station",
       "Shickell_Drive_Railway_Station",
     ];
-    B[88][9] = [27, "Loader Walk Railway Station", "Loader_Walk_Railway_Station"];
+    B[88][9] = [
+      27,
+      "Loader Walk Railway Station",
+      "Loader_Walk_Railway_Station",
+    ];
     B[81][15] = [
       27,
       "Corp Boulevard Railway Station",
@@ -8693,7 +9301,11 @@
       "Guppey Place Railway Station",
       "Guppey_Place_Railway_Station",
     ];
-    B[85][20] = [27, "Brooks Row Railway Station", "Brooks_Row_Railway_Station"];
+    B[85][20] = [
+      27,
+      "Brooks Row Railway Station",
+      "Brooks_Row_Railway_Station",
+    ];
     B[87][24] = [
       27,
       "Clevely Grove Railway Station",
@@ -8729,7 +9341,11 @@
       "Samways Walk Railway Station",
       "Samways_Walk_Railway_Station",
     ];
-    B[84][50] = [27, "Gass Plaza Railway Station", "Gass_Plaza_Railway_Station"];
+    B[84][50] = [
+      27,
+      "Gass Plaza Railway Station",
+      "Gass_Plaza_Railway_Station",
+    ];
     B[81][65] = [
       27,
       "Grice Crescent Railway Station",
@@ -8741,7 +9357,11 @@
       "Tobit Grove Railway Station",
       "Tobit_Grove_Railway_Station",
     ];
-    B[81][78] = [27, "Leave Lane Railway Station", "Leave_Lane_Railway_Station"];
+    B[81][78] = [
+      27,
+      "Leave Lane Railway Station",
+      "Leave_Lane_Railway_Station",
+    ];
     B[87][72] = [
       27,
       "Turnock Drive Railway Station",
@@ -8922,7 +9542,11 @@
     B[12][0] = [28, "Henslow Street School", "Henslow_Street_School"];
     B[12][4] = [28, "Gazzard Avenue School", "Gazzard_Avenue_School"];
     B[19][0] = [28, "Flew Lane School", "Flew_Lane_School"];
-    B[16][16] = [28, "Veresmith Boulevard School", "Veresmith_Boulevard_School"];
+    B[16][16] = [
+      28,
+      "Veresmith Boulevard School",
+      "Veresmith_Boulevard_School",
+    ];
     B[19][12] = [28, "Horn Drive School", "Horn_Drive_School"];
     B[17][23] = [28, "Marriott Place School", "Marriott_Place_School"];
     B[11][38] = [28, "Dennett Walk School", "Dennett_Walk_School"];
@@ -8963,7 +9587,11 @@
     B[22][69] = [28, "Greenaway Way School", "Greenaway_Way_School"];
     B[24][64] = [28, "Pask Crescent School", "Pask_Crescent_School"];
     B[28][61] = [28, "Baxter Boulevard School", "Baxter_Boulevard_School"];
-    B[22][79] = [28, "Beer Place School", "Beer_Place_School_%28Santlerville%29"];
+    B[22][79] = [
+      28,
+      "Beer Place School",
+      "Beer_Place_School_%28Santlerville%29",
+    ];
     B[27][79] = [28, "Ayling Road School", "Ayling_Road_School"];
     B[25][85] = [28, "Amatt Place School", "Amatt_Place_School"];
     B[28][85] = [28, "Noyce Plaza School", "Noyce_Plaza_School"];
@@ -9054,15 +9682,27 @@
     B[65][28] = [28, "Shipp Way School", "Shipp_Way_School"];
     B[66][20] = [28, "Horner Avenue School", "Horner_Avenue_School"];
     B[69][25] = [28, "Whyt Plaza School", "Whyt_Plaza_School"];
-    B[65][39] = [28, "Chamberlaine Street School", "Chamberlaine_Street_School"];
+    B[65][39] = [
+      28,
+      "Chamberlaine Street School",
+      "Chamberlaine_Street_School",
+    ];
     B[66][30] = [28, "Rowles Way School", "Rowles_Way_School"];
     B[69][34] = [28, "McCreadie Avenue School", "McCreadie_Avenue_School"];
     B[63][57] = [28, "Dimond Lane School", "Dimond_Lane_School"];
     B[65][51] = [28, "Passco Avenue School", "Passco_Avenue_School"];
-    B[66][58] = [28, "Carder Row School", "Carder_Row_School_%28Shackleville%29"];
+    B[66][58] = [
+      28,
+      "Carder Row School",
+      "Carder_Row_School_%28Shackleville%29",
+    ];
     B[69][58] = [28, "Vines Plaza School", "Vines_Plaza_School"];
     B[61][67] = [28, "Godwin Square School", "Godwin_Square_School"];
-    B[61][74] = [28, "Hepplethwaite Place School", "Hepplethwaite_Place_School"];
+    B[61][74] = [
+      28,
+      "Hepplethwaite Place School",
+      "Hepplethwaite_Place_School",
+    ];
     B[63][79] = [28, "Vautier Place School", "Vautier_Place_School"];
     B[64][71] = [28, "Beer Place School", "Beer_Place_School_%28Crowbank%29"];
     B[67][78] = [28, "Brogan Boulevard School", "Brogan_Boulevard_School"];
@@ -9817,7 +10457,11 @@
     B[27][7] = [30, "Jaques Drive", "Jaques_Drive"];
     B[28][0] = [30, "Burnley Square", "Burnley_Square"];
     B[28][5] = [30, "Haw Alley", "Haw_Alley"];
-    B[29][2] = [30, "Bergman Square", "Bergman_Square_%28Peddlesden_Village%29"];
+    B[29][2] = [
+      30,
+      "Bergman Square",
+      "Bergman_Square_%28Peddlesden_Village%29",
+    ];
     B[29][4] = [30, "Herick Lane", "Herick_Lane"];
     B[29][8] = [30, "Goodford Avenue", "Goodford_Avenue"];
     B[29][9] = [30, "Lecrus Alley", "Lecrus_Alley"];
@@ -10048,7 +10692,11 @@
     B[25][74] = [30, "Yandle Plaza", "Yandle_Plaza"];
     B[25][76] = [30, "Novell Walk", "Novell_Walk"];
     B[26][70] = [30, "Peden Drive", "Peden_Drive"];
-    B[26][72] = [30, "Tewkesbury Square", "Tewkesbury_Square_%28Santlerville%29"];
+    B[26][72] = [
+      30,
+      "Tewkesbury Square",
+      "Tewkesbury_Square_%28Santlerville%29",
+    ];
     B[26][73] = [30, "Pinchin Avenue", "Pinchin_Avenue"];
     B[26][79] = [30, "Franks Grove", "Franks_Grove"];
     B[27][76] = [30, "Chivers Avenue", "Chivers_Avenue"];
@@ -10279,7 +10927,11 @@
     B[34][47] = [30, "Stalling Street", "Stalling_Street"];
     B[34][48] = [30, "Pridham Avenue", "Pridham_Avenue"];
     B[34][49] = [30, "Bindon Lane", "Bindon_Lane"];
-    B[35][42] = [30, "Rawling Boulevard", "Rawling_Boulevard_%28Ketchelbank%29"];
+    B[35][42] = [
+      30,
+      "Rawling Boulevard",
+      "Rawling_Boulevard_%28Ketchelbank%29",
+    ];
     B[36][41] = [30, "Darch Square", "Darch_Square"];
     B[36][43] = [30, "Cowan Street", "Cowan_Street"];
     B[36][46] = [30, "Chafey Walk", "Chafey_Walk"];
@@ -10750,7 +11402,11 @@
     B[40][97] = [30, "Fudge Square", "Fudge_Square"];
     B[40][99] = [30, "Bulleid Square", "Bulleid_Square_%28Starlingtown%29"];
     B[41][92] = [30, "Atkinson Street", "Atkinson_Street"];
-    B[41][93] = [30, "Devonshire Square", "Devonshire_Square_%28Starlingtown%29"];
+    B[41][93] = [
+      30,
+      "Devonshire Square",
+      "Devonshire_Square_%28Starlingtown%29",
+    ];
     B[41][94] = [30, "Christopher Way", "Christopher_Way"];
     B[41][95] = [30, "Mountford Way", "Mountford_Way"];
     B[41][96] = [30, "Wortley Place", "Wortley_Place"];
@@ -10846,7 +11502,11 @@
     B[57][18] = [30, "Ord Alley", "Ord_Alley"];
     B[58][10] = [30, "Maidment Drive", "Maidment_Drive"];
     B[58][15] = [30, "Gunnynghame Alley", "Gunnynghame_Alley"];
-    B[58][18] = [30, "Merryweather Plaza", "Merryweather_Plaza_%28Reganbank%29"];
+    B[58][18] = [
+      30,
+      "Merryweather Plaza",
+      "Merryweather_Plaza_%28Reganbank%29",
+    ];
     B[58][19] = [30, "Strike Plaza", "Strike_Plaza"];
     B[59][11] = [30, "Southern Lane", "Southern_Lane"];
     B[59][15] = [30, "Rutter Grove", "Rutter_Grove"];
@@ -10955,7 +11615,11 @@
     B[59][44] = [30, "Moffat Grove", "Moffat_Grove"];
     B[59][49] = [30, "Cornick Way", "Cornick_Way"];
     B[50][51] = [30, "Rebus Plaza", "Rebus_Plaza"];
-    B[50][55] = [30, "Rumble Crescent", "Rumble_Crescent_%28Stanbury_Village%29"];
+    B[50][55] = [
+      30,
+      "Rumble Crescent",
+      "Rumble_Crescent_%28Stanbury_Village%29",
+    ];
     B[50][57] = [30, "Mannell Walk", "Mannell_Walk"];
     B[50][59] = [30, "Gooden Street", "Gooden_Street"];
     B[51][52] = [30, "Axworthy Square", "Axworthy_Square"];
@@ -11050,7 +11714,11 @@
     B[52][81] = [30, "Eeles Avenue", "Eeles_Avenue"];
     B[52][87] = [30, "Errington Way", "Errington_Way"];
     B[53][80] = [30, "Osment Drive", "Osment_Drive"];
-    B[53][86] = [30, "Somerville Boulevard", "Somerville_Boulevard_%28Pegton%29"];
+    B[53][86] = [
+      30,
+      "Somerville Boulevard",
+      "Somerville_Boulevard_%28Pegton%29",
+    ];
     B[53][87] = [30, "Hubbard Avenue", "Hubbard_Avenue_%28Pegton%29"];
     B[53][88] = [30, "Edmondson Square", "Edmondson_Square"];
     B[54][80] = [30, "Winscombe Crescent", "Winscombe_Crescent"];
@@ -11754,10 +12422,22 @@
     B[74][90] = [30, "Wyatt Way", "Wyatt_Way"];
     B[74][92] = [30, "Halfacree Square", "Halfacree_Square"];
     B[74][93] = [30, "Buteby Avenue", "Buteby_Avenue"];
-    B[74][96] = [30, "Maddaford Square", "Maddaford_Square_%28Penny_Heights%29"];
-    B[75][91] = [30, "Churchous Avenue", "Churchous_Avenue_%28Penny_Heights%29"];
+    B[74][96] = [
+      30,
+      "Maddaford Square",
+      "Maddaford_Square_%28Penny_Heights%29",
+    ];
+    B[75][91] = [
+      30,
+      "Churchous Avenue",
+      "Churchous_Avenue_%28Penny_Heights%29",
+    ];
     B[76][90] = [30, "Sargent Row", "Sargent_Row"];
-    B[76][97] = [30, "Sargent Crescent", "Sargent_Crescent_%28Penny_Heights%29"];
+    B[76][97] = [
+      30,
+      "Sargent Crescent",
+      "Sargent_Crescent_%28Penny_Heights%29",
+    ];
     B[78][96] = [30, "Murless Way", "Murless_Way"];
     B[79][92] = [30, "Earlham Walk", "Earlham_Walk"];
     B[79][93] = [30, "Grist Grove", "Grist_Grove"];
@@ -12372,7 +13052,11 @@
     B[92][98] = [30, "Weir Place", "Weir_Place"];
     B[92][99] = [30, "Glode Walk", "Glode_Walk"];
     B[93][90] = [30, "Hanham Way", "Hanham_Way"];
-    B[93][91] = [30, "Postlethwaite Drive", "Postlethwaite_Drive_%28Miltown%29"];
+    B[93][91] = [
+      30,
+      "Postlethwaite Drive",
+      "Postlethwaite_Drive_%28Miltown%29",
+    ];
     B[93][97] = [30, "Robinson Crescent", "Robinson_Crescent"];
     B[94][91] = [30, "Restrick Crescent", "Restrick_Crescent"];
     B[94][95] = [30, "Tickle Crescent", "Tickle_Crescent"];
@@ -13427,16 +14111,19 @@
 
     // top bar for controls
     const topBar = document.createElement("div");
-    topBar.style.cssText = "display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid #445544;";
+    topBar.style.cssText =
+      "display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid #445544;";
 
     // checkbox container
     const controls = document.createElement("div");
-    controls.style.cssText = "display:flex; gap:6px; color:#BBCCBB; font-size:10px;";
+    controls.style.cssText =
+      "display:flex; gap:6px; color:#BBCCBB; font-size:10px;";
 
     // main collapse button
     const mainToggleBtn = document.createElement("div");
     mainToggleBtn.textContent = "[-]";
-    mainToggleBtn.style.cssText = "cursor:pointer;color:#BBCCBB;font-weight:bold;margin-left:5px;";
+    mainToggleBtn.style.cssText =
+      "cursor:pointer;color:#BBCCBB;font-weight:bold;margin-left:5px;";
 
     topBar.appendChild(controls);
     topBar.appendChild(mainToggleBtn);
@@ -13470,7 +14157,8 @@
     // helper to create toggle checkboxes
     const createMapToggle = async (mapObj, key, labelText) => {
       const label = document.createElement("label");
-      label.style.cssText = "display:flex; align-items:center; gap:2px; cursor:pointer;";
+      label.style.cssText =
+        "display:flex; align-items:center; gap:2px; cursor:pointer;";
 
       const cb = document.createElement("input");
       cb.type = "checkbox";
@@ -13499,7 +14187,7 @@
     mapHolder.appendChild(suburbMap.wrap);
     mapHolder.appendChild(miniMap.wrap);
 
-    await setCollapsed(await GM.getValue("collapsed") ?? false);
+    await setCollapsed((await GM.getValue("collapsed")) ?? false);
   }
 
   // ------------------------------------------------
@@ -13508,25 +14196,31 @@
 
   async function makeMap(title, size = 10, key) {
     const wrap = document.createElement("div");
-    wrap.style.width = (size * 22) + "px";
+    wrap.style.width = size * 22 + "px";
     wrap.style.display = "flex";
     wrap.style.flexDirection = "column";
 
     const header = document.createElement("div");
-    header.style.cssText = "display:flex; justify-content:center; align-items:center; gap:4px;";
+    header.style.cssText =
+      "display:flex; justify-content:center; align-items:center; gap:4px;";
 
     const label = document.createElement("div");
     label.textContent = title;
-    label.style.cssText = "color:#BBCCBB; margin-bottom:2px; text-align:center; font-weight:bold;";
+    label.style.cssText =
+      "color:#BBCCBB; margin-bottom:2px; text-align:center; font-weight:bold;";
 
     header.appendChild(label);
 
     const coords = document.createElement("div");
     coords.textContent = "\u00A0";
-    coords.style.cssText = "color:#CCDDAA; font-size:10px; text-align:center; margin-bottom:4px";
+    coords.style.cssText =
+      "color:#CCDDAA; font-size:10px; text-align:center; margin-bottom:4px";
 
     const table = document.createElement("table");
-    table.style.cssText = "border-collapse:collapse; table-layout:fixed; width:" + (size * 22) + "px;";
+    table.style.cssText =
+      "border-collapse:collapse; table-layout:fixed; width:" +
+      size * 22 +
+      "px;";
 
     const cells = [];
     for (let y = 0; y < size; y++) {
@@ -13534,7 +14228,8 @@
       cells[y] = [];
       for (let x = 0; x < size; x++) {
         const td = tr.insertCell();
-        td.style.cssText = "width:22px;height:22px;border:1px solid #000;box-sizing:border-box;background:#071A07;";
+        td.style.cssText =
+          "width:22px;height:22px;border:1px solid #000;box-sizing:border-box;background:#071A07;";
         cells[y][x] = td;
       }
     }
@@ -13552,7 +14247,7 @@
   function drawMiniMap() {
     if (playerGX === -1 || playerGY === -1) return;
 
-    const size = miniMap.cells.length
+    const size = miniMap.cells.length;
     const offset = Math.floor(size / 2);
 
     for (let y = 0; y < size; y++) {
@@ -13592,7 +14287,7 @@
 
         // bounds check
         if (targetX < 0 || targetX > 99 || targetY < 0 || targetY > 99) {
-            td.style.background = "#000";
+          td.style.background = "#000";
         }
       }
     }
@@ -13612,8 +14307,10 @@
 
         td.addEventListener("mouseenter", () => {
           if (td.dataset.name) {
-            const isPlayer = (td.textContent === "●");
-            miniMap.label.textContent = isPlayer ? td.dataset.name + " (You)" : td.dataset.name;
+            const isPlayer = td.textContent === "●";
+            miniMap.label.textContent = isPlayer
+              ? td.dataset.name + " (You)"
+              : td.dataset.name;
           } else {
             miniMap.label.textContent = "Street"; // hovering empty/street tile
           }
@@ -13659,7 +14356,7 @@
         `;
 
         td.addEventListener("mouseenter", () => {
-          const isPlayerSuburb = (y === playerSY && x === playerSX);
+          const isPlayerSuburb = y === playerSY && x === playerSX;
 
           cityMap.label.textContent = isPlayerSuburb
             ? suburbNames[y][x] + " (You)"
@@ -13692,7 +14389,9 @@
         td.addEventListener("mouseenter", () => {
           if (td.dataset.name) {
             const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
-            suburbMap.label.textContent = isPlayer ? td.dataset.name + " (You)" : td.dataset.name;
+            suburbMap.label.textContent = isPlayer
+              ? td.dataset.name + " (You)"
+              : td.dataset.name;
             suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
           }
         });
@@ -13738,7 +14437,8 @@
       }
     }
 
-    suburbMap.label.textContent = (suburbName === playerSuburb) ? suburbName + " (You)" : suburbName;
+    suburbMap.label.textContent =
+      suburbName === playerSuburb ? suburbName + " (You)" : suburbName;
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
@@ -13775,7 +14475,6 @@
   // ------------------------------------------------
 
   function globalPlayerCoords() {
-
     // if GPS exists, directly parse coordinates and return
     const element = document.querySelector('input[value*="GPS unit"]');
     if (element) {
@@ -13790,13 +14489,17 @@
     // otherwise, find an exact match of neighboring tiles
 
     function normalizeName(n) {
-      return n.toLowerCase()
-              .replace(/\b(the|a|an)\b/g, '')
-              .replace(/\s+/g, ' ').trim();
+      return n
+        .toLowerCase()
+        .replace(/\b(the|a|an)\b/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
     }
 
     let inputs = document.querySelectorAll('table.c input[type="submit"]');
-    const neighborSig = Array.from(inputs).map(input => normalizeName(input.value)).join('__');
+    const neighborSig = Array.from(inputs)
+      .map((input) => normalizeName(input.value))
+      .join("__");
 
     // treat every tile in suburb as the current "center"
     for (let y = 0; y < 10; y++) {
@@ -13817,9 +14520,11 @@
           }
         }
 
-        const newNeighborSig = Array.from(neighbors).map(normalizeName).join('__');
+        const newNeighborSig = Array.from(neighbors)
+          .map(normalizeName)
+          .join("__");
         if (newNeighborSig == neighborSig) {
-          return [gx, gy]
+          return [gx, gy];
         }
       }
     }
@@ -13836,11 +14541,11 @@
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
         if (suburbNames[y][x] === suburb) {
-          return [x, y]
+          return [x, y];
         }
       }
     }
-    console.error(`Couldn't find suburb: ${suburb}`)
+    console.error(`Couldn't find suburb: ${suburb}`);
     return null;
   }
 
@@ -13931,8 +14636,7 @@
 
           if (cell.dataset.selected === "true") continue;
 
-          cell.style.boxShadow =
-            `0 0 ${6 + pulse * 10}px ${2 + pulse * 5}px rgba(161,196,244,${0.5 + pulse * 0.5})`;
+          cell.style.boxShadow = `0 0 ${6 + pulse * 10}px ${2 + pulse * 5}px rgba(161,196,244,${0.5 + pulse * 0.5})`;
         }
       }
     }, 50);
@@ -13943,7 +14647,6 @@
   // ------------------------------------------------
 
   window.addEventListener("load", async () => {
-
     updateGlobals();
     await createMainContainer();
 
@@ -13954,5 +14657,4 @@
     updateMaps();
     setupPulse();
   });
-
 })();
