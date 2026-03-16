@@ -1,6 +1,6 @@
 # Tactical Map - WWDead Plugin
 
-A personal fork of **DTTL**'s [Tactical Map Greasemonkey Plugin](https://greasyfork.org/en/scripts/567867-wwdead-tactical-map-v2-0) for [WWDead.com](https://wwdead.com) with some minor fixes.
+A personal fork of **DTTL**'s [Tactical Map Greasemonkey Plugin](https://greasyfork.org/en/scripts/567867-wwdead-tactical-map-v2-0) for [WWDead.com](https://wwdead.com) with some additions and fixes.
 
 ## [⚡ Install Tactical Map (v2.0.0-xun.2)](https://github.com/xunoaib/wwdead_tacticalmap/raw/refs/heads/main/TacticalMap.user.js)
 
@@ -12,10 +12,15 @@ You may have to click the `Files changed` tab to see the actual content.
 
 ## Changelog
 
-### [v2.0.0-xun.2] (in progress)
+### [v2.0.0-xun.2]
+
+**Additions**
+- Add a local 9x9 map centered on the current player's tile.
+- Allow toggling the visibility of each submap, and persist these settings.
 
 **Fixes**:
-- Fix error determining player location on ambiguously named tiles (i.e. `a factory`)
+- Improve global player location detection. Fixes errors on ambiguous tiles (i.e. `a factory`)
+- Improve variable scoping and encapsulation of global logic.
 
 ### [v2.0.0-xun.1]
 
