@@ -14590,7 +14590,6 @@
       suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
     }
 
-    if (!selectedSuburb) drawSuburbMap(playerSX, playerSY);
     drawPlayerDot();
     drawMiniMap();
   }
