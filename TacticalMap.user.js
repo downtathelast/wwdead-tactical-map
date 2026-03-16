@@ -162,41 +162,41 @@
 
   const BUILDING_TYPES = {
     0: null,
-    1: { visible: true, color: "#9DB", border: "3px solid #163" }, // armory
-    2: { visible: true, color: "#676" }, // arms
-    3: { visible: true, color: "#FD9" }, // autoshop
-    4: { visible: true, color: "#676", border: "3px dotted #000000" }, // bank
-    5: { visible: true, color: "#676" }, // building
-    6: { visible: true, color: "#232" }, // carpark
-    7: { visible: true, color: "#BBCCBB" }, // cathedral
-    8: { visible: true, color: "#232", border: "3px dotted #FF0000" }, // cemetary
-    9: { visible: true, color: "#676" }, // church
-    10: { visible: true, color: "#676", border: "3px dotted #000000" }, // cinema
-    11: { visible: true, color: "#676", border: "3px dotted #000000" }, // club
-    12: { visible: true, color: "#653" }, // factory
-    13: { visible: true, color: "#BBCCBB" }, // firehouse
-    14: { visible: true, color: "#9DB", border: "3px solid #163" }, // fort
-    15: { visible: true, color: "#FF9999" }, // hospital
-    16: { visible: true, color: "#676" }, // hotel
-    17: { visible: true, color: "#676", border: "2px dotted #DDD" }, // junkyard
-    18: { visible: true, color: "#676" }, // library
-    19: { visible: true, color: "#9DB", border: "3px solid #163" }, // mall
-    20: { visible: true, color: "#BBCCBB" }, // mansion
-    21: { visible: true, color: "#232" }, // monument
-    22: { visible: true, color: "#676" }, // museum
-    23: { visible: true, color: "#C9D" }, // necrotech
-    24: { visible: true, color: "#232" }, // park
-    25: { visible: true, color: "#00F" }, // police
-    26: { visible: true, color: "#BBCCBB" }, // power
-    27: { visible: true, color: "#676" }, // railway
-    28: { visible: true, color: "#676" }, // school
-    29: { visible: true, color: "#BBCCBB" }, // stadium
-    30: { visible: true, color: "#232" }, // street
-    31: { visible: true, color: "#676" }, // towers
-    32: { visible: true, color: "#676" }, // warehouse
-    33: { visible: true, color: "#232" }, // wasteland
-    34: { visible: true, color: "#BBCCBB" }, // zoo
-    35: { visible: true, color: "#BBCCBB", border: "2px dotted #DDD" }, // zoo_enclosure
+    1: { visible: true, color: "#9DB", border: "3px solid #163", name: "Armory" },
+    2: { visible: true, color: "#676", name: "Arms" },
+    3: { visible: true, color: "#FD9", name: "Autoshop" },
+    4: { visible: true, color: "#676", border: "3px dotted #000000", name: "Bank" },
+    5: { visible: true, color: "#676", name: "Building" },
+    6: { visible: true, color: "#232", name: "Carpark" },
+    7: { visible: true, color: "#BBCCBB", name: "Cathedral" },
+    8: { visible: true, color: "#232", border: "3px dotted #FF0000", name: "Cemetary" },
+    9: { visible: true, color: "#676", name: "Church" },
+    10: { visible: true, color: "#676", border: "3px dotted #000000", name: "Cinema" },
+    11: { visible: true, color: "#676", border: "3px dotted #000000", name: "Club" },
+    12: { visible: true, color: "#653", name: "Factory" },
+    13: { visible: true, color: "#BBCCBB", name: "Firehouse" },
+    14: { visible: true, color: "#9DB", border: "3px solid #163", name: "Fort" },
+    15: { visible: true, color: "#FF9999", name: "Hospital" },
+    16: { visible: true, color: "#676", name: "Hotel" },
+    17: { visible: true, color: "#676", border: "2px dotted #DDD", name: "Junkyard" },
+    18: { visible: true, color: "#676", name: "Library" },
+    19: { visible: true, color: "#9DB", border: "3px solid #163", name: "Mall" },
+    20: { visible: true, color: "#BBCCBB", name: "Mansion" },
+    21: { visible: true, color: "#232", name: "Monument" },
+    22: { visible: true, color: "#676", name: "Museum" },
+    23: { visible: true, color: "#C9D", name: "Necrotech" },
+    24: { visible: true, color: "#232", name: "Park" },
+    25: { visible: true, color: "#00F", name: "Police" },
+    26: { visible: true, color: "#BBCCBB", name: "Power" },
+    27: { visible: true, color: "#676", name: "Railway" },
+    28: { visible: true, color: "#676", name: "School" },
+    29: { visible: true, color: "#BBCCBB", name: "Stadium" },
+    30: { visible: true, color: "#232", name: "Street" },
+    31: { visible: true, color: "#676", name: "Towers" },
+    32: { visible: true, color: "#676", name: "Warehouse" },
+    33: { visible: true, color: "#232", name: "Wasteland" },
+    34: { visible: true, color: "#BBCCBB", name: "Zoo" },
+    35: { visible: true, color: "#BBCCBB", border: "2px dotted #DDD", name: "Zoo Enclosure" },
   };
 
   // ------------------------------------------------
@@ -13619,7 +13619,9 @@ cursor:pointer;
             td.style.background = type.color;
             if (type.border) td.style.border = type.border;
           }
+
           td.dataset.name = entry[1];
+          td.title = type?.name ?? "";
         }
       }
     }

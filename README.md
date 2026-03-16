@@ -19,7 +19,8 @@ You may have to click the `Files changed` tab to see the actual content.
 - Use local storage to remember the collapsed/expanded state of the map.
 - Add white dot to indicate the player's current location.
 - Add an outline to indicate the currently-selected suburb in the city map.
-- Indicate whether the given suburb/location is the player's "current"
+- Add text indicating whether the given suburb/location is the player's "current".
+- Add hover text for each tile indicating building type.
 
 **Fixes:**
 - Use a fixed cell size to prevent grid from shifting.
