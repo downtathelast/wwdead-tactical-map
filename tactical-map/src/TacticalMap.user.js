@@ -6326,7 +6326,7 @@
     B[26][14] = [21, "Binney Monument", "The_Binney_Monument"];
     B[27][10] = [21, "Stothert Monument", "The_Stothert_Monument"];
     B[28][16] = [21, "Mapledoram Monument", "The_Mapledoram_Monument"];
-    B[29][18] = [21, "Lawrie Monument", "The_Lawrie_Monument"];
+    B[29][18] = [21, "Hussey Monument", "The_Hussey_Monument"];
     B[22][24] = [21, "Rugvie Monument", "The_Rugvie_Monument"];
     B[29][27] = [21, "Desmond Monument", "The_Desmond_Monument"];
     B[21][39] = [21, "Fortt Monument", "The_Fortt_Monument"];
