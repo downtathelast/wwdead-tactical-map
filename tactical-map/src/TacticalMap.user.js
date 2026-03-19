@@ -1,9 +1,18 @@
 // ==UserScript==
-// @name         WWDead Tactical Map v2.0.0-xun.2
+// @name         WWDead Tactical Map
 // @namespace    wwd-mini-map-malton
-// @version      2.0.0-xun.2
+// @version      3.1.3
+// @author       DTTL
 // @description  Displays city and suburb map in WWDead
-// @include      /^https:\/\/wwdead\.com\/classic\/?(\?.*)?$/
+// @match        https://wwdead.com/classic*
+// @exclude		 https://wwdead.com/classic/skills*
+// @exclude		 https://wwdead.com/classic/contacts*
+// @exclude		 https://wwdead.com/classic/settings*
+// @exclude		 https://wwdead.com/classic/logout*
+// @exclude		 https://wwdead.com/classic/FAQ*
+// @exclude		 https://wwdead.com/classic/profile*
+// @exclude		 https://wwdead.com/classic/login*
+// @exclude		 https://wwdead.com/classic/characters
 // @grant        GM.setValue
 // @grant        GM.getValue
 // @license      GNU General Public License v2 or later; http://www.gnu.org/licenses/gpl.txt
@@ -168,57 +177,57 @@
     0: null,
     1: {
       visible: true,
-      color: "#9DB",
-      border: "3px solid #163",
+      color: "#163",
+      border: "1px dotted #9db",
       name: "Armory",
     },
-    2: { visible: true, color: "#676", name: "Arms" },
+    2: { visible: true, color: "#8fA887", name: "Arms" },
     3: { visible: true, color: "#FD9", name: "Autoshop" },
     4: {
       visible: true,
-      color: "#676",
+      color: "#8fA887",
       border: "3px dotted #000000",
       name: "Bank",
     },
-    5: { visible: true, color: "#676", name: "Building" },
-    6: { visible: true, color: "#232", name: "Carpark" },
+    5: { visible: true, color: "#8fA887", name: "Building" },
+    6: { visible: true, color: "#587156", name: "Carpark" },
     7: { visible: true, color: "#BBCCBB", name: "Cathedral" },
     8: {
       visible: true,
-      color: "#232",
+      color: "#587156",
       border: "3px dotted #FF0000",
       name: "Cemetary",
     },
-    9: { visible: true, color: "#676", name: "Church" },
+    9: { visible: true, color: "#8fA887", name: "Church" },
     10: {
       visible: true,
-      color: "#676",
+      color: "#8fA887",
       border: "3px dotted #000000",
       name: "Cinema",
     },
     11: {
       visible: true,
-      color: "#676",
+      color: "#8fA887",
       border: "3px dotted #000000",
       name: "Club",
     },
     12: { visible: true, color: "#653", name: "Factory" },
-    13: { visible: true, color: "#BBCCBB", name: "Firehouse" },
+    13: { visible: true, color: "#8fA887", name: "Firehouse" },
     14: {
       visible: true,
-      color: "#9DB",
-      border: "3px solid #163",
+      color: "#163",
+      border: "2px solid #9db",
       name: "Fort",
     },
-    15: { visible: true, color: "#FF9999", name: "Hospital" },
-    16: { visible: true, color: "#676", name: "Hotel" },
+    15: { visible: true, color: "#FF9999",border:"3px solid #FF1493", name: "Hospital" },
+    16: { visible: true, color: "#8fA887", name: "Hotel" },
     17: {
       visible: true,
-      color: "#676",
+      color: "#8fA887",
       border: "2px dotted #DDD",
       name: "Junkyard",
     },
-    18: { visible: true, color: "#676", name: "Library" },
+    18: { visible: true, color: "#8fA887", name: "Library" },
     19: {
       visible: true,
       color: "#9DB",
@@ -226,26 +235,27 @@
       name: "Mall",
     },
     20: { visible: true, color: "#BBCCBB", name: "Mansion" },
-    21: { visible: true, color: "#232", name: "Monument" },
-    22: { visible: true, color: "#676", name: "Museum" },
-    23: { visible: true, color: "#C9D", name: "Necrotech" },
-    24: { visible: true, color: "#232", name: "Park" },
-    25: { visible: true, color: "#00F", name: "Police" },
-    26: { visible: true, color: "#BBCCBB", name: "Power" },
-    27: { visible: true, color: "#676", name: "Railway" },
-    28: { visible: true, color: "#676", name: "School" },
-    29: { visible: true, color: "#BBCCBB", name: "Stadium" },
-    30: { visible: true, color: "#232", name: "Street" },
-    31: { visible: true, color: "#676", name: "Towers" },
-    32: { visible: true, color: "#676", name: "Warehouse" },
-    33: { visible: true, color: "#232", name: "Wasteland" },
-    34: { visible: true, color: "#BBCCBB", name: "Zoo" },
+    21: { visible: true, color: "#617C58", name: "Monument" },
+    22: { visible: true, color: "#8fA887", name: "Museum" },
+    23: { visible: true, color: "#9933FF", name: "Necrotech" },
+    24: { visible: true, color: "#617C58", name: "Park" },
+    25: { visible: true, color: "#C6C6FF",border:"3px solid #00F", name: "Police" },
+    26: { visible: true, color: "#ff7034", name: "Power" },
+    27: { visible: true, color: "#8fA887", name: "Railway" },
+    28: { visible: true, color: "#8fA887", name: "School" },
+    29: { visible: true, color: "#9DB",border: "3px solid #765", name: "Stadium" },
+    30: { visible: true, color: "#617C58", name: "Street" },
+    31: { visible: true, color: "#8fA887", name: "Towers" },
+    32: { visible: true, color: "#8fA887", name: "Warehouse" },
+    33: { visible: true, color: "#617C58", name: "Wasteland" },
+    34: { visible: true, color: "#B3A486", border:"2px solid #665533", name: "Zoo" },
     35: {
       visible: true,
-      color: "#BBCCBB",
-      border: "2px dotted #DDD",
+      color: "#B3A486",
+      border: "2px dotted #665533",
       name: "Zoo Enclosure",
     },
+    36: { visible: true, color: "#163", border:"4px dotted #9db", name: "Gatehouse" },
   };
 
   // ------------------------------------------------
@@ -4574,7 +4584,7 @@
     B[49][78] = [14, "Fort Creedy Exercise Yard", "Fort_Creedy"];
     B[49][79] = [14, "Fort Creedy Training Ground", "Fort_Creedy"];
     B[47][80] = [14, "Fort Creedy Barracks", "Fort_Creedy"];
-    B[48][80] = [14, "Fort Creedy Gatehouse", "Fort_Creedy"];
+    B[48][80] = [36, "Fort Creedy Gatehouse", "Fort_Creedy"];
     B[49][80] = [14, "Fort Creedy Vehicle Depot", "Fort_Creedy"];
     B[89][84] = [14, "Fort Perryn Vehicle Depot", "Fort_Perryn"];
     B[89][85] = [14, "Fort Perryn Exercise Yard", "Fort_Perryn"];
@@ -4582,7 +4592,7 @@
     B[90][84] = [14, "Fort Perryn Infirmary", "Fort_Perryn"];
     B[90][86] = [14, "Fort Perryn Storehouse", "Fort_Perryn"];
     B[91][84] = [14, "Fort Perryn Storehouse", "Fort_Perryn"];
-    B[91][85] = [14, "Fort Perryn Gatehouse", "Fort_Perryn"];
+    B[91][85] = [36, "Fort Perryn Gatehouse", "Fort_Perryn"];
     B[91][86] = [14, "Fort Perryn Barracks", "Fort_Perryn"];
     B[1][6] = [15, "St Ansgar's Hospital", "St._Ansgar%27s_Hospital"];
     B[5][3] = [
@@ -14104,6 +14114,122 @@
   let playerSuburb = "";
   let currentViewSuburb = "";
 
+// ------------------------------------------------
+// ALT MARKERS STORAGE (FINAL VERSION)
+// ------------------------------------------------
+
+const STORAGE_KEY = "wwdead_chars_v2";
+const MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
+const MAX_ALTS = 10;
+
+function getProfileLink() {
+  return document.querySelector('.gt a[href*="/classic/profile"]');
+}
+
+function getCharacterId() {
+  const link = getProfileLink();
+  if (!link) return null;
+
+  const match = link.href.match(/profile\/([a-f0-9-]+)/);
+  return match ? match[1] : null;
+}
+
+function getCharacterName() {
+  const link = getProfileLink();
+  if (!link) return "Unknown";
+  return link.textContent.trim();
+}
+
+function getStoredCharacters() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveStoredCharacters(chars) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
+}
+
+function cleanupOldCharacters(chars) {
+  const now = Date.now();
+  for (const id in chars) {
+    if (!chars[id].time || now - chars[id].time > MAX_AGE) {
+      delete chars[id];
+    }
+  }
+}
+
+function enforceMaxAlts(chars) {
+  const ids = Object.keys(chars);
+  if (ids.length <= MAX_ALTS) return;
+
+  ids
+    .sort((a, b) => chars[a].time - chars[b].time)
+    .slice(0, ids.length - MAX_ALTS)
+    .forEach(id => delete chars[id]);
+}
+
+function saveCurrentCharacterPosition() {
+  const id = getCharacterId();
+  const name = getCharacterName();
+
+  if (!id) {
+    console.warn("❌ Could not determine character ID");
+    return;
+  }
+
+  if (playerSX === -1 || playerSY === -1) return;
+  if (playerGX === -1 || playerGY === -1) return;
+
+  let chars = getStoredCharacters();
+
+  cleanupOldCharacters(chars);
+
+  if (chars[id]) {
+    if (
+      chars[id].gx === playerGX &&
+      chars[id].gy === playerGY
+    ) {
+      return;
+    }
+  }
+
+  chars[id] = {
+    name,
+    sx: playerSX,
+    sy: playerSY,
+    gx: playerGX,
+    gy: playerGY,
+    time: Date.now()
+  };
+
+  enforceMaxAlts(chars);
+  saveStoredCharacters(chars);
+
+  console.log("✅ Saved:", name, `(${playerGX}, ${playerGY})`);
+}
+
+function drawAltMarkers() {
+  const chars = getStoredCharacters();
+  const currentId = getCharacterId();
+
+  for (const id in chars) {
+    if (id === currentId) continue;
+
+    const posAlt = chars[id];
+    if (posAlt.sx === undefined || posAlt.sy === undefined) continue;
+
+    const altCell = cityMap.cells[posAlt.sy]?.[posAlt.sx];
+    if (!altCell) continue;
+
+    altCell.style.outline = "2px dashed #ffffff";
+    altCell.style.outlineOffset = "-1px";
+
+    altCell.title = posAlt.name || "Alt";
+  }
+}
   // ------------------------------------------------
   // CREATE MAP WINDOW (Collapsible)
   // ------------------------------------------------
@@ -14189,6 +14315,28 @@
     await createMapToggle(suburbMap, "suburb", "Sub");
     await createMapToggle(miniMap, "local", "Loc");
 
+      // Clear alts button
+      const clearBtn = document.createElement("div");
+
+      clearBtn.textContent = "[Clear Alts]";
+
+      clearBtn.style.cssText = `
+      cursor:pointer;
+      color:#FF9999;
+      font-size:10px;
+      margin-left:6px;
+`;
+
+clearBtn.onclick = () => {
+  if (!confirm("Clear all stored alt positions?")) return;
+
+  localStorage.removeItem(STORAGE_KEY);
+  console.log("🧹 Cleared alt storage");
+
+  updateMaps();
+};
+
+controls.appendChild(clearBtn);
     mapHolder.appendChild(cityMap.wrap);
     mapHolder.appendChild(suburbMap.wrap);
     mapHolder.appendChild(miniMap.wrap);
@@ -14382,7 +14530,85 @@
       }
     }
   }
+// ------------------------------------------------
+// CITY MAP SELECTED SUBURB + LINKS (Second Line)
+// ------------------------------------------------
 
+// Helper to generate Wiki/DSS links for a suburb
+function createCitySuburbLinks(suburbName) {
+  const suburbSafe = suburbName.split("[")[0].trim().replace(/ /g, "_");
+
+  const container = document.createElement("span");
+  container.style.marginLeft = "6px"; // spacing from "Selected:"
+
+  // Wiki link
+  const wikiLink = document.createElement("a");
+  wikiLink.textContent = "wiki";
+  wikiLink.href = "http://wiki.urbandead.com/index.php/" + suburbSafe + "#Suburb_Map";
+  wikiLink.style.color = "#faa";
+  wikiLink.target = "_blank";
+  container.appendChild(wikiLink);
+
+  container.appendChild(document.createTextNode(", "));
+
+  // DSS link
+  const dssLink = document.createElement("a");
+  dssLink.textContent = "DSS";
+  dssLink.href = "https://web.archive.org/web/20160613225203/http://map.dssrzs.org/" + suburbSafe;
+  dssLink.style.color = "#faa";
+  dssLink.target = "_blank";
+  container.appendChild(dssLink);
+
+  return container;
+}
+
+// Update cityMap.coords to include links next to selected suburb
+function updateCityMapCoords(suburb) {
+  if (!cityMap || !cityMap.coords) return;
+
+  cityMap.coords.textContent = `Selected: ${suburb || playerSuburb}`;
+
+  // Remove previous links
+  const oldLinks = cityMap.coords.querySelectorAll("span");
+  oldLinks.forEach(e => e.remove());
+
+  // Append new links
+  cityMap.coords.appendChild(createCitySuburbLinks(suburb || playerSuburb));
+}
+
+// Use this inside city interactions & click events:
+function setupCityInteractions() {
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      const td = cityMap.cells[y][x];
+
+      td.style.cssText = `
+        width:22px;
+        height:22px;
+        border:1px solid #000;
+        box-sizing:border-box;
+        background:${getQuadrantColor(y, x)};
+        transition:box-shadow .3s ease,border .2s ease;
+        cursor:pointer;
+      `;
+
+      td.addEventListener("mouseenter", () => {
+        const isPlayerSuburb = y === playerSY && x === playerSX;
+        const displayName = isPlayerSuburb ? suburbNames[y][x] + " (You)" : suburbNames[y][x];
+        cityMap.label.textContent = displayName;
+      });
+
+      td.addEventListener("click", () => {
+        selectedSuburb = suburbNames[y][x];
+        drawSuburbMap(x, y);
+        updateCityMapCoords(selectedSuburb);
+      });
+    }
+  }
+
+  // Initial links for current suburb
+  updateCityMapCoords(playerSuburb);
+}
   // ------------------------------------------------
   // SUBURB GRID
   // ------------------------------------------------
@@ -14429,11 +14655,11 @@
       for (let x = 0; x < 10; x++) {
         const cell = cityMap.cells[y][x];
         if (y === sy && x === sx) {
-          cell.style.outline = "2px dashed #FFFFFF";
+        cell.style.outline = "2px dashed #FFF";
           cell.style.outlineOffset = "-1px";
           cell.style.zIndex = "20";
           cell.style.position = "relative";
-          cell.style.boxShadow = "0 0 5px rgba(0,0,0,0.8)";
+          cell.style.boxShadow = " 0 0 4px 1px rgba(0, 0, 0, 1), 0 0 8px 2px rgba(0, 0, 0, 0.9), 0 0 12px 4px rgba(5,255, 255, 0.8), 0 0 18px 6px rgba(255, 255, 255, 0.7), 0 0 24px 8px rgba(255, 255, 255, 0.6), inset 0 0 6px 2px rgba(89, 255, 27, 0.8), inset 0 0 10px 4px rgba(89, 255, 27, 0.5)";
         } else {
           cell.style.position = "static";
           cell.style.zIndex = "1";
@@ -14538,7 +14764,6 @@
     console.error("Failed to determine player coordinates");
     return null;
   }
-
   // ------------------------------------------------
   // UPDATE MAPS
   // ------------------------------------------------
@@ -14555,18 +14780,25 @@
     return null;
   }
 
-  function updateGlobals() {
-    const suburbElem = document.querySelector(".sb");
-    if (!suburbElem) {
-      console.error("Couldn't find suburb element");
-      return;
-    }
-    playerSuburb = suburbElem.textContent.trim();
-
-    [playerSX, playerSY] = suburbCoordsByName(playerSuburb);
-    [playerGX, playerGY] = globalPlayerCoords();
+function updateGlobals() {
+  const suburbElem = document.querySelector(".sb");
+  if (!suburbElem) {
+    console.error("Couldn't find suburb element");
+    return;
   }
 
+  playerSuburb = suburbElem.textContent.trim();
+
+  const suburbCoords = suburbCoordsByName(playerSuburb);
+  if (!suburbCoords) return;
+
+  [playerSX, playerSY] = suburbCoords;
+
+  const coords = globalPlayerCoords();
+  if (coords) {
+    [playerGX, playerGY] = coords;
+  }
+}
   function updateMaps() {
     // highlight city suburb
     for (let y = 0; y < 10; y++) {
@@ -14587,6 +14819,9 @@
       drawSuburbMap(playerSX, playerSY);
     }
 
+      // draw other characters' positions on city map
+      drawAltMarkers();
+
     // set initial GPS coordinates in suburb map heading
     if (currentViewSuburb === playerSuburb) {
       suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
@@ -14595,6 +14830,7 @@
     drawPlayerDot();
     drawMiniMap();
   }
+
 
   // ------------------------------------------------
   // DRAW PLAYER DOT
@@ -14620,46 +14856,28 @@
   }
 
   // ------------------------------------------------
-  // CENTER QUADRANT PULSE
-  // ------------------------------------------------
-
-  function setupPulse() {
-    let pulseDir = 1;
-    let pulse = 0;
-
-    setInterval(() => {
-      pulse += 0.02 * pulseDir;
-
-      if (pulse > 0.4) pulseDir = -1;
-      if (pulse < 0) pulseDir = 1;
-
-      for (let y = 3; y <= 6; y++) {
-        for (let x = 3; x <= 6; x++) {
-          const cell = cityMap.cells[y][x];
-
-          if (cell.style.border === "2px solid rgb(0, 0, 0)") continue;
-
-          if (cell.dataset.selected === "true") continue;
-
-          cell.style.boxShadow = `0 0 ${6 + pulse * 10}px ${2 + pulse * 5}px rgba(161,196,244,${0.5 + pulse * 0.5})`;
-        }
-      }
-    }, 50);
-  }
-
-  // ------------------------------------------------
   // START SCRIPT
   // ------------------------------------------------
 
-  window.addEventListener("load", async () => {
-    updateGlobals();
-    await createMainContainer();
+ window.addEventListener("load", async () => {
+  updateGlobals();
 
-    setupCityInteractions();
-    setupSuburbInteractions();
-    setupLocalInteractions();
+  // SAVE AFTER globals are ready
+  saveCurrentCharacterPosition();
 
+  await createMainContainer();
+
+  setupCityInteractions();
+  setupSuburbInteractions();
+  setupLocalInteractions();
+
+  updateMaps();
+  setupPulse();
+
+  setInterval(() => {
+    updateGlobals();              // refresh position
+    saveCurrentCharacterPosition(); // save AFTER update
     updateMaps();
-    setupPulse();
-  });
+  }, 5000);
+});
 })();
