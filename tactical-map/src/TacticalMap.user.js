@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WWDead Tactical Map
 // @namespace    wwd-mini-map-malton
-// @version      3.1.3
+// @version      3.1.4
 // @author       DTTL
 // @description  Displays city and suburb map in WWDead
 // @include  /^https:\/\/wwdead\.com\/classic\/?(\?.*)?$/
