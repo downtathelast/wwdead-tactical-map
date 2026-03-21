@@ -14487,43 +14487,7 @@ controls.appendChild(clearBtn);
 
     return "#A9D3B0";
   }
-
-  function setupCityInteractions() {
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        const td = cityMap.cells[y][x];
-
-        td.style.cssText = `
-          width:22px;
-          height:22px;
-          border:1px solid #000;
-          box-sizing:border-box;
-          background:${getQuadrantColor(y, x)};
-          transition:box-shadow .3s ease,border .2s ease;
-          cursor:pointer;
-        `;
-
-        td.addEventListener("mouseenter", () => {
-          const isPlayerSuburb = y === playerSY && x === playerSX;
-
-          cityMap.label.textContent = isPlayerSuburb
-            ? suburbNames[y][x] + " (You)"
-            : suburbNames[y][x];
-        });
-
-        td.addEventListener("mouseleave", () => {
-          cityMap.label.textContent = cityMap.title;
-          cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
-        });
-
-        td.addEventListener("click", () => {
-          selectedSuburb = suburbNames[y][x];
-          cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
-          drawSuburbMap(x, y);
-        });
-      }
-    }
-  }
+  
 // ------------------------------------------------
 // CITY MAP SELECTED SUBURB + LINKS (Second Line)
 // ------------------------------------------------
@@ -14590,6 +14554,11 @@ function setupCityInteractions() {
         const isPlayerSuburb = y === playerSY && x === playerSX;
         const displayName = isPlayerSuburb ? suburbNames[y][x] + " (You)" : suburbNames[y][x];
         cityMap.label.textContent = displayName;
+      });
+
+      td.addEventListener("mouseleave", () => {
+        cityMap.label.textContent = cityMap.title;
+        cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
       });
 
       td.addEventListener("click", () => {
