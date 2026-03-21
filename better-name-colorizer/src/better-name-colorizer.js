@@ -110,6 +110,24 @@ function addRules(css) {
     css.push("td.gp table.c a:visited:not([class^='con']) { color: #444 !important; }");
 }
 
+// Darken the nameplate text of players whose profiles have been visited.
+function clarifyNamePlates() {
+  if (document.getElementById('clarify-styles')) return;
+
+  const style = document.createElement('style');
+  style.id = 'clarify-styles';
+
+  style.textContent = `
+    html body table.c a:visited,
+    html body table.c a:visited span {
+      color: #444444 !important;
+      background-color: transparent !important;
+    }
+  `;
+
+  document.documentElement.appendChild(style);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// INTERNAL FUNCTIONS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,3 +155,4 @@ function writeRules(css) {
 const cssRulesToAdd = [];
 addRules(cssRulesToAdd);
 writeRules(cssRulesToAdd);
+clarifyNamePlates();
