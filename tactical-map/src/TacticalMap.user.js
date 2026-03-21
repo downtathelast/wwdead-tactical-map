@@ -4,15 +4,8 @@
 // @version      3.1.3
 // @author       DTTL
 // @description  Displays city and suburb map in WWDead
-// @match        https://wwdead.com/classic*
-// @exclude		 https://wwdead.com/classic/skills*
-// @exclude		 https://wwdead.com/classic/contacts*
-// @exclude		 https://wwdead.com/classic/settings*
-// @exclude		 https://wwdead.com/classic/logout*
-// @exclude		 https://wwdead.com/classic/FAQ*
-// @exclude		 https://wwdead.com/classic/profile*
-// @exclude		 https://wwdead.com/classic/login*
-// @exclude		 https://wwdead.com/classic/characters
+// @include  /^https:\/\/wwdead\.com\/classic\/?(\?.*)?$/
+// @include  /^https:\/\/wwdead\.com\/classic\/stats\/?(\?.*)?$/
 // @grant        GM.setValue
 // @grant        GM.getValue
 // @license      GNU General Public License v2 or later; http://www.gnu.org/licenses/gpl.txt
