@@ -14411,7 +14411,6 @@ controls.appendChild(clearBtn);
         const td = miniMap.cells[y][x];
 
         // wipe cell
-        td.textContent = "";
         td.style.background = "#111";
         td.style.border = "1px solid #222";
         td.dataset.name = "";
@@ -14421,9 +14420,11 @@ controls.appendChild(clearBtn);
         // draw player in center
         if (x === offset && y === offset) {
           td.textContent = "●";
-          td.style.color = "#FFF";
-          td.style.textAlign = "center";
           td.dataset.name = "You";
+          td.classList.add('map-player-dot');
+        } else {
+          td.textContent = "";
+          td.classList.remove('map-player-dot');
         }
 
         // check if coordinate exists in global data
@@ -14845,19 +14846,30 @@ function updateGlobals() {
 
     const td = suburbMap.cells[y][x];
     td.textContent = "●";
-    td.style.color = "#FFFFFF";
-    td.style.textAlign = "center";
-    td.style.lineHeight = "1";
-    td.style.fontSize = "14px";
-    td.style.cursor = "default";
     td.title = "You are here";
-    td.style.width = "22px";
-    td.style.height = "22px";
-    td.style.display = "flex";
-    td.style.alignItems = "center";
-    td.style.justifyContent = "center";
+    td.classList.add('map-player-dot')
 
     suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
+  }
+
+  function addStyles() {
+    // inject syles for player dot
+    const style = document.createElement('style');
+    style.textContent = `
+      .map-player-dot {
+        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 1;
+        cursor: default;
+        width: 22px;
+        height: 22px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-sizing: border-box;
+      }
+    `;
+    document.head.appendChild(style);
   }
 
   // ------------------------------------------------
@@ -14865,6 +14877,7 @@ function updateGlobals() {
   // ------------------------------------------------
 
  window.addEventListener("load", async () => {
+  addStyles();
   updateGlobals();
 
   // SAVE AFTER globals are ready
