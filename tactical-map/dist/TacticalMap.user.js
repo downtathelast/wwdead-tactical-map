@@ -248,7 +248,7 @@
     34: { visible: true, color: "#B3A486", border:"2px solid #665533", name: "Zoo" },
     35: {
       visible: true,
-      color: "#B3A486",
+      color: "#94886F",
       border: "2px dotted #665533",
       name: "Zoo Enclosure",
     },
