@@ -33,7 +33,7 @@
 (async function () {
   "use strict";
 
-  let LOCAL_MAP_RADIUS = (await GM.getValue("LOCAL_MAP_RADIUS", 5));
+  let LOCAL_MAP_RADIUS = parseInt(localStorage.getItem("LOCAL_MAP_RADIUS") || 5);
   let LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
 
   // ------------------------------------------------
@@ -14337,7 +14337,7 @@ function drawAltMarkers() {
       if (newRadius !== LOCAL_MAP_RADIUS) {
         LOCAL_MAP_RADIUS = newRadius;
         LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
-        await GM.setValue("LOCAL_MAP_RADIUS", LOCAL_MAP_RADIUS);
+        localStorage.setItem("LOCAL_MAP_RADIUS", LOCAL_MAP_RADIUS);
         // recreate minimap
         const oldWrap = miniMap.wrap;
         const currentDisplay = oldWrap.style.display;
