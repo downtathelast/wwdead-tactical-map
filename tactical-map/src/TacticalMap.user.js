@@ -33,8 +33,14 @@
 (async function () {
   "use strict";
 
+<<<<<<< adjustable-local-map-size
   let LOCAL_MAP_RADIUS = parseInt(localStorage.getItem("LOCAL_MAP_RADIUS") || 5);
   let LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
+=======
+  const LOCAL_MAP_SIZE = 11; // should be odd
+  const MAIN_PLAYER_SYM = "●";
+  const ALT_PLAYER_SYM = "▲";
+>>>>>>> main
 
   // ------------------------------------------------
   // SUBURB NAMES
@@ -14107,7 +14113,6 @@
   let selectedSuburb = null;
   let playerSuburb = "";
   let currentViewSuburb = "";
-
 // ------------------------------------------------
 // ALT MARKERS STORAGE (FINAL VERSION)
 // ------------------------------------------------
@@ -14219,8 +14224,6 @@ function drawAltMarkers() {
   const currentId = getCharacterId();
 
   for (const id in chars) {
-    if (id === currentId) continue;
-
     const posAlt = chars[id];
     if (posAlt.sx === undefined || posAlt.sy === undefined) continue;
 
@@ -14459,17 +14462,6 @@ controls.appendChild(clearBtn);
         td.style.border = "1px solid #222";
         td.dataset.name = "";
         td.dataset.gps = `(${targetX}, ${targetY})`;
-        td.title = "";
-
-        // draw player in center
-        if (x === offset && y === offset) {
-          td.textContent = "●";
-          td.dataset.name = "You";
-          td.classList.add('map-player-dot');
-        } else {
-          td.textContent = "";
-          td.classList.remove('map-player-dot');
-        }
 
         // check if coordinate exists in global data
         const entry = B[targetY]?.[targetX];
@@ -14506,7 +14498,7 @@ controls.appendChild(clearBtn);
 
         td.addEventListener("mouseenter", () => {
           if (td.dataset.name) {
-            const isPlayer = td.textContent === "●";
+            const isPlayer = td.textContent === MAIN_PLAYER_SYM;
             miniMap.label.textContent = isPlayer
               ? td.dataset.name + " (You)"
               : td.dataset.name;
@@ -14538,7 +14530,7 @@ controls.appendChild(clearBtn);
 
     return "#A9D3B0";
   }
-  
+
 // ------------------------------------------------
 // CITY MAP SELECTED SUBURB + LINKS (Second Line)
 // ------------------------------------------------
@@ -14616,6 +14608,7 @@ function setupCityInteractions() {
         selectedSuburb = suburbNames[y][x];
         drawSuburbMap(x, y);
         updateCityMapCoords(selectedSuburb);
+        updateMaps();
       });
     }
   }
@@ -14664,27 +14657,8 @@ function setupCityInteractions() {
 
     const suburbName = suburbNames[sy][sx];
     currentViewSuburb = suburbName;
+
     suburbMap.coords.textContent = "\u00A0";
-
-    // highlight the selected cell
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        const cell = cityMap.cells[y][x];
-        if (y === sy && x === sx) {
-        cell.style.outline = "2px dashed #FFF";
-          cell.style.outlineOffset = "-1px";
-          cell.style.zIndex = "20";
-          cell.style.position = "relative";
-          cell.style.boxShadow = " 0 0 4px 1px rgba(0, 0, 0, 1), 0 0 8px 2px rgba(0, 0, 0, 0.9), 0 0 12px 4px rgba(5,255, 255, 0.8), 0 0 18px 6px rgba(255, 255, 255, 0.7), 0 0 24px 8px rgba(255, 255, 255, 0.6), inset 0 0 6px 2px rgba(89, 255, 27, 0.8), inset 0 0 10px 4px rgba(89, 255, 27, 0.5)";
-        } else {
-          cell.style.position = "static";
-          cell.style.zIndex = "1";
-          cell.style.outline = "none";
-          cell.style.boxShadow = "none";
-        }
-      }
-    }
-
     suburbMap.label.textContent =
       suburbName === playerSuburb ? suburbName + " (You)" : suburbName;
 
@@ -14715,7 +14689,7 @@ function setupCityInteractions() {
       }
     }
 
-    drawPlayerDot();
+    drawPlayerDots();
     drawAltMarkers();
   }
 
@@ -14812,34 +14786,41 @@ function updateGlobals() {
 }
 
   function updateMaps() {
+    let viewX = playerSX;
+    let viewY = playerSY;
+
+    if (selectedSuburb) {
+      const coords = suburbCoordsByName(selectedSuburb);
+      if (coords) [viewX, viewY] = coords;
+    }
+
     // highlight city suburb
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
+        const cell = cityMap.cells[y][x];
+
+        cell.classList.remove('map-suburb-selected', 'map-current-player-suburb');
+        cell.style.background = getQuadrantColor(y, x);
+
         if (y === playerSY && x === playerSX) {
-          cityMap.cells[y][x].style.border = "2px solid #000";
-          cityMap.cells[y][x].style.boxShadow =
-            "0 0 10px 3px rgba(0,0,0,.7), inset 0 0 6px rgba(0,0,0,.5)";
-        } else {
-          cityMap.cells[y][x].style.border = "1px solid #000";
-          cityMap.cells[y][x].style.boxShadow = "none";
-          cityMap.cells[y][x].style.background = getQuadrantColor(y, x);
+          cell.classList.add('map-current-player-suburb');
+        }
+
+        if (y === viewY && x === viewX) {
+          cell.classList.add('map-suburb-selected');
         }
       }
     }
 
-    if (!selectedSuburb) {
-      drawSuburbMap(playerSX, playerSY);
-    }
-
-      // draw other characters' positions on city map
-      drawAltMarkers();
+    drawSuburbMap(viewX, viewY);
+    drawAltMarkers();
 
     // set initial GPS coordinates in suburb map heading
     if (currentViewSuburb === playerSuburb) {
       suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
     }
 
-    drawPlayerDot();
+    drawPlayerDots();
     drawMiniMap();
   }
 
@@ -14848,18 +14829,39 @@ function updateGlobals() {
   // DRAW PLAYER DOT
   // ------------------------------------------------
 
-  function drawPlayerDot() {
-    if (playerGX === null || playerGY === null) return;
-    if (currentViewSuburb !== playerSuburb) return;
+  function drawPlayerDots() {
 
-    let x = playerGX - playerSX * 10;
-    let y = playerGY - playerSY * 10;
+    const chars = getStoredCharacters();
+    const currentId = getCharacterId();
 
-    const td = suburbMap.cells[y][x];
-    td.textContent = "●";
-    td.title = "You are here";
-    td.classList.add('map-player-dot')
+    // draw alt character dots
+    for (const id in chars) {
+      const pos = chars[id];
+      if (pos.sx === undefined || pos.sy === undefined) continue;
 
+      // draw player dot in current suburb map
+      const charSuburbName = suburbNames[pos.sy][pos.sx];
+
+      if (currentViewSuburb === charSuburbName) {
+        const cell = suburbMap.cells[pos.gy % 10]?.[pos.gx % 10];
+        cell.title = chars[id].name;
+        cell.textContent = (currentId === id) ? MAIN_PLAYER_SYM : ALT_PLAYER_SYM;
+        cell.classList.add('map-player-dot')
+      }
+
+      // draw player dot in local map
+      const cx = (pos.gx - playerGX) + Math.floor(LOCAL_MAP_SIZE / 2);
+      const cy = (pos.gy - playerGY) + Math.floor(LOCAL_MAP_SIZE / 2);
+
+      if (cx >= 0 && cx < LOCAL_MAP_SIZE && cy >= 0 && cy < LOCAL_MAP_SIZE) {
+        const cell = miniMap.cells[cy]?.[cx];
+        cell.title = chars[id].name;
+        cell.textContent = (currentId === id) ? MAIN_PLAYER_SYM : ALT_PLAYER_SYM;
+        cell.classList.add('map-player-dot')
+      }
+    }
+
+    // set initial GPS coordinates
     suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
   }
 
@@ -14877,12 +14879,23 @@ function updateGlobals() {
         align-items: center;
         justify-content: center;
         text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,1);
         box-sizing: border-box;
       }
 
       .map-alt-highlight {
         outline: 2px dashed #ffffff !important;
         outline-offset: -1px !important;
+      }
+
+      .map-suburb-selected {
+        z-index: 20 !important;
+        position: relative !important;
+        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 1), 0 0 8px 2px rgba(0, 0, 0, 0.9), 0 0 12px 4px rgba(5,255, 255, 0.8), 0 0 18px 6px rgba(255, 255, 255, 0.7), 0 0 24px 8px rgba(255, 255, 255, 0.6), inset 0 0 6px 2px rgba(89, 255, 27, 0.8), inset 0 0 10px 4px rgba(89, 255, 27, 0.5);
+      }
+
+      .map-current-player-suburb {
+        border: 2px solid #000 !important;
       }
     `;
     document.head.appendChild(style);
@@ -14906,6 +14919,5 @@ function updateGlobals() {
   setupLocalInteractions();
 
   updateMaps();
-  setupPulse();
 });
 })();
