@@ -33,7 +33,8 @@
 (async function () {
   "use strict";
 
-  const LOCAL_MAP_SIZE = 11; // should be odd
+  let LOCAL_MAP_SIZE = (await GM.getValue("LOCAL_MAP_SIZE", 11));
+  if (LOCAL_MAP_SIZE % 2 === 0) LOCAL_MAP_SIZE += 1;
 
   // ------------------------------------------------
   // SUBURB NAMES
@@ -14287,7 +14288,7 @@ function drawAltMarkers() {
     cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
 
     // helper to create toggle checkboxes
-    const createMapToggle = async (mapObj, key, labelText) => {
+    const createMapToggle = async (getMap, key, labelText) => {
       const label = document.createElement("label");
       label.style.cssText =
         "display:flex; align-items:center; gap:2px; cursor:pointer;";
@@ -14298,10 +14299,10 @@ function drawAltMarkers() {
 
       let isVisible = await GM.getValue(`map_visible_${key}`, true);
       cb.checked = isVisible;
-      mapObj.wrap.style.display = isVisible ? "flex" : "none";
+      getMap().wrap.style.display = isVisible ? "flex" : "none";
 
       cb.onchange = async () => {
-        mapObj.wrap.style.display = cb.checked ? "flex" : "none";
+        getMap().wrap.style.display = cb.checked ? "flex" : "none";
         await GM.setValue(`map_visible_${key}`, cb.checked);
       };
 
@@ -14311,11 +14312,54 @@ function drawAltMarkers() {
     };
 
     // add checkboxes to upper right
-    await createMapToggle(cityMap, "city", "City");
-    await createMapToggle(suburbMap, "suburb", "Sub");
-    await createMapToggle(miniMap, "local", "Loc");
+    await createMapToggle(() => cityMap, "city", "City");
+    await createMapToggle(() => suburbMap, "suburb", "Sub");
+    await createMapToggle(() => miniMap, "local", "Loc");
 
-      // Clear alts button
+    // local map size input
+    const sizeInput = document.createElement("input");
+    sizeInput.type = "number";
+    sizeInput.min = "3";
+    sizeInput.max = "25";
+    sizeInput.step = "2";
+    sizeInput.value = LOCAL_MAP_SIZE;
+    sizeInput.style.cssText =
+      "width:32px; background:#223322; color:#BBCCBB; border:1px solid #445544; font-size:10px; margin-left:2px; height: 14px; padding: 0 2px;";
+    sizeInput.title = "Local Map Size (odd numbers)";
+
+    sizeInput.onchange = async () => {
+      let newSize = parseInt(sizeInput.value);
+      if (isNaN(newSize)) return;
+      if (newSize % 2 === 0) newSize += 1;
+      if (newSize < 3) newSize = 3;
+      if (newSize > 25) newSize = 25;
+      sizeInput.value = newSize;
+
+      if (newSize !== LOCAL_MAP_SIZE) {
+        LOCAL_MAP_SIZE = newSize;
+        await GM.setValue("LOCAL_MAP_SIZE", LOCAL_MAP_SIZE);
+        // recreate minimap
+        const oldWrap = miniMap.wrap;
+        const currentDisplay = oldWrap.style.display;
+        miniMap = await makeMap("Local", LOCAL_MAP_SIZE, "local");
+        miniMap.wrap.style.display = currentDisplay;
+        oldWrap.parentNode.replaceChild(miniMap.wrap, oldWrap);
+
+        // re-run initial setup for new map
+        miniMap.label.textContent = `Local (${playerSuburb})`;
+        setupLocalInteractions();
+        updateMaps();
+      }
+    };
+
+    const sizeLabel = document.createElement("label");
+    sizeLabel.style.cssText =
+      "display:flex; align-items:center; gap:2px; margin-left:6px; font-size:10px; color:#BBCCBB;";
+    sizeLabel.appendChild(document.createTextNode("Size:"));
+    sizeLabel.appendChild(sizeInput);
+    controls.appendChild(sizeLabel);
+
+    // Clear alts button
       const clearBtn = document.createElement("div");
 
       clearBtn.textContent = "[Clear Alts]";
