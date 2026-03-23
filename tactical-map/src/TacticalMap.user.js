@@ -6,8 +6,6 @@
 // @description  Displays city and suburb map in WWDead
 // @include  /^https:\/\/wwdead\.com\/classic\/?(\?.*)?$/
 // @include  /^https:\/\/wwdead\.com\/classic\/stats\/?(\?.*)?$/
-// @grant        GM.setValue
-// @grant        GM.getValue
 // @license      GNU General Public License v2 or later; http://www.gnu.org/licenses/gpl.txt
 // @downloadURL https://greasyfork.org/en/scripts/567867-wwdead-tactical-map.user.js
 // @updateURL https://greasyfork.org/en/scripts/567867-wwdead-tactical.meta.js
@@ -14120,6 +14118,29 @@
 const STORAGE_KEY = "wwdead_chars_v2";
 const MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
 const MAX_ALTS = 10;
+
+// drop-in replacement for GM.getValue and GM.setValue using localStorage
+const GM_KEY_PREFIX = "wwdead_map:gm:";
+const GM = {
+  getValue: async (key, defaultValue) => {
+    const value = localStorage.getItem(GM_KEY_PREFIX + key);
+    if (value === null) return defaultValue;
+
+    try {
+      return JSON.parse(value);
+    } catch {
+      return value;
+    }
+  },
+
+  setValue: async (key, value) => {
+    localStorage.setItem(GM_KEY_PREFIX + key, JSON.stringify(value));
+  },
+
+  deleteValue: async (key) => {
+    localStorage.removeItem(GM_KEY_PREFIX + key);
+  }
+};
 
 function getProfileLink() {
   return document.querySelector('.gt a[href*="/classic/profile"]');
