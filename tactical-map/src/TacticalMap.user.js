@@ -33,8 +33,8 @@
 (async function () {
   "use strict";
 
-  let LOCAL_MAP_SIZE = (await GM.getValue("LOCAL_MAP_SIZE", 11));
-  if (LOCAL_MAP_SIZE % 2 === 0) LOCAL_MAP_SIZE += 1;
+  let LOCAL_MAP_RADIUS = (await GM.getValue("LOCAL_MAP_RADIUS", 5));
+  let LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
 
   // ------------------------------------------------
   // SUBURB NAMES
@@ -14316,28 +14316,28 @@ function drawAltMarkers() {
     await createMapToggle(() => suburbMap, "suburb", "Sub");
     await createMapToggle(() => miniMap, "local", "Loc");
 
-    // local map size input
-    const sizeInput = document.createElement("input");
-    sizeInput.type = "number";
-    sizeInput.min = "3";
-    sizeInput.max = "25";
-    sizeInput.step = "2";
-    sizeInput.value = LOCAL_MAP_SIZE;
-    sizeInput.style.cssText =
+    // local map radius input
+    const radiusInput = document.createElement("input");
+    radiusInput.type = "number";
+    radiusInput.min = "1";
+    radiusInput.max = "12";
+    radiusInput.step = "1";
+    radiusInput.value = LOCAL_MAP_RADIUS;
+    radiusInput.style.cssText =
       "width:32px; background:#223322; color:#BBCCBB; border:1px solid #445544; font-size:10px; margin-left:2px; height: 14px; padding: 0 2px;";
-    sizeInput.title = "Local Map Size (odd numbers)";
+    radiusInput.title = "Local Map Radius (size = 2R + 1)";
 
-    sizeInput.onchange = async () => {
-      let newSize = parseInt(sizeInput.value);
-      if (isNaN(newSize)) return;
-      if (newSize % 2 === 0) newSize += 1;
-      if (newSize < 3) newSize = 3;
-      if (newSize > 25) newSize = 25;
-      sizeInput.value = newSize;
+    radiusInput.onchange = async () => {
+      let newRadius = parseInt(radiusInput.value);
+      if (isNaN(newRadius)) return;
+      if (newRadius < 1) newRadius = 1;
+      if (newRadius > 12) newRadius = 12;
+      radiusInput.value = newRadius;
 
-      if (newSize !== LOCAL_MAP_SIZE) {
-        LOCAL_MAP_SIZE = newSize;
-        await GM.setValue("LOCAL_MAP_SIZE", LOCAL_MAP_SIZE);
+      if (newRadius !== LOCAL_MAP_RADIUS) {
+        LOCAL_MAP_RADIUS = newRadius;
+        LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
+        await GM.setValue("LOCAL_MAP_RADIUS", LOCAL_MAP_RADIUS);
         // recreate minimap
         const oldWrap = miniMap.wrap;
         const currentDisplay = oldWrap.style.display;
@@ -14352,12 +14352,12 @@ function drawAltMarkers() {
       }
     };
 
-    const sizeLabel = document.createElement("label");
-    sizeLabel.style.cssText =
+    const radiusLabel = document.createElement("label");
+    radiusLabel.style.cssText =
       "display:flex; align-items:center; gap:2px; margin-left:6px; font-size:10px; color:#BBCCBB;";
-    sizeLabel.appendChild(document.createTextNode("Size:"));
-    sizeLabel.appendChild(sizeInput);
-    controls.appendChild(sizeLabel);
+    radiusLabel.appendChild(document.createTextNode("Radius:"));
+    radiusLabel.appendChild(radiusInput);
+    controls.appendChild(radiusLabel);
 
     // Clear alts button
       const clearBtn = document.createElement("div");
