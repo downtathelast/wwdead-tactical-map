@@ -33,9 +33,14 @@
 (async function () {
   "use strict";
 
+<<<<<<< adjustable-local-map-size
+  let LOCAL_MAP_RADIUS = parseInt(localStorage.getItem("LOCAL_MAP_RADIUS") || 5);
+  let LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
+=======
   const LOCAL_MAP_SIZE = 11; // should be odd
   const MAIN_PLAYER_SYM = "●";
   const ALT_PLAYER_SYM = "▲";
+>>>>>>> main
 
   // ------------------------------------------------
   // SUBURB NAMES
@@ -14286,7 +14291,7 @@ function drawAltMarkers() {
     cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
 
     // helper to create toggle checkboxes
-    const createMapToggle = async (mapObj, key, labelText) => {
+    const createMapToggle = async (getMap, key, labelText) => {
       const label = document.createElement("label");
       label.style.cssText =
         "display:flex; align-items:center; gap:2px; cursor:pointer;";
@@ -14297,10 +14302,10 @@ function drawAltMarkers() {
 
       let isVisible = await GM.getValue(`map_visible_${key}`, true);
       cb.checked = isVisible;
-      mapObj.wrap.style.display = isVisible ? "flex" : "none";
+      getMap().wrap.style.display = isVisible ? "flex" : "none";
 
       cb.onchange = async () => {
-        mapObj.wrap.style.display = cb.checked ? "flex" : "none";
+        getMap().wrap.style.display = cb.checked ? "flex" : "none";
         await GM.setValue(`map_visible_${key}`, cb.checked);
       };
 
@@ -14310,11 +14315,54 @@ function drawAltMarkers() {
     };
 
     // add checkboxes to upper right
-    await createMapToggle(cityMap, "city", "City");
-    await createMapToggle(suburbMap, "suburb", "Sub");
-    await createMapToggle(miniMap, "local", "Loc");
+    await createMapToggle(() => cityMap, "city", "City");
+    await createMapToggle(() => suburbMap, "suburb", "Sub");
+    await createMapToggle(() => miniMap, "local", "Loc");
 
-      // Clear alts button
+    // local map radius input
+    const radiusInput = document.createElement("input");
+    radiusInput.type = "number";
+    radiusInput.min = "1";
+    radiusInput.max = "12";
+    radiusInput.step = "1";
+    radiusInput.value = LOCAL_MAP_RADIUS;
+    radiusInput.style.cssText =
+      "width:32px; background:#223322; color:#BBCCBB; border:1px solid #445544; font-size:10px; margin-left:2px; height: 14px; padding: 0 2px;";
+    radiusInput.title = "Local Map Radius (size = 2R + 1)";
+
+    radiusInput.onchange = async () => {
+      let newRadius = parseInt(radiusInput.value);
+      if (isNaN(newRadius)) return;
+      if (newRadius < 1) newRadius = 1;
+      if (newRadius > 12) newRadius = 12;
+      radiusInput.value = newRadius;
+
+      if (newRadius !== LOCAL_MAP_RADIUS) {
+        LOCAL_MAP_RADIUS = newRadius;
+        LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
+        localStorage.setItem("LOCAL_MAP_RADIUS", LOCAL_MAP_RADIUS);
+        // recreate minimap
+        const oldWrap = miniMap.wrap;
+        const currentDisplay = oldWrap.style.display;
+        miniMap = await makeMap("Local", LOCAL_MAP_SIZE, "local");
+        miniMap.wrap.style.display = currentDisplay;
+        oldWrap.parentNode.replaceChild(miniMap.wrap, oldWrap);
+
+        // re-run initial setup for new map
+        miniMap.label.textContent = `Local (${playerSuburb})`;
+        setupLocalInteractions();
+        updateMaps();
+      }
+    };
+
+    const radiusLabel = document.createElement("label");
+    radiusLabel.style.cssText =
+      "display:flex; align-items:center; gap:2px; margin-left:6px; font-size:10px; color:#BBCCBB;";
+    radiusLabel.appendChild(document.createTextNode("Radius:"));
+    radiusLabel.appendChild(radiusInput);
+    controls.appendChild(radiusLabel);
+
+    // Clear alts button
       const clearBtn = document.createElement("div");
 
       clearBtn.textContent = "[Clear Alts]";
