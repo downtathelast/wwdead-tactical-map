@@ -14462,6 +14462,20 @@ controls.appendChild(clearBtn);
     return { wrap, label, coords, table, title, cells };
   }
 
+  function miniMapCenter() {
+    const size = miniMap.cells.length;
+    const offset = Math.floor(size / 2);
+
+    // show no more than 1 block of OOB
+    const minCenter = offset - 1;
+    const maxCenter = 99 - (offset - 1);
+
+    const centerX = Math.max(minCenter, Math.min(maxCenter, playerGX));
+    const centerY = Math.max(minCenter, Math.min(maxCenter, playerGY));
+
+    return [centerX, centerY];
+  }
+
   // ------------------------------------------------
   // DRAW MINIMAP AROUND PLAYER
   // ------------------------------------------------
@@ -14471,10 +14485,12 @@ controls.appendChild(clearBtn);
     const size = miniMap.cells.length;
     const offset = Math.floor(size / 2);
 
+    const [centerX, centerY] = miniMapCenter();
+
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
-        const targetX = playerGX - offset + x;
-        const targetY = playerGY - offset + y;
+        const targetX = centerX - offset + x;
+        const targetY = centerY - offset + y;
         const td = miniMap.cells[y][x];
 
         // wipe cell
@@ -14854,6 +14870,10 @@ function updateGlobals() {
     const chars = getStoredCharacters();
     const currentId = getCharacterId();
 
+    const [viewCenterX, viewCenterY] = miniMapCenter();
+    const localSize = miniMap.cells.length;
+    const localOffset = Math.floor(localSize / 2);
+
     // draw alt character dots
     for (const id in chars) {
       const pos = chars[id];
@@ -14869,12 +14889,12 @@ function updateGlobals() {
         cell.classList.add('map-player-dot')
       }
 
-      // draw player dot in local map
-      const cx = (pos.gx - playerGX) + Math.floor(LOCAL_MAP_SIZE / 2);
-      const cy = (pos.gy - playerGY) + Math.floor(LOCAL_MAP_SIZE / 2);
+      // draw dot in local map, relative to view center
+      const lx = (pos.gx - viewCenterX) + localOffset;
+      const ly = (pos.gy - viewCenterY) + localOffset;
 
-      if (cx >= 0 && cx < LOCAL_MAP_SIZE && cy >= 0 && cy < LOCAL_MAP_SIZE) {
-        const cell = miniMap.cells[cy]?.[cx];
+      if (lx >= 0 && lx < localSize && ly >= 0 && ly < localSize) {
+        const cell = miniMap.cells[ly]?.[lx];
         cell.title = chars[id].name;
         cell.textContent = (currentId === id) ? MAIN_PLAYER_SYM : ALT_PLAYER_SYM;
         cell.classList.add('map-player-dot')
