@@ -14844,6 +14844,7 @@ function updateGlobals() {
         align-items: center;
         justify-content: center;
         text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,1);
         box-sizing: border-box;
       }
 
