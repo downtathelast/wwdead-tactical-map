@@ -14205,6 +14205,15 @@ function saveCurrentCharacterPosition() {
 }
 
 function drawAltMarkers() {
+  // clear existing alt highlights
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      const cell = cityMap.cells[y][x];
+      cell.classList.remove('map-alt-highlight');
+      cell.title = "";
+    }
+  }
+
   const chars = getStoredCharacters();
   const currentId = getCharacterId();
 
@@ -14217,9 +14226,7 @@ function drawAltMarkers() {
     const altCell = cityMap.cells[posAlt.sy]?.[posAlt.sx];
     if (!altCell) continue;
 
-    altCell.style.outline = "2px dashed #ffffff";
-    altCell.style.outlineOffset = "-1px";
-
+    altCell.classList.add('map-alt-highlight')
     altCell.title = posAlt.name || "Alt";
   }
 }
@@ -14665,6 +14672,7 @@ function setupCityInteractions() {
     }
 
     drawPlayerDot();
+    drawAltMarkers();
   }
 
   // ------------------------------------------------
@@ -14826,6 +14834,11 @@ function updateGlobals() {
         justify-content: center;
         text-align: center;
         box-sizing: border-box;
+      }
+
+      .map-alt-highlight {
+        outline: 2px dashed #ffffff !important;
+        outline-offset: -1px !important;
       }
     `;
     document.head.appendChild(style);
