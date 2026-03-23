@@ -34,6 +34,8 @@
   "use strict";
 
   const LOCAL_MAP_SIZE = 11; // should be odd
+  const MAIN_PLAYER_SYM = "●";
+  const ALT_PLAYER_SYM = "▲";
 
   // ------------------------------------------------
   // SUBURB NAMES
@@ -14106,7 +14108,6 @@
   let selectedSuburb = null;
   let playerSuburb = "";
   let currentViewSuburb = "";
-
 // ------------------------------------------------
 // ALT MARKERS STORAGE (FINAL VERSION)
 // ------------------------------------------------
@@ -14415,17 +14416,6 @@ controls.appendChild(clearBtn);
         td.style.border = "1px solid #222";
         td.dataset.name = "";
         td.dataset.gps = `(${targetX}, ${targetY})`;
-        td.title = "";
-
-        // draw player in center
-        if (x === offset && y === offset) {
-          td.textContent = "●";
-          td.dataset.name = "You";
-          td.classList.add('map-player-dot');
-        } else {
-          td.textContent = "";
-          td.classList.remove('map-player-dot');
-        }
 
         // check if coordinate exists in global data
         const entry = B[targetY]?.[targetX];
@@ -14462,7 +14452,7 @@ controls.appendChild(clearBtn);
 
         td.addEventListener("mouseenter", () => {
           if (td.dataset.name) {
-            const isPlayer = td.textContent === "●";
+            const isPlayer = td.textContent === MAIN_PLAYER_SYM;
             miniMap.label.textContent = isPlayer
               ? td.dataset.name + " (You)"
               : td.dataset.name;
@@ -14671,7 +14661,7 @@ function setupCityInteractions() {
       }
     }
 
-    drawPlayerDot();
+    drawPlayerDots();
     drawAltMarkers();
   }
 
@@ -14795,7 +14785,7 @@ function updateGlobals() {
       suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
     }
 
-    drawPlayerDot();
+    drawPlayerDots();
     drawMiniMap();
   }
 
@@ -14804,18 +14794,39 @@ function updateGlobals() {
   // DRAW PLAYER DOT
   // ------------------------------------------------
 
-  function drawPlayerDot() {
-    if (playerGX === null || playerGY === null) return;
-    if (currentViewSuburb !== playerSuburb) return;
+  function drawPlayerDots() {
 
-    let x = playerGX - playerSX * 10;
-    let y = playerGY - playerSY * 10;
+    const chars = getStoredCharacters();
+    const currentId = getCharacterId();
 
-    const td = suburbMap.cells[y][x];
-    td.textContent = "●";
-    td.title = "You are here";
-    td.classList.add('map-player-dot')
+    // draw alt character dots
+    for (const id in chars) {
+      const pos = chars[id];
+      if (pos.sx === undefined || pos.sy === undefined) continue;
 
+      // draw player dot in current suburb map
+      const charSuburbName = suburbNames[pos.sy][pos.sx];
+
+      if (currentViewSuburb === charSuburbName) {
+        const cell = suburbMap.cells[pos.gy % 10]?.[pos.gx % 10];
+        cell.title = chars[id].name;
+        cell.textContent = (currentId === id) ? MAIN_PLAYER_SYM : ALT_PLAYER_SYM;
+        cell.classList.add('map-player-dot')
+      }
+
+      // draw player dot in local map
+      const cx = (pos.gx - playerGX) + Math.floor(LOCAL_MAP_SIZE / 2);
+      const cy = (pos.gy - playerGY) + Math.floor(LOCAL_MAP_SIZE / 2);
+
+      if (cx >= 0 && cx < LOCAL_MAP_SIZE && cy >= 0 && cy < LOCAL_MAP_SIZE) {
+        const cell = miniMap.cells[cy]?.[cx];
+        cell.title = chars[id].name;
+        cell.textContent = (currentId === id) ? MAIN_PLAYER_SYM : ALT_PLAYER_SYM;
+        cell.classList.add('map-player-dot')
+      }
+    }
+
+    // set initial GPS coordinates
     suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
   }
 
