@@ -14652,12 +14652,25 @@ function setupCityInteractions() {
         const td = suburbMap.cells[y][x];
 
         td.addEventListener("mouseenter", () => {
-          if (td.dataset.name) {
-            const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
-            suburbMap.label.textContent = isPlayer
-              ? td.dataset.name + " (You)"
-              : td.dataset.name;
-            suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
+          if (td.dataset.gps) {
+            const coordsMatch = td.dataset.gps.match(/\d+/g);
+            const gx = parseInt(coordsMatch[0]);
+            const gy = parseInt(coordsMatch[1]);
+
+            const isPlayer = gx === playerGX && gy === playerGY;
+
+            // update label (building name)
+            if (td.dataset.name) {
+              suburbMap.label.textContent = isPlayer
+                ? td.dataset.name + " (You)"
+                : td.dataset.name;
+            } else {
+              suburbMap.label.textContent = "Street";
+            }
+
+            // update coords + offset
+            const offset = getRelativeOffset(gx, gy);
+            suburbMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
           }
         });
       }
