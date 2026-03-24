@@ -14340,10 +14340,12 @@ function drawAltMarkers() {
     await createMapToggle(() => miniMap, "local", "Loc");
 
     // local map radius input
+    const MAX_RADIUS = 18;
+
     const radiusInput = document.createElement("input");
     radiusInput.type = "number";
     radiusInput.min = "1";
-    radiusInput.max = "12";
+    radiusInput.max = `${MAX_RADIUS}`;
     radiusInput.step = "1";
     radiusInput.value = LOCAL_MAP_RADIUS;
     radiusInput.style.cssText =
@@ -14354,7 +14356,7 @@ function drawAltMarkers() {
       let newRadius = parseInt(radiusInput.value);
       if (isNaN(newRadius)) return;
       if (newRadius < 1) newRadius = 1;
-      if (newRadius > 12) newRadius = 12;
+      if (newRadius > MAX_RADIUS) newRadius = MAX_RADIUS;
       radiusInput.value = newRadius;
 
       if (newRadius !== LOCAL_MAP_RADIUS) {
