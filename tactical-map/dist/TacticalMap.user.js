@@ -14517,6 +14517,10 @@ controls.appendChild(clearBtn);
         const td = localCells[y][x];
 
         td.addEventListener("mouseenter", () => {
+          const coordsMatch = td.dataset.gps.match(/\d+/g);
+          const tx = parseInt(coordsMatch[0]);
+          const ty = parseInt(coordsMatch[1]);
+
           if (td.dataset.name) {
             const isPlayer = td.textContent === MAIN_PLAYER_SYM;
             miniMap.label.textContent = isPlayer
@@ -14525,7 +14529,9 @@ controls.appendChild(clearBtn);
           } else {
             miniMap.label.textContent = "Street"; // hovering empty/street tile
           }
-          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+
+          const offset = getRelativeOffset(tx, ty);
+          miniMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
         });
       }
     }
@@ -14883,6 +14889,23 @@ function updateGlobals() {
 
     // set initial GPS coordinates
     suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
+  }
+
+  function getRelativeOffset(tx, ty) {
+    if (playerGX === null || playerGY === null) return "";
+
+    const dx = tx - playerGX;
+    const dy = ty - playerGY;
+
+    if (dx === 0 && dy === 0) return " (Here)";
+
+    let xDir = dx > 0 ? "E" : "W";
+    let yDir = dy > 0 ? "S" : "N";
+
+    let xStr = dx !== 0 ? `${Math.abs(dx)}${xDir}` : "";
+    let yStr = dy !== 0 ? `${Math.abs(dy)}${yDir}` : "";
+
+    return ` [${[yStr, xStr].filter(Boolean).join(", ")}]`;
   }
 
   function addStyles() {
