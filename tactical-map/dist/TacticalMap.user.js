@@ -14912,13 +14912,29 @@ function updateGlobals() {
 
     if (dx === 0 && dy === 0) return " (Here)";
 
-    let xDir = dx > 0 ? "E" : "W";
-    let yDir = dy > 0 ? "S" : "N";
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
 
-    let xStr = dx !== 0 ? `${Math.abs(dx)}${xDir}` : "";
-    let yStr = dy !== 0 ? `${Math.abs(dy)}${yDir}` : "";
+    const xDir = dx > 0 ? "E" : "W";
+    const yDir = dy > 0 ? "S" : "N";
 
-    return ` [${[yStr, xStr].filter(Boolean).join(", ")}]`;
+    let result = [];
+
+    if (dx !== 0 && dy !== 0) {
+      const diagDist = Math.min(absX, absY);
+      result.push(`${diagDist}${yDir}${xDir}`);
+
+      if (absX > absY) {
+        result.push(`${absX - absY}${xDir}`);
+      } else if (absY > absX) {
+        result.push(`${absY - absX}${yDir}`);
+      }
+    } else {
+      if (dx !== 0) result.push(`${absX}${xDir}`);
+      if (dy !== 0) result.push(`${absY}${yDir}`);
+    }
+
+    return ` [${result.join(", ")}]`;
   }
 
   function addStyles() {
