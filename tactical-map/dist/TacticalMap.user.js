@@ -14535,6 +14535,10 @@ controls.appendChild(clearBtn);
         const td = localCells[y][x];
 
         td.addEventListener("mouseenter", () => {
+          const coordsMatch = td.dataset.gps.match(/\d+/g);
+          const tx = parseInt(coordsMatch[0]);
+          const ty = parseInt(coordsMatch[1]);
+
           if (td.dataset.name) {
             const isPlayer = td.textContent === MAIN_PLAYER_SYM;
             miniMap.label.textContent = isPlayer
@@ -14543,7 +14547,9 @@ controls.appendChild(clearBtn);
           } else {
             miniMap.label.textContent = "Street"; // hovering empty/street tile
           }
-          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+
+          const offset = getRelativeOffset(tx, ty);
+          miniMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
         });
       }
     }
@@ -14664,12 +14670,25 @@ function setupCityInteractions() {
         const td = suburbMap.cells[y][x];
 
         td.addEventListener("mouseenter", () => {
-          if (td.dataset.name) {
-            const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
-            suburbMap.label.textContent = isPlayer
-              ? td.dataset.name + " (You)"
-              : td.dataset.name;
-            suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
+          if (td.dataset.gps) {
+            const coordsMatch = td.dataset.gps.match(/\d+/g);
+            const gx = parseInt(coordsMatch[0]);
+            const gy = parseInt(coordsMatch[1]);
+
+            const isPlayer = gx === playerGX && gy === playerGY;
+
+            // update label (building name)
+            if (td.dataset.name) {
+              suburbMap.label.textContent = isPlayer
+                ? td.dataset.name + " (You)"
+                : td.dataset.name;
+            } else {
+              suburbMap.label.textContent = "Street";
+            }
+
+            // update coords + offset
+            const offset = getRelativeOffset(gx, gy);
+            suburbMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
           }
         });
       }
@@ -14905,6 +14924,39 @@ function updateGlobals() {
 
     // set initial GPS coordinates
     suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
+  }
+
+  function getRelativeOffset(tx, ty) {
+    if (playerGX === null || playerGY === null) return "";
+
+    const dx = tx - playerGX;
+    const dy = ty - playerGY;
+
+    if (dx === 0 && dy === 0) return " (Here)";
+
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+
+    const xDir = dx > 0 ? "E" : "W";
+    const yDir = dy > 0 ? "S" : "N";
+
+    let result = [];
+
+    if (dx !== 0 && dy !== 0) {
+      const diagDist = Math.min(absX, absY);
+      result.push(`${diagDist}${yDir}${xDir}`);
+
+      if (absX > absY) {
+        result.push(`${absX - absY}${xDir}`);
+      } else if (absY > absX) {
+        result.push(`${absY - absX}${yDir}`);
+      }
+    } else {
+      if (dx !== 0) result.push(`${absX}${xDir}`);
+      if (dy !== 0) result.push(`${absY}${yDir}`);
+    }
+
+    return ` [${result.join(", ")}]`;
   }
 
   function addStyles() {
