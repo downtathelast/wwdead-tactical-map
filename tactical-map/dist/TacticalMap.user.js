@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WWDead Tactical Map
 // @namespace    wwd-mini-map-malton
-// @version      3.2.0
+// @version      3.2.1
 // @description  Tactical Map improvements: localStorage storage, dynamic map sizing, alt indicators, and bug fixes
 // @author       DTTL
 // @description  Displays city and suburb map in WWDead
@@ -248,7 +248,7 @@
     34: { visible: true, color: "#B3A486", border:"2px solid #665533", name: "Zoo" },
     35: {
       visible: true,
-      color: "#B3A486",
+      color: "#94886F",
       border: "2px dotted #665533",
       name: "Zoo Enclosure",
     },
@@ -14340,10 +14340,12 @@ function drawAltMarkers() {
     await createMapToggle(() => miniMap, "local", "Loc");
 
     // local map radius input
+    const MAX_RADIUS = 18;
+
     const radiusInput = document.createElement("input");
     radiusInput.type = "number";
     radiusInput.min = "1";
-    radiusInput.max = "12";
+    radiusInput.max = `${MAX_RADIUS}`;
     radiusInput.step = "1";
     radiusInput.value = LOCAL_MAP_RADIUS;
     radiusInput.style.cssText =
@@ -14354,7 +14356,7 @@ function drawAltMarkers() {
       let newRadius = parseInt(radiusInput.value);
       if (isNaN(newRadius)) return;
       if (newRadius < 1) newRadius = 1;
-      if (newRadius > 12) newRadius = 12;
+      if (newRadius > MAX_RADIUS) newRadius = MAX_RADIUS;
       radiusInput.value = newRadius;
 
       if (newRadius !== LOCAL_MAP_RADIUS) {
@@ -14462,6 +14464,20 @@ controls.appendChild(clearBtn);
     return { wrap, label, coords, table, title, cells };
   }
 
+  function miniMapCenter() {
+    const size = miniMap.cells.length;
+    const offset = Math.floor(size / 2);
+
+    // show no more than 1 block of OOB
+    const minCenter = offset - 1;
+    const maxCenter = 99 - (offset - 1);
+
+    const centerX = Math.max(minCenter, Math.min(maxCenter, playerGX));
+    const centerY = Math.max(minCenter, Math.min(maxCenter, playerGY));
+
+    return [centerX, centerY];
+  }
+
   // ------------------------------------------------
   // DRAW MINIMAP AROUND PLAYER
   // ------------------------------------------------
@@ -14471,10 +14487,12 @@ controls.appendChild(clearBtn);
     const size = miniMap.cells.length;
     const offset = Math.floor(size / 2);
 
+    const [centerX, centerY] = miniMapCenter();
+
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
-        const targetX = playerGX - offset + x;
-        const targetY = playerGY - offset + y;
+        const targetX = centerX - offset + x;
+        const targetY = centerY - offset + y;
         const td = miniMap.cells[y][x];
 
         // wipe cell
@@ -14517,6 +14535,10 @@ controls.appendChild(clearBtn);
         const td = localCells[y][x];
 
         td.addEventListener("mouseenter", () => {
+          const coordsMatch = td.dataset.gps.match(/\d+/g);
+          const tx = parseInt(coordsMatch[0]);
+          const ty = parseInt(coordsMatch[1]);
+
           if (td.dataset.name) {
             const isPlayer = td.textContent === MAIN_PLAYER_SYM;
             miniMap.label.textContent = isPlayer
@@ -14525,7 +14547,9 @@ controls.appendChild(clearBtn);
           } else {
             miniMap.label.textContent = "Street"; // hovering empty/street tile
           }
-          miniMap.coords.textContent = "GPS: " + td.dataset.gps;
+
+          const offset = getRelativeOffset(tx, ty);
+          miniMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
         });
       }
     }
@@ -14646,12 +14670,25 @@ function setupCityInteractions() {
         const td = suburbMap.cells[y][x];
 
         td.addEventListener("mouseenter", () => {
-          if (td.dataset.name) {
-            const isPlayer = td.dataset.gps === `(${playerGX}, ${playerGY})`;
-            suburbMap.label.textContent = isPlayer
-              ? td.dataset.name + " (You)"
-              : td.dataset.name;
-            suburbMap.coords.textContent = "GPS: " + td.dataset.gps;
+          if (td.dataset.gps) {
+            const coordsMatch = td.dataset.gps.match(/\d+/g);
+            const gx = parseInt(coordsMatch[0]);
+            const gy = parseInt(coordsMatch[1]);
+
+            const isPlayer = gx === playerGX && gy === playerGY;
+
+            // update label (building name)
+            if (td.dataset.name) {
+              suburbMap.label.textContent = isPlayer
+                ? td.dataset.name + " (You)"
+                : td.dataset.name;
+            } else {
+              suburbMap.label.textContent = "Street";
+            }
+
+            // update coords + offset
+            const offset = getRelativeOffset(gx, gy);
+            suburbMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
           }
         });
       }
@@ -14854,6 +14891,10 @@ function updateGlobals() {
     const chars = getStoredCharacters();
     const currentId = getCharacterId();
 
+    const [viewCenterX, viewCenterY] = miniMapCenter();
+    const localSize = miniMap.cells.length;
+    const localOffset = Math.floor(localSize / 2);
+
     // draw alt character dots
     for (const id in chars) {
       const pos = chars[id];
@@ -14869,12 +14910,12 @@ function updateGlobals() {
         cell.classList.add('map-player-dot')
       }
 
-      // draw player dot in local map
-      const cx = (pos.gx - playerGX) + Math.floor(LOCAL_MAP_SIZE / 2);
-      const cy = (pos.gy - playerGY) + Math.floor(LOCAL_MAP_SIZE / 2);
+      // draw dot in local map, relative to view center
+      const lx = (pos.gx - viewCenterX) + localOffset;
+      const ly = (pos.gy - viewCenterY) + localOffset;
 
-      if (cx >= 0 && cx < LOCAL_MAP_SIZE && cy >= 0 && cy < LOCAL_MAP_SIZE) {
-        const cell = miniMap.cells[cy]?.[cx];
+      if (lx >= 0 && lx < localSize && ly >= 0 && ly < localSize) {
+        const cell = miniMap.cells[ly]?.[lx];
         cell.title = chars[id].name;
         cell.textContent = (currentId === id) ? MAIN_PLAYER_SYM : ALT_PLAYER_SYM;
         cell.classList.add('map-player-dot')
@@ -14883,6 +14924,39 @@ function updateGlobals() {
 
     // set initial GPS coordinates
     suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
+  }
+
+  function getRelativeOffset(tx, ty) {
+    if (playerGX === null || playerGY === null) return "";
+
+    const dx = tx - playerGX;
+    const dy = ty - playerGY;
+
+    if (dx === 0 && dy === 0) return " (Here)";
+
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+
+    const xDir = dx > 0 ? "E" : "W";
+    const yDir = dy > 0 ? "S" : "N";
+
+    let result = [];
+
+    if (dx !== 0 && dy !== 0) {
+      const diagDist = Math.min(absX, absY);
+      result.push(`${diagDist}${yDir}${xDir}`);
+
+      if (absX > absY) {
+        result.push(`${absX - absY}${xDir}`);
+      } else if (absY > absX) {
+        result.push(`${absY - absX}${yDir}`);
+      }
+    } else {
+      if (dx !== 0) result.push(`${absX}${xDir}`);
+      if (dy !== 0) result.push(`${absY}${yDir}`);
+    }
+
+    return ` [${result.join(", ")}]`;
   }
 
   function addStyles() {
