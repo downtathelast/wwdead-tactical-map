@@ -14464,7 +14464,7 @@ controls.appendChild(clearBtn);
     return { wrap, label, coords, table, title, cells };
   }
 
-  function miniMapCenter() {
+  function miniMapCenter(px, py) {
     const size = miniMap.cells.length;
     const offset = Math.floor(size / 2);
 
@@ -14472,8 +14472,8 @@ controls.appendChild(clearBtn);
     const minCenter = offset - 1;
     const maxCenter = 99 - (offset - 1);
 
-    const centerX = Math.max(minCenter, Math.min(maxCenter, playerGX));
-    const centerY = Math.max(minCenter, Math.min(maxCenter, playerGY));
+    const centerX = Math.max(minCenter, Math.min(maxCenter, px));
+    const centerY = Math.max(minCenter, Math.min(maxCenter, py));
 
     return [centerX, centerY];
   }
@@ -14481,13 +14481,13 @@ controls.appendChild(clearBtn);
   // ------------------------------------------------
   // DRAW MINIMAP AROUND PLAYER
   // ------------------------------------------------
-  function drawMiniMap() {
-    if (playerGX === null || playerGY === null) return;
+  function drawMiniMap(px, py) {
+    if (px === null || py === null) return;
 
     const size = miniMap.cells.length;
     const offset = Math.floor(size / 2);
 
-    const [centerX, centerY] = miniMapCenter();
+    const [centerX, centerY] = miniMapCenter(px, py);
 
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
@@ -14520,7 +14520,7 @@ controls.appendChild(clearBtn);
         }
       }
     }
-    miniMap.coords.textContent = `Center: (${playerGX}, ${playerGY})`;
+    miniMap.coords.textContent = `Center: (${px}, ${py})`;
   }
 
   // ------------------------------------------------
@@ -14878,7 +14878,12 @@ function updateGlobals() {
     }
 
     drawPlayerDots();
-    drawMiniMap();
+
+    const char = getStoredCharacters()[getCharacterId()];
+    const px = playerGX ?? char.gx;
+    const py = playerGY ?? char.gy;
+
+    drawMiniMap(px, py);
   }
 
 
@@ -14891,7 +14896,10 @@ function updateGlobals() {
     const chars = getStoredCharacters();
     const currentId = getCharacterId();
 
-    const [viewCenterX, viewCenterY] = miniMapCenter();
+    const px = playerGX ?? chars[currentId].gx;
+    const py = playerGY ?? chars[currentId].gy;
+
+    const [viewCenterX, viewCenterY] = miniMapCenter(px, py);
     const localSize = miniMap.cells.length;
     const localOffset = Math.floor(localSize / 2);
 
@@ -14923,7 +14931,7 @@ function updateGlobals() {
     }
 
     // set initial GPS coordinates
-    suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
+    suburbMap.coords.textContent = `GPS: (${px}, ${py})`;
   }
 
   function getRelativeOffset(tx, ty) {
