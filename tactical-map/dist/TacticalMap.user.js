@@ -186,29 +186,58 @@ const BUILDING_TYPES = {
   12: { visible: true, color: "#653", name: "Factory" },
   13: { visible: true, color: "#8fA887", name: "Firehouse" },
   14: { visible: true, color: "#163", border: "2px solid #9db", name: "Fort" },
-  15: { visible: true, color: "#FF9999", border: "3px solid #FF1493", name: "Hospital" },
+  15: { visible: true, color: "#FF9999", border: "1px solid #FF1493", name: "Hospital" },
   16: { visible: true, color: "#8fA887", name: "Hotel" },
   17: { visible: true, color: "#8fA887", border: "2px dotted #DDD", name: "Junkyard" },
   18: { visible: true, color: "#8fA887", name: "Library" },
-  19: { visible: true, color: "#9DB", border: "3px solid #163", name: "Mall" },
+  19: { visible: true, color: "#9DB", border: "1px solid #163", name: "Mall" },
   20: { visible: true, color: "#BBCCBB", name: "Mansion" },
   21: { visible: true, color: "#617C58", name: "Monument" },
   22: { visible: true, color: "#8fA887", name: "Museum" },
   23: { visible: true, color: "#9933FF", name: "Necrotech" },
   24: { visible: true, color: "#617C58", name: "Park" },
-  25: { visible: true, color: "#C6C6FF", border: "3px solid #00F", name: "Police" },
+  25: { visible: true, color: "#C6C6FF", border: "1px solid #00F", name: "Police" },
   26: { visible: true, color: "#ff7034", name: "Power" },
   27: { visible: true, color: "#8fA887", name: "Railway" },
   28: { visible: true, color: "#8fA887", name: "School" },
-  29: { visible: true, color: "#9DB", border: "3px solid #765", name: "Stadium" },
+  29: { visible: true, color: "#9DB", border: "1px solid #765", name: "Stadium" },
   30: { visible: true, color: "#617C58", name: "Street" },
   31: { visible: true, color: "#8fA887", name: "Towers" },
   32: { visible: true, color: "#8fA887", name: "Warehouse" },
   33: { visible: true, color: "#617C58", name: "Wasteland" },
-  34: { visible: true, color: "#B3A486", border: "2px solid #665533", name: "Zoo" },
-  35: { visible: true, color: "#B3A486", border: "2px dotted #665533", name: "Zoo Enclosure" },
+  34: { visible: true, color: "#B3A486", name: "Zoo" },
+  35: { visible: true, color: "#B3A486", name: "Zoo Enclosure" },
   36: { visible: true, color: "#163", border: "4px dotted #9db", name: "Gatehouse" },
+
+  // Zoo buildings
+  37: { visible: true, color: "#A3D9FF", border: "2px dotted #DDD", name: "The Aquarium", icon: "🦈" },
+  38: { visible: true, color: "#D1BFA3", border: "2px dotted #DDD", name: "The Bear Pit", icon: "🐻" },
+  39: { visible: true, color: "#C0C0C0", border: "2px dotted #DDD", name: "The Elephant House", icon: "🐘" },
+  40: { visible: true, color: "#FFF5B3", border: "2px dotted #DDD", name: "The Giraffe House", icon: "🦒" },
+  41: { visible: true, color: "#FFE0B3", border: "2px dotted #DDD", name: "The Lion Enclosure", icon: "🦁" },
+  42: { visible: true, color: "#C3E6A3", border: "2px dotted #DDD", name: "The Reptile House", icon: "🐊" },
+
+  // Fort Creedy
+  43: { visible: true, color: "#818589", border: "4px dotted #000", name: "Fort Creedy Armoury", icon: "" },
+  44: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Creedy Barracks", icon: "" },
+  45: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Creedy Exercise Yard", icon: "" },
+  46: { visible: true, color: "#818589", name: "Fort Creedy Gatehouse", icon: "🛂" },
+  47: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Creedy Infirmary", icon: "🇨🇭" },
+  48: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Creedy Storehouse", icon: "📦" },
+  49: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Creedy Training Ground", icon: "" },
+  50: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Creedy Vehicle Depot", icon: "🧰" },
+
+  // Fort Perryn
+  51: { visible: true, color: "#818589", border: "4px dotted #000", name: "Fort Perryn Armoury", icon: "" },
+  52: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Perryn Barracks", icon: "" },
+  53: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Perryn Exercise Yard", icon: "" },
+  54: { visible: true, color: "#818589", name: "Fort Perryn Gatehouse", icon: "🛂" },
+  55: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Perryn Infirmary", icon: "🇨🇭" },
+  56: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Perryn Storehouse", icon: "📦" },
+  57: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Perryn Training Ground", icon: "" },
+  58: { visible: true, color: "#818589", border: "3px solid #525252", name: "Fort Perryn Vehicle Depot", icon: "🧰" },
 };
+
 
   // ------------------------------------------------
   // BUILDING DATABASE
@@ -11030,16 +11059,18 @@ controls.appendChild(clearBtn);
         // check if coordinate exists in global data
         const entry = B[targetY]?.[targetX];
         if (entry) {
-          const type = BUILDING_TYPES[entry[0]];
-          if (type && type.visible) {
-            td.style.background = type.color;
-            if (type.border) td.style.border = type.border;
-          }
+  const type = BUILDING_TYPES[entry[0]];
+  if (type && type.visible) {
+    td.style.background = type.color;
+    if (type.border) td.style.border = type.border;
+    if (type.icon) {
+      td.textContent = type.icon;
+    }
+  }
 
-          td.dataset.name = entry[1]; // location name
-          td.title = type?.name ?? ""; // building type name
-        }
-
+  td.dataset.name = entry[1];
+  td.title = type?.name ?? "";
+}
         // bounds check
         if (targetX < 0 || targetX > 99 || targetY < 0 || targetY > 99) {
           td.style.background = "#000";
@@ -11259,16 +11290,19 @@ function setupCityInteractions() {
         td.title = "";
 
         const entry = B[gy]?.[gx];
-        if (entry) {
-          const type = BUILDING_TYPES[entry[0]];
-          if (type && type.visible) {
-            td.style.background = type.color;
-            if (type.border) td.style.border = type.border;
-          }
+       if (entry) {
+  const type = BUILDING_TYPES[entry[0]];
+  if (type && type.visible) {
+    td.style.background = type.color;
+    if (type.border) td.style.border = type.border;
+    if (type.icon) {
+      td.textContent = type.icon;
+    }
+  }
 
-          td.dataset.name = entry[1];
-          td.title = type?.name ?? "";
-        }
+  td.dataset.name = entry[1];
+  td.title = type?.name ?? "";
+}
       }
     }
 
