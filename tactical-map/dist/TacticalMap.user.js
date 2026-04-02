@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WWDead Tactical Map
 // @namespace    wwd-mini-map-malton
-// @version      4.0.1
+// @version      4.1.1
 // @description  Tactical Map improvements: localStorage storage, dynamic map sizing, alt indicators, and bug fixes
 // @author       DTTL
 // @description  Displays city and suburb map in WWDead
@@ -10755,7 +10755,17 @@ function saveCurrentCharacterPosition() {
   }
 
   if (playerSX === null || playerSY === null) return;
-  if (playerGX === null || playerGY === null) return;
+
+// fallback if GPS failed (dead / NT issue)
+if (playerGX === null || playerGY === null) {
+  const existing = getStoredCharacters()[id];
+  if (existing) {
+    playerGX = existing.gx;
+    playerGY = existing.gy;
+  } else {
+    return;
+  }
+}
 
   let chars = getStoredCharacters();
 
