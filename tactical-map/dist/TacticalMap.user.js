@@ -23,7 +23,6 @@
  * Source: https://github.com/xunoaib/wwdead_tacticalmap
  *
  * Thanks to the Urban Dead / World Wide Dead scripting community.
- *
  * License:
  * GNU General Public License v2 or later
  * http://www.gnu.org/licenses/gpl.txt
