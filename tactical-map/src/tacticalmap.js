@@ -14789,40 +14789,30 @@
     const name = getCharacterName();
 
     if (!id) {
-      console.warn("❌ Could not determine character ID");
-      return;
+        console.warn("❌ Could not determine character ID");
+        return;
     }
 
     if (playerSX === null || playerSY === null) return;
 
-    // fallback if GPS failed (dead / NT issue)
+    // Always get the current global coords; do not reuse old ones
     if (playerGX === null || playerGY === null) {
-      const existing = getStoredCharacters()[id];
-      if (existing) {
-        playerGX = existing.gx;
-        playerGY = existing.gy;
-      } else {
+        console.warn("⚠️ Player global coordinates are not set, skipping save");
         return;
-      }
     }
 
     let chars = getStoredCharacters();
 
     cleanupOldCharacters(chars);
 
-    if (chars[id]) {
-      if (chars[id].gx === playerGX && chars[id].gy === playerGY) {
-        return;
-      }
-    }
-
+    // Always save current position, even if it matches the old one
     chars[id] = {
-      name,
-      sx: playerSX,
-      sy: playerSY,
-      gx: playerGX,
-      gy: playerGY,
-      time: Date.now(),
+        name,
+        sx: playerSX,
+        sy: playerSY,
+        gx: playerGX,
+        gy: playerGY,
+        time: Date.now(),
     };
 
     enforceMaxAlts(chars);
