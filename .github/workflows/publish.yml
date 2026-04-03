@@ -1,0 +1,29 @@
+name: Publish Distribution
+on:
+  release:
+    types: [published]
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Checkout dist repo
+        uses: actions/checkout@v4
+        with:
+          repository: downtathelast/worldwide-dead-script-dist
+          token: ${{ secrets.DIST_REPO_TOKEN }}
+          path: dist-repo
+
+      - name: Copy userscript(s) to dist repo
+        run: cp src/*.js dist-repo/
+
+      - name: Commit and push to dist repo
+        working-directory: dist-repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "Update dist from release ${{ github.ref_name }}"
+          git push
