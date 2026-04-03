@@ -17,7 +17,7 @@ jobs:
           path: dist-repo
 
       - name: Copy userscript(s) to dist repo
-        run: cp src/*.js dist-repo/
+        run: cp tactical-map/dist/*.user.js dist-repo/
 
       - name: Commit and push to dist repo
         working-directory: dist-repo
