@@ -15069,6 +15069,10 @@
     return [centerX, centerY];
   }
 
+  function formatTileSymbol(symbol) {
+    return `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; line-height: 1; font-size: 14px; user-select: none; -webkit-user-select: none; cursor: default;">${symbol}</div>`;
+  }
+
   // ------------------------------------------------
   // DRAW MINIMAP AROUND PLAYER
   // ------------------------------------------------
@@ -15100,7 +15104,7 @@
             td.style.background = type.color;
             if (type.border) td.style.border = type.border;
             if (type.icon) {
-              td.textContent = type.icon;
+              td.innerHTML = formatTileSymbol(type.icon);
             }
           }
 
@@ -15337,7 +15341,7 @@
             td.style.background = type.color;
             if (type.border) td.style.border = type.border;
             if (type.icon) {
-              td.textContent = type.icon;
+              td.innerHTML = formatTileSymbol(type.icon);
             }
           }
 
