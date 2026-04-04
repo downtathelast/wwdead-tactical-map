@@ -15431,15 +15431,20 @@
   }
 
   function updateGlobals() {
-    const suburbElem = document.querySelector(".sb");
+    // load cached player position as a default (if available)
+    const char = getStoredCharacters()[getCharacterId()];
+    if (char) {
+      [playerSX, playerSY] = [Math.floor(char.gx / 10), Math.floor(char.gy / 10)];
+      [playerGX, playerGY] = [char.gx, char.gy];
+    }
 
+    const suburbElem = document.querySelector(".sb");
     if (!suburbElem) {
       console.error("Couldn't find suburb element");
       return;
     }
 
     playerSuburb = suburbElem.textContent.trim();
-
     [playerSX, playerSY] = suburbCoordsByName(playerSuburb) ?? [null, null];
     [playerGX, playerGY] = globalPlayerCoords() ?? [null, null];
   }
@@ -15483,12 +15488,7 @@
     }
 
     drawPlayerDots();
-
-    const char = getStoredCharacters()[getCharacterId()];
-    const px = playerGX ?? char.gx;
-    const py = playerGY ?? char.gy;
-
-    drawMiniMap(px, py);
+    drawMiniMap(playerGX, playerGY);
   }
 
   // ------------------------------------------------
@@ -15499,12 +15499,7 @@
     const chars = getStoredCharacters();
     const currentId = getCharacterId();
 
-    const current = chars[currentId] || {};
-
-    const px = playerGX ?? current.gx;
-    const py = playerGY ?? current.gy;
-
-    const [viewCenterX, viewCenterY] = miniMapCenter(px, py);
+    const [viewCenterX, viewCenterY] = miniMapCenter(playerGX, playerGY);
     const localSize = miniMap.cells.length;
     const localOffset = Math.floor(localSize / 2);
 
@@ -15538,7 +15533,7 @@
       }
     }
     // set initial GPS coordinates
-    suburbMap.coords.textContent = `GPS: (${px}, ${py})`;
+    suburbMap.coords.textContent = `GPS: (${playerGX}, ${playerGY})`;
   }
 
   function getRelativeOffset(tx, ty) {
