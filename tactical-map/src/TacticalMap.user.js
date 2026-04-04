@@ -15128,9 +15128,13 @@
         const td = localCells[y][x];
 
         td.addEventListener("mouseenter", () => {
-          const coordsMatch = td.dataset.gps.match(/\d+/g);
-          const tx = parseInt(coordsMatch[0]);
-          const ty = parseInt(coordsMatch[1]);
+          if (td.dataset.gps) {
+            const coordsMatch = td.dataset.gps.match(/\d+/g);
+            const tx = parseInt(coordsMatch[0]);
+            const ty = parseInt(coordsMatch[1]);
+            const offset = getRelativeOffset(tx, ty);
+            miniMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
+          }
 
           if (td.dataset.name) {
             const isPlayer = td.textContent === MAIN_PLAYER_SYM;
@@ -15140,9 +15144,6 @@
           } else {
             miniMap.label.textContent = "Street"; // hovering empty/street tile
           }
-
-          const offset = getRelativeOffset(tx, ty);
-          miniMap.coords.textContent = "GPS: " + td.dataset.gps + offset;
         });
       }
     }
