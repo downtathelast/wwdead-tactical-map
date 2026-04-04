@@ -15070,7 +15070,7 @@
   }
 
   function formatTileSymbol(symbol) {
-    return `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; line-height: 1; font-size: 14px; user-select: none; -webkit-user-select: none; cursor: default;">${symbol}</div>`;
+    return `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; line-height: 1; font-size: 14px; user-select: none; -webkit-user-select: none; cursor: default; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">${symbol}</div>`;
   }
 
   // ------------------------------------------------
