@@ -37,6 +37,7 @@
   const CURRENT_MEM_VERSION = 2; // bump to wipe stored data
   const MEM_VERSION_KEY = "tacticalmap:memResetVersion";
   const COLLAPSED_KEY = "tacticalmap:collapsed";
+  const LOCAL_MAP_RADIUS_KEY = "tacticalmap:LOCAL_MAP_RADIUS";
 
   function checkMemoryVersion() {
     const storedVersion = parseInt(localStorage.getItem(MEM_VERSION_KEY) || "0", 10);
@@ -45,7 +46,7 @@
       // clear all tacticalmap storage
       localStorage.removeItem("tacticalmap:chars_v2");
       localStorage.removeItem("tacticalmap:settings");
-      localStorage.removeItem("LOCAL_MAP_RADIUS");
+      localStorage.removeItem(LOCAL_MAP_RADIUS_KEY);
       localStorage.removeItem(COLLAPSED_KEY);
       localStorage.setItem(MEM_VERSION_KEY, CURRENT_MEM_VERSION);
     }
@@ -55,10 +56,7 @@
   // -----------------------------
   // Local map settings
   // -----------------------------
-  let LOCAL_MAP_RADIUS = parseInt(
-      localStorage.getItem("tacticalmap:LOCAL_MAP_RADIUS") || 5,
-      10
-  );
+  let LOCAL_MAP_RADIUS = parseInt(localStorage.getItem(LOCAL_MAP_RADIUS_KEY) || 5, 10);
   let LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
 
   const MAIN_PLAYER_SYM = "●";
@@ -14955,7 +14953,7 @@
       if (newRadius !== LOCAL_MAP_RADIUS) {
         LOCAL_MAP_RADIUS = newRadius;
         LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
-        localStorage.setItem("LOCAL_MAP_RADIUS", LOCAL_MAP_RADIUS);
+        localStorage.setItem(LOCAL_MAP_RADIUS_KEY, LOCAL_MAP_RADIUS);
         // recreate minimap
         const oldWrap = miniMap.wrap;
         const currentDisplay = oldWrap.style.display;
