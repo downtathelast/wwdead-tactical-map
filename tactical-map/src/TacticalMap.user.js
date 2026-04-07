@@ -14712,29 +14712,6 @@
   const MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
   const MAX_ALTS = 10;
 
-  // drop-in replacement for GM.getValue and GM.setValue using localStorage
-  const GM_KEY_PREFIX = "tacticalmap:gm:";
-  const GM = {
-    getValue: async (key, defaultValue) => {
-      const value = localStorage.getItem(GM_KEY_PREFIX + key);
-      if (value === null) return defaultValue;
-
-      try {
-        return JSON.parse(value);
-      } catch {
-        return value;
-      }
-    },
-
-    setValue: async (key, value) => {
-      localStorage.setItem(GM_KEY_PREFIX + key, JSON.stringify(value));
-    },
-
-    deleteValue: async (key) => {
-      localStorage.removeItem(GM_KEY_PREFIX + key);
-    },
-  };
-
   function getProfileLink() {
     return document.querySelector('.gt a[href*="/classic/profile"]');
   }
