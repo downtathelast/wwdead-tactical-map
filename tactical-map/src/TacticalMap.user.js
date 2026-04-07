@@ -35,6 +35,7 @@
   // MEMORY VERSIONING
   // ------------------------------------------------
   const CURRENT_MEM_VERSION = 2; // bump to wipe stored data
+  const CHARACTERS_KEY = "tacticalmap:chars_v2";
   const MEM_VERSION_KEY = "tacticalmap:memResetVersion";
   const COLLAPSED_KEY = "tacticalmap:collapsed";
   const LOCAL_MAP_RADIUS_KEY = "tacticalmap:LOCAL_MAP_RADIUS";
@@ -44,7 +45,7 @@
     if (storedVersion < CURRENT_MEM_VERSION) {
       console.log(`Memory reset triggered: stored=${storedVersion}, current=${CURRENT_MEM_VERSION}`);
       // clear all tacticalmap storage
-      localStorage.removeItem("tacticalmap:chars_v2");
+      localStorage.removeItem(CHARACTERS_KEY);
       localStorage.removeItem("tacticalmap:settings");
       localStorage.removeItem(LOCAL_MAP_RADIUS_KEY);
       localStorage.removeItem(COLLAPSED_KEY);
@@ -14708,7 +14709,6 @@
   // ALT MARKERS STORAGE (FINAL VERSION)
   // ------------------------------------------------
 
-  const STORAGE_KEY = "tacticalmap:chars_v2";
   const MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
   const MAX_ALTS = 10;
 
@@ -14732,14 +14732,14 @@
 
   function getStoredCharacters() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      return JSON.parse(localStorage.getItem(CHARACTERS_KEY) || "{}");
     } catch {
       return {};
     }
   }
 
   function saveStoredCharacters(chars) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
+    localStorage.setItem(CHARACTERS_KEY, JSON.stringify(chars));
   }
 
   function cleanupOldCharacters(chars) {
@@ -14969,7 +14969,7 @@
     clearBtn.onclick = () => {
       if (!confirm("Clear all stored alt positions?")) return;
 
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(CHARACTERS_KEY);
       console.log("🧹 Cleared alt storage");
 
       updateMaps();
