@@ -28,7 +28,7 @@
  * http://www.gnu.org/licenses/gpl.txt
  */
 
-(async function () {
+(function () {
   "use strict";
 
   // ------------------------------------------------
@@ -14826,7 +14826,7 @@
   // CREATE MAP WINDOW (Collapsible)
   // ------------------------------------------------
 
-  async function createMainContainer() {
+  function createMainContainer() {
     let collapsed = false;
 
     const container = document.createElement("div");
@@ -14879,7 +14879,7 @@
     cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
 
     // helper to create toggle checkboxes
-    const createMapToggle = async (getMap, key, labelText) => {
+    const createMapToggle = (getMap, key, labelText) => {
       const label = document.createElement("label");
       label.style.cssText =
         "display:flex; align-items:center; gap:2px; cursor:pointer;";
@@ -14894,7 +14894,7 @@
       cb.checked = isVisible;
       getMap().wrap.style.display = isVisible ? "flex" : "none";
 
-      cb.onchange = async () => {
+      cb.onchange = () => {
         getMap().wrap.style.display = cb.checked ? "flex" : "none";
         localStorage.setItem(MAP_VISIBLE_KEY, cb.checked);
       };
@@ -14905,9 +14905,9 @@
     };
 
     // add checkboxes to upper right
-    await createMapToggle(() => cityMap, "city", "City");
-    await createMapToggle(() => suburbMap, "suburb", "Sub");
-    await createMapToggle(() => miniMap, "local", "Loc");
+    createMapToggle(() => cityMap, "city", "City");
+    createMapToggle(() => suburbMap, "suburb", "Sub");
+    createMapToggle(() => miniMap, "local", "Loc");
 
     // local map radius input
     const MAX_RADIUS = 18;
@@ -15610,14 +15610,14 @@
   // START SCRIPT
   // ------------------------------------------------
 
-  window.addEventListener("load", async () => {
+  window.addEventListener("load", () => {
     addStyles();
     updateGlobals();
 
     // SAVE AFTER globals are ready
     saveCurrentCharacterPosition();
 
-    await createMainContainer();
+    createMainContainer();
 
     setupCityInteractions();
     setupSuburbInteractions();
