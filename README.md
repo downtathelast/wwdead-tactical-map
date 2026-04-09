@@ -1,6 +1,6 @@
-# WWDEAD Tactical Map Enhancer
+# WWDEAD Tactical Map
 
-A **browser-based userscript** that enhances map visibility and tracking in **WWDEAD** (a reboot of Urban Dead). It allows you to monitor multiple character “alts” and visualize their positions in real-time across city, suburb, and local maps.
+A **browser-based userscript** that enhances map visibility and tracking in **WWDEAD** . It allows you to monitor multiple character “alts” and visualize their positions in real-time across city, suburb, and local maps.
 
 ## Features
 
