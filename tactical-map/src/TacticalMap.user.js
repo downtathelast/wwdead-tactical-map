@@ -28,23 +28,26 @@
  * http://www.gnu.org/licenses/gpl.txt
  */
 
-(async function () {
+(function () {
   "use strict";
 
   // ------------------------------------------------
   // MEMORY VERSIONING
   // ------------------------------------------------
   const CURRENT_MEM_VERSION = 2; // bump to wipe stored data
+  const CHARACTERS_KEY = "tacticalmap:chars_v2";
   const MEM_VERSION_KEY = "tacticalmap:memResetVersion";
+  const COLLAPSED_KEY = "tacticalmap:collapsed";
+  const LOCAL_MAP_RADIUS_KEY = "tacticalmap:LOCAL_MAP_RADIUS";
 
   function checkMemoryVersion() {
     const storedVersion = parseInt(localStorage.getItem(MEM_VERSION_KEY) || "0", 10);
     if (storedVersion < CURRENT_MEM_VERSION) {
       console.log(`Memory reset triggered: stored=${storedVersion}, current=${CURRENT_MEM_VERSION}`);
       // clear all tacticalmap storage
-      localStorage.removeItem("tacticalmap:chars_v2");
-      localStorage.removeItem("tacticalmap:settings");
-      localStorage.removeItem("LOCAL_MAP_RADIUS");
+      localStorage.removeItem(CHARACTERS_KEY);
+      localStorage.removeItem(LOCAL_MAP_RADIUS_KEY);
+      localStorage.removeItem(COLLAPSED_KEY);
       localStorage.setItem(MEM_VERSION_KEY, CURRENT_MEM_VERSION);
     }
   }
@@ -53,10 +56,7 @@
   // -----------------------------
   // Local map settings
   // -----------------------------
-  let LOCAL_MAP_RADIUS = parseInt(
-      localStorage.getItem("tacticalmap:LOCAL_MAP_RADIUS") || 5,
-      10
-  );
+  let LOCAL_MAP_RADIUS = parseInt(localStorage.getItem(LOCAL_MAP_RADIUS_KEY) || 5, 10);
   let LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
 
   const MAIN_PLAYER_SYM = "●";
@@ -14708,32 +14708,8 @@
   // ALT MARKERS STORAGE (FINAL VERSION)
   // ------------------------------------------------
 
-  const STORAGE_KEY = "tacticalmap:chars_v2";
   const MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
   const MAX_ALTS = 10;
-
-  // drop-in replacement for GM.getValue and GM.setValue using localStorage
-  const GM_KEY_PREFIX = "tacticalmap:gm:";
-  const GM = {
-    getValue: async (key, defaultValue) => {
-      const value = localStorage.getItem(GM_KEY_PREFIX + key);
-      if (value === null) return defaultValue;
-
-      try {
-        return JSON.parse(value);
-      } catch {
-        return value;
-      }
-    },
-
-    setValue: async (key, value) => {
-      localStorage.setItem(GM_KEY_PREFIX + key, JSON.stringify(value));
-    },
-
-    deleteValue: async (key) => {
-      localStorage.removeItem(GM_KEY_PREFIX + key);
-    },
-  };
 
   function getProfileLink() {
     return document.querySelector('.gt a[href*="/classic/profile"]');
@@ -14755,14 +14731,14 @@
 
   function getStoredCharacters() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      return JSON.parse(localStorage.getItem(CHARACTERS_KEY) || "{}");
     } catch {
       return {};
     }
   }
 
   function saveStoredCharacters(chars) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
+    localStorage.setItem(CHARACTERS_KEY, JSON.stringify(chars));
   }
 
   function cleanupOldCharacters(chars) {
@@ -14849,7 +14825,7 @@
   // CREATE MAP WINDOW (Collapsible)
   // ------------------------------------------------
 
-  async function createMainContainer() {
+  function createMainContainer() {
     let collapsed = false;
 
     const container = document.createElement("div");
@@ -14876,16 +14852,16 @@
     topBar.appendChild(mainToggleBtn);
     container.appendChild(topBar);
 
-    async function setCollapsed(value) {
+    function setCollapsed(value) {
       collapsed = value;
       container.style.display = "flex";
       mapHolder.style.display = collapsed ? "none" : "flex";
       controls.style.display = collapsed ? "none" : "flex"; // Hide checkboxes when main is collapsed
       mainToggleBtn.textContent = collapsed ? "[+]" : "[-]";
-      await GM.setValue("collapsed", collapsed);
+      localStorage.setItem(COLLAPSED_KEY, collapsed);
     }
 
-    mainToggleBtn.onclick = async () => await setCollapsed(!collapsed);
+    mainToggleBtn.onclick = () => setCollapsed(!collapsed);
 
     const mapHolder = document.createElement("div");
     mapHolder.style.cssText = "display:flex;gap:10px;align-items:flex-start";
@@ -14893,16 +14869,16 @@
     document.body.appendChild(container);
 
     // create maps
-    cityMap = await makeMap("City Map", 10, "city");
-    suburbMap = await makeMap("Suburb Map", 10, "suburb");
-    miniMap = await makeMap("Local", LOCAL_MAP_SIZE, "local");
+    cityMap = makeMap("City Map", 10, "city");
+    suburbMap = makeMap("Suburb Map", 10, "suburb");
+    miniMap = makeMap("Local", LOCAL_MAP_SIZE, "local");
 
     // override initial labels
     miniMap.label.textContent = `Local (${playerSuburb})`;
     cityMap.coords.textContent = `Selected: ${selectedSuburb || playerSuburb}`;
 
     // helper to create toggle checkboxes
-    const createMapToggle = async (getMap, key, labelText) => {
+    const createMapToggle = (getMap, key, labelText) => {
       const label = document.createElement("label");
       label.style.cssText =
         "display:flex; align-items:center; gap:2px; cursor:pointer;";
@@ -14911,13 +14887,15 @@
       cb.type = "checkbox";
       cb.style.margin = "0";
 
-      let isVisible = await GM.getValue(`map_visible_${key}`, true);
+      const MAP_VISIBLE_KEY = `tacticalmap:map_visible:${key}`;
+
+      let isVisible = (localStorage.getItem(MAP_VISIBLE_KEY) || "true") === "true";
       cb.checked = isVisible;
       getMap().wrap.style.display = isVisible ? "flex" : "none";
 
-      cb.onchange = async () => {
+      cb.onchange = () => {
         getMap().wrap.style.display = cb.checked ? "flex" : "none";
-        await GM.setValue(`map_visible_${key}`, cb.checked);
+        localStorage.setItem(MAP_VISIBLE_KEY, cb.checked);
       };
 
       label.appendChild(cb);
@@ -14926,9 +14904,9 @@
     };
 
     // add checkboxes to upper right
-    await createMapToggle(() => cityMap, "city", "City");
-    await createMapToggle(() => suburbMap, "suburb", "Sub");
-    await createMapToggle(() => miniMap, "local", "Loc");
+    createMapToggle(() => cityMap, "city", "City");
+    createMapToggle(() => suburbMap, "suburb", "Sub");
+    createMapToggle(() => miniMap, "local", "Loc");
 
     // local map radius input
     const MAX_RADIUS = 18;
@@ -14943,7 +14921,7 @@
       "width:32px; background:#223322; color:#BBCCBB; border:1px solid #445544; font-size:10px; margin-left:2px; height: 14px; padding: 0 2px;";
     radiusInput.title = "Local Map Radius (size = 2R + 1)";
 
-    radiusInput.onchange = async () => {
+    radiusInput.onchange = () => {
       let newRadius = parseInt(radiusInput.value);
       if (isNaN(newRadius)) return;
       if (newRadius < 1) newRadius = 1;
@@ -14953,11 +14931,11 @@
       if (newRadius !== LOCAL_MAP_RADIUS) {
         LOCAL_MAP_RADIUS = newRadius;
         LOCAL_MAP_SIZE = LOCAL_MAP_RADIUS * 2 + 1;
-        localStorage.setItem("LOCAL_MAP_RADIUS", LOCAL_MAP_RADIUS);
+        localStorage.setItem(LOCAL_MAP_RADIUS_KEY, LOCAL_MAP_RADIUS);
         // recreate minimap
         const oldWrap = miniMap.wrap;
         const currentDisplay = oldWrap.style.display;
-        miniMap = await makeMap("Local", LOCAL_MAP_SIZE, "local");
+        miniMap = makeMap("Local", LOCAL_MAP_SIZE, "local");
         miniMap.wrap.style.display = currentDisplay;
         oldWrap.parentNode.replaceChild(miniMap.wrap, oldWrap);
 
@@ -14990,7 +14968,7 @@
     clearBtn.onclick = () => {
       if (!confirm("Clear all stored alt positions?")) return;
 
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(CHARACTERS_KEY);
       console.log("🧹 Cleared alt storage");
 
       updateMaps();
@@ -15001,14 +14979,14 @@
     mapHolder.appendChild(suburbMap.wrap);
     mapHolder.appendChild(miniMap.wrap);
 
-    await setCollapsed((await GM.getValue("collapsed")) ?? false);
+    setCollapsed(localStorage.getItem(COLLAPSED_KEY) === "true");
   }
 
   // ------------------------------------------------
   // MAP BUILDER
   // ------------------------------------------------
 
-  async function makeMap(title, size = 10, key) {
+  function makeMap(title, size = 10, key) {
     const wrap = document.createElement("div");
     wrap.style.width = size * 22 + "px";
     wrap.style.display = "flex";
@@ -15631,14 +15609,14 @@
   // START SCRIPT
   // ------------------------------------------------
 
-  window.addEventListener("load", async () => {
+  window.addEventListener("load", () => {
     addStyles();
     updateGlobals();
 
     // SAVE AFTER globals are ready
     saveCurrentCharacterPosition();
 
-    await createMainContainer();
+    createMainContainer();
 
     setupCityInteractions();
     setupSuburbInteractions();
