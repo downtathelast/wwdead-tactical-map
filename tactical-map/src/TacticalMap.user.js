@@ -45,9 +45,11 @@
     if (storedVersion < CURRENT_MEM_VERSION) {
       console.log(`Memory reset triggered: stored=${storedVersion}, current=${CURRENT_MEM_VERSION}`);
       // clear all tacticalmap storage
-      localStorage.removeItem(CHARACTERS_KEY);
-      localStorage.removeItem(LOCAL_MAP_RADIUS_KEY);
-      localStorage.removeItem(COLLAPSED_KEY);
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith("tacticalmap:")) {
+          localStorage.removeItem(key);
+        }
+      });
       localStorage.setItem(MEM_VERSION_KEY, CURRENT_MEM_VERSION);
     }
   }
