@@ -15454,7 +15454,7 @@
 
     playerSuburb = suburbElem.textContent.trim();
     [playerSX, playerSY] = suburbCoordsByName(playerSuburb) ?? [null, null];
-    [playerGX, playerGY] = globalPlayerCoords() ?? [null, null];
+    [playerGX, playerGY] = globalPlayerCoords() ?? [playerGX, playerGY];
   }
 
   function updateMaps() {
