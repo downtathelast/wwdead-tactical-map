@@ -15347,12 +15347,12 @@
     // if GPS exists, directly parse coordinates and return
     const element = document.querySelector('input[value*="GPS unit"]');
     if (element) {
-      const matches = element.value.match(/\d+/g);
-      if (matches && matches.length >= 2) {
-        return [Number(matches[0]), Number(matches[1])];
-      } else {
-        console.error("Found GPS but no coordinates?");
+      const match = element.value.match(/\[(.*?)\]/);
+      const coords = match[1].split(',').map(num => Number(num.trim()));
+      if (coords.length == 2) {
+        return coords;
       }
+      console.error("Unexpected GPS format: "  + element.value);
     }
 
     // otherwise, find an exact match of neighboring tiles
