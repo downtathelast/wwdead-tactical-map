@@ -13,6 +13,14 @@
 // ==/UserScript==
 
 /**
+ * For bug reports, issues, and feature requests:
+ *
+ *   WWDead Discord:      https://discord.gg/YbRnES4uVV
+ *   TacticalMap Channel: https://discord.com/channels/1420504434227806350/1477360156806480047
+ *   TacticalMap GitHub:  https://github.com/downtathelast/wwdead-tactical-map
+ *
+ * --------------------------------------------------------
+ *
  * Original version: http://torbjorn.org/urbandead/gm/ud.navigation.user.js
  * Modified version by http://wiki.urbandead.com/index.php/User:Janzak
  * Additional tweaks by http://wiki.urbandead.com/index.php/User:Aichon
